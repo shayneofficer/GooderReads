@@ -1,0 +1,25 @@
+{
+  "name": "GooderReads",
+  "version": "1.0.0",
+  "description": "It's more good.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shayneofficer/GooderReads.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/shayneofficer/GooderReads/issues"
+  },
+  "homepage": "https://github.com/shayneofficer/GooderReads#readme",
+  "dependencies": {
+    "express": "^4.16.4",
+    "mysql": "^2.16.0",
+    "sequelize": "^4.42.0"
+  }
+}
