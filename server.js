@@ -9,6 +9,13 @@ app.use(express.json());
 // var apiRoutes = require("./routes/api-routes");
 // app.use(apiRoutes);
 
+// Set Handlebars.
+var exphbs = require("express-handlebars");
+
+app.engine("handlebars", exphbs({ defaultLayout: "main" }));
+app.set("view engine", "handlebars");
+
+
 var htmlRoutes = require("./routes/html-routes");
 app.use(htmlRoutes);
 
