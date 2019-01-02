@@ -6,8 +6,8 @@ var PORT = process.env.PORT || 8080;
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-// var apiRoutes = require("./routes/api-routes");
-// app.use(apiRoutes);
+var apiRoutes = require("./routes/api-routes");
+app.use(apiRoutes);
 
 // Set Handlebars.
 var exphbs = require("express-handlebars");
