@@ -1,3 +1,8 @@
+.main-container {
+  width: 80%;
+  margin: auto;
+}
+
 #username, #password, #email {
 padding: 10px;
 margin: 5px;
