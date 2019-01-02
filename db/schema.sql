@@ -15,9 +15,9 @@ CREATE TABLE users (
   `User-ID` int(11) NOT NULL AUTO_INCREMENT,
   `Location` varchar(250) default NULL,
   `Age` int(11) default NULL,
-  `userName` varchar(255) NOT NULL,
-  `userPassword` varchar(255) NOT NULL,
-  `userEmail` varchar(255) NOT NULL,
+  `userName` varchar(255) NOT NULL DEFAULT '',
+  `userPassword` varchar(255) NOT NULL DEFAULT '',
+  `userEmail` varchar(255) NOT NULL DEFAULT '',
   PRIMARY KEY  (`User-ID`)
 ) ENGINE=MyISAM;
 
