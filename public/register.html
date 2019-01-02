@@ -28,15 +28,30 @@
                 <input type="text" class="form-control" id="user-name">
               </div>
               <div class="form-group">
-                <label for="user-password">Password</label>
-                <input type="text" class="form-control" id="user-password">
+                <label for="user-password">Password (min character length of 8)</label>
+                <input type="password" class="form-control" id="user-password">
+              </div>
+              <div class="form-group">
+                <label for="user-password">Confirm Password</label>
+                <input type="password" class="form-control" id="confirm-password"><span id='message'></span>
               </div>
               <div class="form-group">
                 <label for="user-email">Email</label>
                 <input type="text" class="form-control" id="user-email">
               </div>
-              <button type="submit" class="btn btn-primary submit">Submit</button>
+              <button type="submit" class="btn btn-primary submit">Register</button>
               <a href="/"><button type="button" class="btn btn-danger">Back</button></a>
+              <script>
+                
+
+                $('#user-password, #confirm-password').on('keyup', function () {
+                if ($('#user-password').val() == $('#confirm-password').val() && $('#user-password').val().length > 7) {
+                $('#message').html('Matching').css('color', 'green');
+                
+                } else 
+                $('#message').html('Not Matching').css('color', 'red');
+                });
+              </script>
             </form>
           </div>
         </div>
