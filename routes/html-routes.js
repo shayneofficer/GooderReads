@@ -5,6 +5,10 @@ var router = express.Router();
 router.use(express.urlencoded({ extended: true }));
 router.use(express.json());
 
+router.get("/register", function (req, res) {
+    res.sendFile(path.join(__dirname, "../public/register.html"));
+});
+
 router.get("/home", function (req, res) {
   res.render("home", {username: "Change Me"});
 });
