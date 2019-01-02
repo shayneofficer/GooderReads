@@ -15,6 +15,7 @@ router.get('/basic-home', function (req, res) {
     },
     {
       title: 'Harry Pottah',
+      summary: '',
       cover: placeholderImg
     },
     {
@@ -22,7 +23,7 @@ router.get('/basic-home', function (req, res) {
       cover: placeholderImg
     }
   ];
-  res.render('basic-home', books);
+  res.render('basic-home', {books: books});
 });
 
 router.get('/user-home', function (req, res) {
@@ -31,6 +32,11 @@ router.get('/user-home', function (req, res) {
     email: 'Email Placeholder',
   };
   res.render('user-home', user)
+});
+
+
+router.get('/register', function (req, res) {
+  res.sendFile(path.join(__dirname, '../public/register.html'));
 });
 
 // A default, catch-all route that leads to index.html which displays the home page.
