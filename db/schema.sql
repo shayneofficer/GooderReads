@@ -1,5 +1,5 @@
-CREATE DATABASE GoodReads_db;
-USE GoodReads_db;
+CREATE DATABASE books_db;
+USE books_db;
 
 CREATE TABLE users
 (
