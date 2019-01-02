@@ -12,13 +12,13 @@ USE gooderreads_db;
 --
 
 CREATE TABLE users (
-  id int(11) NOT NULL AUTO_INCREMENT,
-  location varchar(250) default NULL,
-  age int(11) default NULL,
-  username varchar(255) NOT NULL,
-  password varchar(255) NOT NULL,
-  email varchar(255) NOT NULL,
-  PRIMARY KEY  (id)
+  `User-ID` int(11) NOT NULL AUTO_INCREMENT,
+  `Location` varchar(250) default NULL,
+  `Age` int(11) default NULL,
+  `userName` varchar(255) NOT NULL,
+  `userPassword` varchar(255) NOT NULL,
+  `userEmail` varchar(255) NOT NULL,
+  PRIMARY KEY  (`User-ID`)
 ) ENGINE=MyISAM;
 
 --
@@ -26,7 +26,7 @@ CREATE TABLE users (
 --
 
 CREATE TABLE books (
-  isbn varchar(13) binary NOT NULL default '',
+  `ISBN` varchar(13) binary NOT NULL default '',
   `Book-Title` varchar(255) default NULL,
   `Book-Author` varchar(255) default NULL,
   `Year-Of-Publication` int(10) unsigned default NULL,
