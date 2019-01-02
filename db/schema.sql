@@ -15,6 +15,9 @@ CREATE TABLE users (
   `User-ID` int(11) NOT NULL default '0',
   `Location` varchar(250) default NULL,
   `Age` int(11) default NULL,
+  `userName` varchar(255) NOT NULL,
+  `userPassword varchar`(255) NOT NULL,
+  `userEmail varchar`(255) NOT NULLF
   PRIMARY KEY  (`User-ID`)
 ) ENGINE=MyISAM;
 
@@ -44,3 +47,4 @@ CREATE TABLE ratings (
   `Book-Rating` int(11) NOT NULL default '0',
   PRIMARY KEY  (`User-ID`,`ISBN`)
 ) ENGINE=MyISAM;
+
