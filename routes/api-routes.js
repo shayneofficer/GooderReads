@@ -8,6 +8,7 @@ router.use(express.urlencoded({ extended: true }));
 router.use(express.json());
 
 router.post("/api/registerUser", function (req, res) {
+    
     user.selectWhere("userName", req.body.userName,
         function (result) {
             if (result && result.length) {
