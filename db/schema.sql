@@ -13,7 +13,7 @@ USE gooderreads_db;
 
 CREATE TABLE userEmails (
   `userEmail` varchar(255) NOT NULL,
-  `User-ID` int(11) NOT NULL,
+  `UserID` int(11) NOT NULL,
   PRIMARY KEY (`userEmail`)
 ) ENGINE=MyISAM;
 
@@ -27,7 +27,6 @@ CREATE TABLE users (
   `Age` int(11) default NULL,
   `userName` varchar(255) NOT NULL DEFAULT '',
   `userPassword` varchar(255) NOT NULL DEFAULT '',
-  
   PRIMARY KEY  (`User-ID`)
 ) ENGINE=MyISAM;
 
