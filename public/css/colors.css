@@ -1,0 +1,45 @@
+:root {
+  --light: rgba(255,255,255,1.0);
+  --dark: rgba(0,0,0,0.8);
+}
+
+@-webkit-keyframes toDark{
+  0%   {background-color: var(--light);}
+  100% {background-color: var(--dark);}
+}
+
+@keyframes toDark{
+  0%   {background-color: var(--light);}
+  100% {background-color: var(--dark);}
+}
+
+@-webkit-keyframes toLight{
+  0%   {background-color: var(--dark);}
+  100% {background-color: var(--light);}
+}
+
+@keyframes toLight{
+  0%   {background-color: var(--dark);}
+  100% {background-color: var(--light);}
+}
+
+.bg-dark-slow {
+  background-color: var(--dark);
+  -webkit-animation-name: toDark;
+  -webkit-animation-duration: 0.5s;
+  animation-name: toDark;
+  animation-duration: 0.5s;
+}
+
+.bg-light-slow {
+  background-color: var(--light);
+  -webkit-animation-name: toLight;
+  -webkit-animation-duration: 0.5s;
+  animation-name: toLight;
+  animation-duration: 0.5s;
+}
+
+#darkMode {
+  color: var(--light);
+}
+

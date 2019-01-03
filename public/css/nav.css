@@ -1,0 +1,50 @@
+.navbar {
+  font-size: 1.2em;
+  padding: 0.5em 10% 0.5em 10% !important;
+  margin: 0;
+  justify-content: space-between !important;
+}
+
+.navbar-brand {
+  font-size: 1.5em !important;
+}
+
+.navbar-nav {
+  text-align: right;
+}
+
+#navbarSupportedContent {
+  width: fit-content;
+  flex-grow: 0;
+}
+
+#lightMode,
+#darkMode {
+  vertical-align: bottom;
+  line-height: 0.5em;
+  padding-left: 0.25em;
+}
+
+#mode-toggle {
+  width: 24px !important;
+  height: 44px !important;
+  overflow: hidden;
+}
+
+@media only screen and (max-width: 992px) {
+  .navbar {
+    padding: 0.5em 5% 0.5em 5% !important;
+  }
+
+  #lightMode,
+  #darkMode {
+    vertical-align: baseline;
+    line-height: 1em;
+  }
+}
+
+@media only screen and (min-width: 992px) {
+  #loginIcon {
+    display: none;
+  }
+}
