@@ -31,7 +31,6 @@ router.post("/api/registerUser", function (req, res) {
     });
 });
 
-
 function getBooks(title, cb) {
     books.search(title, function (error, results) {
         if (!error) {
@@ -53,17 +52,13 @@ function getBooks(title, cb) {
                     pageCount: bookInfo.pageCount,
                     identifier: identifiers
                 });
-
             }
-
             cb(books)
         }
         else {
             console.log(error);
         }
     });
-
 }
-
 
 module.exports = router;
