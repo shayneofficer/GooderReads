@@ -1,11 +1,18 @@
 .navbar {
   font-size: 1.2em;
-  padding-bottom: 1em;
+  padding: 0.5em 10% 0.5em 10% !important;
   margin-bottom: 1em;
+  justify-content: space-between !important;
 }
 
 .navbar-brand {
   font-size: 1.5em !important; 
+}
+
+#navbarSupportedContent {
+  width: fit-content;
+  flex-grow: 0;
+  flex-basis: auto;
 }
 
 .main-container {
@@ -36,6 +43,12 @@
   height: auto;
 }
 
+.amazon {
+  width: 65%;
+  max-width: 160px;
+  height: auto;
+}
+
 .container-fluid {
   padding: 0 !important;
 }
@@ -53,8 +66,18 @@ margin: 5px;
   border-bottom: solid #000000 1px;
 }
 
-@media screen-only and (max-width: 1000px) {
+@media only screen and (max-width: 992px) {
   .main-container {
     width: 90%;
+  }
+
+  .navbar {
+    padding: 0.5em 5% 0.5em 5%;
+  }
+}
+
+@media only screen and (min-width: 992px) {
+  #loginIcon {
+    display: none;
   }
 }
