@@ -17,7 +17,7 @@ CREATE TABLE users (
   `Age` int(11) default NULL,
   `userName` varchar(255) NOT NULL,
   `userPassword varchar`(255) NOT NULL,
-  `userEmail varchar`(255) NOT NULLF
+  `userEmail varchar`(255) NOT NULL,
   PRIMARY KEY  (`User-ID`)
 ) ENGINE=MyISAM;
 
