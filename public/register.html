@@ -25,19 +25,19 @@
                         <form role="form">
                             <div class="form-group">
                                 <label for="user-name">User Name</label>
-                                <input type="text" class="form-control" id="user-name">
+                                <input type="text" class="form-control" id="user-name" required>
                             </div>
                             <div class="form-group">
                                 <label for="user-password">Password (min character length of 8)</label>
-                                <input type="password" class="form-control" id="user-password">
+                                <input type="password" class="form-control" id="user-password" required>
                             </div>
                             <div class="form-group">
-                                <label for="user-password">Confirm Password</label>
-                                <input type="password" class="form-control" id="confirm-password"><span id='message'></span>
+                                <label for="confirm-password">Confirm Password</label>
+                                <input type="password" class="form-control" id="confirm-password" required><span id='message'></span>
                             </div>
                             <div class="form-group">
                                 <label for="user-email">Email</label>
-                                <input type="text" class="form-control" id="user-email">
+                                <input type="text" class="form-control" id="user-email" required>
                             </div>
                             <button type="submit" class="btn btn-primary submit">Register</button>
                             <a href="/"><button type="button" class="btn btn-danger">Back</button></a>
@@ -83,6 +83,7 @@
                 // Clear the form when submitting
                 $("#user-name").val("");
                 $("#user-password").val("");
+                $("#confirm-password").val("");
                 $("#user-email").val("");
             }
         );

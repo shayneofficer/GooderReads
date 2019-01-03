@@ -29,10 +29,10 @@ function objToSql(ob) {
 }
 
 var orm = {
-    all: function(table, cb) {
+    all: function (table, cb) {
         var queryString = "SELECT * FROM " + table + ";";
-        connection.query(queryString, function(error, result){
-            if(error) throw error;
+        connection.query(queryString, function (error, result) {
+            if (error) throw error;
             cb(result);
         });
     },
@@ -53,10 +53,10 @@ var orm = {
         });
     },
 
-    select: function (table, cols, attr, val, cb) {
-        var queryString = "SELECT " + cols.toString() + " FROM " + table + " WHERE " + attr + " = " + val + ";";
-        connection.query(queryString, function(error, result){
-            if(error) throw error;
+    selectWhere: function (table, searchCol, val, cb) {
+        var queryString = "SELECT * FROM ?? WHERE ?? = ?";
+        connection.query(queryString, [table, searchCol, val], function (err, result) {
+            if (err) throw err;
             cb(result);
         });
     }

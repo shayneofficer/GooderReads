@@ -14,9 +14,8 @@ var user = {
     });
   },
 
-  // The variable cols is an array
-  select: function (cols, attr, val, cb) {
-    orm.select("users", cols, attr, val, function (res) {
+  selectWhere: function (searchCol, val, cb) {
+    orm.selectWhere("users", searchCol, val, function (res) {
       cb(res);
     });
   },
