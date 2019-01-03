@@ -19,31 +19,31 @@ router.post("/api/registerUser", function (req, res) {
 });
 
 
-function getBooks(title, ISBN, cb) {
+function getBooks(title, cb) {
 books.search(title, function(error, results) {
     if ( ! error ) {
-      
-        
+      var books = []
       for (var i = 0; i < results.length; i++){
         var bookInfo = results[i];
-        if (bookInfo.hasOwnProperty("industryIdentifiers")){
-          for(var j = 0; j < bookInfo.industryIdentifiers.length; j++){
-            if (bookInfo.industryIdentifiers[j].identifier === ISBN){
-              var book ={
-                description: bookInfo.description,
-                image: bookInfo.thumbnail,
-                categories: bookInfo.categories,
-                pageCount: bookInfo.pageCount,
-                ISBN: bookInfo.industryIdentifiers[j].identifier
-              };
-              console.log(book)
-        //   cb(book)
-              return
-            }
-          }
+        var identifiers = []
+        for (var j = 0; j < bookInfo.industryIdentifiers.length; j++){
+            identifiers.push({type: bookInfo.industryIdentifiers[j].type, identifier: bookInfo.industryIdentifiers[j].identifier })
         }
+         books.push ({
+            title: bookInfo.title,
+            author: bookInfo.authors,
+            publisher: bookInfo.publisher,
+            publishedDate: bookInfo.publishedDate, 
+            description: bookInfo.description,
+            image: bookInfo.thumbnail,
+            categories: bookInfo.categories,
+            pageCount: bookInfo.pageCount,
+            identifier: identifiers
+          });  
         
     }
+
+      cb(books) 
 }
     else {
         console.log(error);
