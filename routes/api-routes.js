@@ -7,6 +7,7 @@ router.use(express.urlencoded({ extended: true }));
 router.use(express.json());
 
 router.post("/api/registerUser", function (req, res) {
+    
     user.create(
         ["userName", "userPassword", "userEmail"],
         [req.body.userName, req.body.userPassword, req.body.userEmail],
