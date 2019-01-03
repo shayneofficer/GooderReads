@@ -1,6 +1,52 @@
+.navbar {
+  font-size: 1.2em;
+  padding: 0.5em 10% 0.5em 10% !important;
+  margin-bottom: 1em;
+  justify-content: space-between !important;
+}
+
+.navbar-brand {
+  font-size: 1.5em !important; 
+}
+
+#navbarSupportedContent {
+  width: fit-content;
+  flex-grow: 0;
+  flex-basis: auto;
+}
+
 .main-container {
   width: 80%;
   margin: auto;
+}
+
+.book-card {
+  margin: 2em 0 2em 0;
+}
+
+.card-body {
+  overflow-y: scroll;
+}
+
+::-webkit-scrollbar {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background-color: rgba(0,0,0,0.7);
+  border-radius: 0.2em;
+}
+
+.amazon,
+.google-play {
+  width: 75%;
+  max-width: 180px;
+  height: auto;
+}
+
+.amazon {
+  width: 65%;
+  max-width: 160px;
+  height: auto;
 }
 
 .container-fluid {
@@ -14,4 +60,24 @@
 #username, #password, #email {
 padding: 10px;
 margin: 5px;
+}
+
+.bottom-border {
+  border-bottom: solid #000000 1px;
+}
+
+@media only screen and (max-width: 992px) {
+  .main-container {
+    width: 90%;
+  }
+
+  .navbar {
+    padding: 0.5em 5% 0.5em 5%;
+  }
+}
+
+@media only screen and (min-width: 992px) {
+  #loginIcon {
+    display: none;
+  }
 }

@@ -1,36 +1,20 @@
-<h3>Welcome {{user.name}}</h3>
+<div class="row">
+  <h3 class="w-100 bottom-border">Recommended Books</h3>
+</div>
 
-<div class="container-fluid">
-  <div class="container-fluid book-row">
-    <div class="card">
-      <h5 class="card-header">Book 1</h5>
-      <div class="card-body">
-        <h5 class="card-title">Special title treatment</h5>
-        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-        <a href="#" class="btn btn-primary">Go somewhere</a>
-      </div>
-    </div>
-  </div>
-  <div class="container-fluid book-row">
-    <div class="card">
-      <h5 class="card-header">Book 2</h5>
-      <div class="card-body">
-        <h5 class="card-title">Special title treatment</h5>
-        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-        <a href="#" class="btn btn-primary">Go somewhere</a>
-      </div>
-    </div>
-  </div>
-  <div class="container-fluid book-row">
-    <div class="card">
-      <h5 class="card-header">Book 3</h5>
-      <div class="card-body">
-        <h5 class="card-title">Special title treatment</h5>
-        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-        <a href="#" class="btn btn-primary">Go somewhere</a>
+{{#each books}}
+<div class="card book-card">
+  <div class="row">
+    <img src="{{this.cover}}" alt="X" class="rounded float-left">
+    <div class="card-body">
+      <h5 class="card-title">{{this.title}}</h5>
+      <p class="card-text">{{this.summary}}</p>
+      <a href="#" class="btn btn-primary">Preview</a>
+      <div class="row justify-content-center">
+        <a href="#"><img class="google-play" src="./assets/google-play-badge.png" alt="X"></a>
+        <a href="#"><img class="amazon" src="./assets/amazon-badge.png" alt="X"></a>
       </div>
     </div>
   </div>
 </div>
-
-</div>
+{{/each}}
