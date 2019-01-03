@@ -3,6 +3,14 @@
   margin: auto;
 }
 
+.container-fluid {
+  padding: 0 !important;
+}
+
+.row {
+  margin: 0 !important;
+}
+
 #username, #password, #email {
 padding: 10px;
 margin: 5px;

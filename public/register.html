@@ -2,79 +2,92 @@
 <html>
 
 <head>
-    <!-- Latest compiled and minified CSS & JS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <script src="https://code.jquery.com/jquery.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" type="text/css" media="screen" href="./css/styles.css" />
-    <script src="./js/view.js"></script>
+  <!-- Latest compiled and minified CSS & JS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script src="https://code.jquery.com/jquery.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" type="text/css" media="screen" href="./css/styles.css" />
+  <script src="./js/view.js"></script>
 </head>
 
 <body>
-    <div class="container">
-        <h1>Register</h1>
-        <div class="row">
-            <div class="col-lg-12">
-                <!-- Regester Page -->
-                <div class="card">
-                    <div class="card-header">
-                        New User
-                    </div>
-                    <div class="card-body">
-                        <form role="form">
-                            <div class="form-group">
-                                <label for="user-name">User Name</label>
-                                <input type="text" class="form-control" id="user-name">
-                            </div>
-                            <div class="form-group">
-                                <label for="user-password">Password</label>
-                                <input type="text" class="form-control" id="user-password">
-                            </div>
-                            <div class="form-group">
-                                <label for="user-email">Email</label>
-                                <input type="text" class="form-control" id="user-email">
-                            </div>
-                            <button type="submit" class="btn btn-primary submit">Submit</button>
-                            <a href="/"><button type="button" class="btn btn-danger">Back</button></a> 
-                        </form>
-                    </div>
-                </div>
-            </div>
+  <div class="container">
+    <h1>Register</h1>
+    <div class="row">
+      <div class="col-lg-12">
+        <!-- Regester Page -->
+        <div class="card">
+          <div class="card-header">
+            New User
+          </div>
+          <div class="card-body">
+            <form role="form">
+              <div class="form-group">
+                <label for="user-name">User Name</label>
+                <input type="text" class="form-control" id="user-name">
+              </div>
+              <div class="form-group">
+                <label for="user-password">Password (min character length of 8)</label>
+                <input type="password" class="form-control" id="user-password">
+              </div>
+              <div class="form-group">
+                <label for="user-password">Confirm Password</label>
+                <input type="password" class="form-control" id="confirm-password"><span id='message'></span>
+              </div>
+              <div class="form-group">
+                <label for="user-email">Email</label>
+                <input type="text" class="form-control" id="user-email">
+              </div>
+              <button type="submit" class="btn btn-primary submit">Register</button>
+              <a href="/"><button type="button" class="btn btn-danger">Back</button></a>
+              <script>
+                
+
+                $('#user-password, #confirm-password').on('keyup', function () {
+                if ($('#user-password').val() == $('#confirm-password').val() && $('#user-password').val().length > 7) {
+                $('#message').html('Matching').css('color', 'green');
+                
+                } else 
+                $('#message').html('Not Matching').css('color', 'red');
+                });
+              </script>
+            </form>
+          </div>
         </div>
+      </div>
     </div>
+  </div>
 </body>
 
 </html>
 
 <script type="text/javascript">
+  $(".submit").on("click", function (event) {
+    event.preventDefault();
 
-    $(".submit").on("click", function (event) {
-        event.preventDefault();
+    // Grab the form elements
+    var newUser = {
+      userName: $("#user-name").val().trim(),
+      userPassword: $("#user-password").val().trim(),
+      userEmail: $("#user-email").val().trim()
+    };
 
-        // Grab the form elements
-        var newUser = {
-            userName: $("#user-name").val().trim(),
-            userPassword: $("#user-password").val().trim(),
-            userEmail: $("#user-email").val().trim()
-        };
+    console.log(newUser);
 
-        console.log(newUser);
+    $.post("/api/registerUser", newUser,
+      function (data) {
 
-        $.post("/api/registerUser", newUser,
-            function (data) {
+        // If a table is available... tell user they are booked.
+        if (data) {
+          console.log(data);
+        }
 
-                // If a table is available... tell user they are booked.
-                if (data) {
-                    console.log(data);
-                }
-
-                // Clear the form when submitting
-                $("#user-name").val("");
-                $("#user-password").val("");
-                $("#user-email").val("");
-            }
-        );
-    });
-
+        // Clear the form when submitting
+        $("#user-name").val("");
+        $("#user-password").val("");
+        $("#user-email").val("");
+      }
+    );
+  });
 </script>
