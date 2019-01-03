@@ -39,7 +39,7 @@
                 <label for="user-email">Email</label>
                 <input type="text" class="form-control" id="user-email">
               </div>
-              <button type="submit" class="btn btn-primary submit">Register</button>
+              <button type="submit" class="btn btn-primary submit" onclick="window.location.href='/genre'">Continue</button>
               <a href="/"><button type="button" class="btn btn-danger">Back</button></a>
               <script>
                 
@@ -75,19 +75,19 @@
 
     console.log(newUser);
 
-    $.post("/api/registerUser", newUser,
-      function (data) {
+    // $.post("/api/registerUser", newUser,
+    //   function (data) {
 
-        // If a table is available... tell user they are booked.
-        if (data) {
-          console.log(data);
-        }
+    //     // If a table is available... tell user they are booked.
+    //     if (data) {
+    //       console.log(data);
+    //     }
 
-        // Clear the form when submitting
-        $("#user-name").val("");
-        $("#user-password").val("");
-        $("#user-email").val("");
-      }
-    );
+    //     // Clear the form when submitting
+    //     $("#user-name").val("");
+    //     $("#user-password").val("");
+    //     $("#user-email").val("");
+    //   }
+    // );
   });
 </script>
