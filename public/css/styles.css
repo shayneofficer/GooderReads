@@ -18,6 +18,7 @@
 .main-container {
   width: 80%;
   margin: auto;
+  background-color: blanchedalmond
 }
 
 .book-card {
@@ -80,4 +81,8 @@ margin: 5px;
   #loginIcon {
     display: none;
   }
+}
+
+body {
+  background-color: blanchedalmond;
 }

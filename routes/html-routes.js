@@ -60,6 +60,10 @@ router.get('/register', function (req, res) {
   res.sendFile(path.join(__dirname, '../public/register.html'));
 });
 
+router.get('/genre', function (req, res) {
+  res.sendFile(path.join(__dirname, '../public/genre.html'));
+});
+
 // A default, catch-all route that leads to index.html which displays the home page.
 router.get('*', function (req, res) {
   res.sendFile(path.join(__dirname, '../public/index.html'));
