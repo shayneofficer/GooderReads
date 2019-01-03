@@ -10,7 +10,7 @@ if (process.env.JAWSDB_URL) {
         port: 3307,
         user: "root",
         password: "root",
-        database: "books_db"
+        database: "gooderreads_db"
     });
 }
 

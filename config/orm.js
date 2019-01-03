@@ -29,21 +29,35 @@ function objToSql(ob) {
 }
 
 var orm = {
+    all: function (table, cb) {
+        var queryString = "SELECT * FROM " + table + ";";
+        connection.query(queryString, function (error, result) {
+            if (error) throw error;
+            cb(result);
+        });
+    },
+
     create: function (table, cols, vals, cb) {
         var queryString = "INSERT INTO " + table;
         queryString += " (";
         queryString += cols.toString();
         queryString += ") VALUES (";
         queryString += printQuestionMarks(vals.length);
-        queryString += ") ";
+        queryString += ");";
 
         console.log(queryString);
 
         connection.query(queryString, vals, function (err, result) {
-            if (err) {
-                throw err;
-            }
+            if (err) throw err;
+            console.log("result")
+            cb(result);
+        });
+    },
 
+    selectWhere: function (table, searchCol, val, cb) {
+        var queryString = "SELECT * FROM ?? WHERE ?? = ?";
+        connection.query(queryString, [table, searchCol, val], function (err, result) {
+            if (err) throw err;
             cb(result);
         });
     }

@@ -32,9 +32,12 @@ router.get('/user-home', function (req, res) {
   });
 });
 
-
 router.get('/register', function (req, res) {
   res.sendFile(path.join(__dirname, '../public/register.html'));
+});
+
+router.get('/genre', function (req, res) {
+  res.sendFile(path.join(__dirname, '../public/genre.html'));
 });
 
 // Default landing page
