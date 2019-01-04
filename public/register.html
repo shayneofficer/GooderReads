@@ -62,6 +62,7 @@
 <script type="text/javascript">
     $(".submit").on("click", function (event) {
         event.preventDefault();
+        var password = $("#user-password").val().trim()
 
         // Grab the form elements
         var newUser = {

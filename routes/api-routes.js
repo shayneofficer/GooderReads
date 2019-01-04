@@ -18,7 +18,7 @@ router.post("/api/registerUser", function (req, res) {
                 function (result) {
                     console.log(`email:${req.body.userEmail} id:${result.insertId}`);
                     userEmail.create(
-                        ["userEmail", "UserID"],
+                        ["userEmail", "`User-ID`"],
                         [req.body.userEmail, result.insertId],
                         function (res) {
                             console.log(res);
