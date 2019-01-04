@@ -35,7 +35,7 @@ $("#darkMode").on("click", function (event) {
   if ($("#content-heading").hasClass("text-dark")) {
     $("#content-heading").removeClass("text-dark");
   }
-  
+
   $(".modal-header").addClass("bg-dark-slow");
   $(".modal-footer").addClass("bg-dark-slow");
 });
@@ -64,3 +64,14 @@ $("#lightMode").on("click", function (event) {
 
   $("#content-heading").addClass("text-dark");
 });
+
+$("#searchBtn").on("click", function (event) {
+  event.preventDefault();
+
+  var title = $("#book-title-search").val().trim();
+  var titleFixed = title.split(" ").join("+");
+
+  $.get("/search/" + titleFixed).then(function () {
+    window.location.href = "/search/" + titleFixed;
+  });
+})
