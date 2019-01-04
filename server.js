@@ -22,3 +22,9 @@ app.use(htmlRoutes);
 app.listen(PORT, function () {
     console.log("Server listening on: http://localhost:" + PORT);
 });
+
+var orm = require("./config/orm");
+
+orm.selectWhere("ratings", "User-ID", 1, function (res) {
+    console.log(res);
+})
