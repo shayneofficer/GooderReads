@@ -1,6 +1,8 @@
 :root {
   --light: rgba(255,255,255,1.0);
-  --dark: rgba(0,0,0,0.8);
+  --dark: #2A3D4F;
+  --grey: #727272;
+  --primary: #DE681C;
 }
 
 @-webkit-keyframes toDark{
@@ -31,6 +33,14 @@
   animation-duration: 0.5s;
 }
 
+.bg-primary-slow {
+  background-color: var(--primary);
+  -webkit-animation-name: toDark;
+  -webkit-animation-duration: 0.5s;
+  animation-name: toDark;
+  animation-duration: 0.5s;
+}
+
 .bg-light-slow {
   background-color: var(--light);
   -webkit-animation-name: toLight;
@@ -39,7 +49,17 @@
   animation-duration: 0.5s;
 }
 
-#darkMode {
-  color: var(--light);
+.bg-grey {
+  background-color: var(--grey);
 }
 
+.border-dark {
+  border: solid var(--dark) 1px;
+}
+
+.form-control {
+  border: solid var(--dark) thin;
+}
+#darkMode {
+  color: #FFFFFF;
+}
