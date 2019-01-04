@@ -10,21 +10,21 @@ router.use(express.json());
 // Landing page for users already signed in
 router.get('/user-home', function (req, res) {
   //Popular / Featured books
-  var placeholderImg = 'http://www.stleos.uq.edu.au/wp-content/uploads/2016/08/image-placeholder-350x350.png';
+  var placeholderImg = ['http://www.stleos.uq.edu.au/wp-content/uploads/2016/08/image-placeholder-350x350.png'];
   var books = [{
     title: 'Hunt for Red October',
-    cover: placeholderImg,
-    summary: 'This is a summary.'
+    description: 'This is a summary.',
+    image: placeholderImg
   },
   {
     title: 'Harry Pottah',
-    summary: 'This is a summary, with a British accent.',
-    cover: placeholderImg
+    description: 'This is a summary, with a British accent.',
+    image: placeholderImg
   },
   {
     title: 'Lord of the Rings',
-    summary: 'This is a boring summary.',
-    cover: placeholderImg,
+    description: 'This is a boring summary.',
+    image: placeholderImg,
   }
   ];
   res.render('user-home', {
@@ -40,24 +40,28 @@ router.get('/genres', function (req, res) {
   res.render('genres');
 });
 
+router.get('/index', function (req, res) {
+  res.sendFile(path.join(__dirname, '../public/index.html'));
+});
+
 // Default landing page
 router.get('*', function (req, res) {
   //Popular / Featured books 
-  var placeholderImg = 'http://www.stleos.uq.edu.au/wp-content/uploads/2016/08/image-placeholder-350x350.png';
+  var placeholderImg = ['http://www.stleos.uq.edu.au/wp-content/uploads/2016/08/image-placeholder-350x350.png'];
   var books = [{
     title: 'Hunt for Red October',
-    cover: placeholderImg,
-    summary: 'This is a summary.'
+    description: 'This is a summary.',
+    image: placeholderImg
   },
   {
     title: 'Harry Pottah',
-    summary: 'This is a summary, with a British accent.',
-    cover: placeholderImg
+    description: 'This is a summary, with a British accent.',
+    image: placeholderImg
   },
   {
     title: 'Lord of the Rings',
-    summary: 'This is a boring summary.',
-    cover: placeholderImg,
+    description: 'This is a boring summary.',
+    image: placeholderImg,
   }
   ];
   res.render('basic-home', {

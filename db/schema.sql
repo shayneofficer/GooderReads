@@ -62,9 +62,9 @@ CREATE TABLE ratings (
 --
 
 CREATE TABLE genres (
-  `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `Genre-ID` int(11) NOT NULL AUTO_INCREMENT,
   `genreName` varchar(255),
-  PRIMARY KEY (`ID`)
+  PRIMARY KEY (`Genre-ID`)
 );
 
 --

@@ -28,7 +28,15 @@ var user = {
   //     orm.delete("users", condition, function(res) {
   //       cb(res);
   //     });
-  //   }
+  //   },
+
+  // The variables cols is an array.
+  // Left Join for users table
+  leftJoin: function (table2, primaryKeyT2, cols, cb) {
+    orm.leftJoin("users", table2, "User-ID", primaryKeyT2, cols, function (res) {
+      cb(res);
+    });
+  }
 };
 
 // Export the database functions to route controllers.
