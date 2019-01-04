@@ -3,6 +3,8 @@ var userEmail = require("../models/userEmails");
 var express = require("express");
 var router = express.Router();
 var axios = require("axios");
+var bcrypt = require('bcryptjs');
+var saltRounds = 10;
 
 
 router.use(express.urlencoded({ extended: true }));
@@ -18,7 +20,10 @@ router.post("/api/userLogin", function (req, res) {
         console.log(result);
         for (var i = 0; i < result.length; i++) {
             if (result[i].userEmail == req.body.userEmail) {
-                if(result[i].userPassword == password) {
+                if (bcrypt.compare(password, hash, function (err, res) {
+                    return res
+                })
+                ) {
                     userName = result[i].userName;
                     userID = Object.values(result[i])[0];
                     console.log("User Sign in: " + userName + "\n" + userID + "\n");
@@ -28,13 +33,13 @@ router.post("/api/userLogin", function (req, res) {
                 break;
             }
         }
-        
+
         if (userName && userID) {
-            res.json({userName: userName, userID: userID});
+            res.json({ userName: userName, userID: userID });
         } else if (userName === -4) {
-            res.json({error: "Incorrect Password"});
-        }else {
-            res.json({error: "Email Does Not Exist"});
+            res.json({ error: "Incorrect Password" });
+        } else {
+            res.json({ error: "Email Does Not Exist" });
         }
     });
 });
@@ -57,10 +62,17 @@ router.post("/api/registerUser", function (req, res) {
     } else {
         userEmail.selectWhere("userEmail", req.body.userEmail, function (result) {
             if (!result.length) {
+                // Encrypt password Server Side
+                var password = req.body.userPassword;
+                bcrypt.hash(password, saltRounds, function (err, hash) {
+                    // Store hash in your password DB.
+                    password = hash;
+                });
+                
                 // Create new User
                 user.create(
                     ["userName", "userPassword"],
-                    [req.body.userName, req.body.userPassword],
+                    [req.body.userName, password],
                     function (result) {
                         console.log(`email:${req.body.userEmail} id:${result.insertId}`);
                         userEmail.create(

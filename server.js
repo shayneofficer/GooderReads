@@ -1,4 +1,6 @@
 var express = require("express");
+var session = require('express-session')
+var bodyParser = require('body-parser')
 var app = express();
 app.use(express.static("public"));
 var PORT = process.env.PORT || 8080;
