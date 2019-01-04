@@ -47,10 +47,6 @@ padding: 10px;
 margin: 5px;
 }
 
-.bottom-border {
-  border-bottom: solid #000000 1px;
-}
-
 @media only screen and (max-width: 992px) {
   .main-container {
     padding: 0 5% 0 5%;
@@ -61,8 +57,4 @@ margin: 5px;
   #loginIcon {
     display: none;
   }
-}
-
-body {
-  background-color: blanchedalmond;
 }

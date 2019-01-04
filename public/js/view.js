@@ -1,8 +1,15 @@
+var GREY = "#444444";
+var WHITE = "#FFFFFF";
+var BLACK = "#000000";
+
 //dark mode enabled by default
 $("#lightMode").hide();
 $("#nav").addClass("navbar-dark bg-dark-slow");
 $("#searchBtn").addClass("btn-outline-light");
-// $("#nav").addClass("navbar-light navbar-bg-light");
+$("#loginFormSubmit").addClass("btn-primary");
+$("#loginFormRegister").addClass("btn-primary");
+$("#content-heading").addClass("text-dark");
+
 $("#darkMode").on("click", function (event) {
   $("#darkMode").fadeOut(50);
   setTimeout(function () {
@@ -25,12 +32,12 @@ $("#darkMode").on("click", function (event) {
   }
   $("#searchBtn").addClass("btn-outline-dark");
 
-  // if ($(".main-container").hasClass("bg-light-slow")) {
-  //   $(".main-container").removeClass("bg-light-slow");
-  // }
-  // $(".main-container").addClass("bg-dark-slow");
-
-  // if ($("#nav").hasClass("navbar-dark") && $("#nav").hasClass("bg-dark"))
+  if ($("#content-heading").hasClass("text-dark")) {
+    $("#content-heading").removeClass("text-dark");
+  }
+  
+  $(".modal-header").addClass("bg-dark-slow");
+  $(".modal-footer").addClass("bg-dark-slow");
 });
 
 $("#lightMode").on("click", function (event) {
@@ -54,4 +61,6 @@ $("#lightMode").on("click", function (event) {
     $("#searchBtn").removeClass("btn-outline-dark");
   }
   $("#searchBtn").addClass("btn-outline-light");
+
+  $("#content-heading").addClass("text-dark");
 });
