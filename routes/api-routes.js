@@ -57,11 +57,10 @@ function getBooks(title, cb) {
         )
         .then(function (response) {
             var books = response.data.items
-
+            console.log(books)
             var booksArr = [];
             for (var i = 0; i < books.length; i++) {
                 var bookInfo = books[i].volumeInfo;
-                // console.log(books[i])
                 var identifiers = [];
                 var images = [];
                 for (var j = 0; j < bookInfo.industryIdentifiers.length; j++) {
@@ -77,18 +76,18 @@ function getBooks(title, cb) {
                     publisher: bookInfo.publisher,
                     publishedDate: bookInfo.publishedDate,
                     description: bookInfo.description,
-                    image: images,
+                    image: bookInfo.imageLinks.thumbnail,
+                    id: books[i].id,
                     categories: bookInfo.categories,
                     pageCount: bookInfo.pageCount,
                     ratingsCount: bookInfo.ratingsCount,
                     identifiers: identifiers,
-                    id: books[i].id,
                     embeddable: books[i].accessInfo.embeddable
-
-
                 });
-
-            }
+                console.log(booksArr[i].identifiers[0].identifier)
+              
+              }
+            console.log(books)
             cb(booksArr)
 
         });
