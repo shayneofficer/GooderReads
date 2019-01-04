@@ -67,7 +67,7 @@
                                                                         </div>
                                                                         <div class="col-md-3">
                                                                                 <label for="chick-lit" class="container">
-                                                                                        <input type="checkbox" id="chick-lit">Chick
+                                                                                        <input type="checkbox" id="chickLit">Chick
                                                                                         Lit
                                                                                 </label>
                                                                         </div>
@@ -76,7 +76,7 @@
                                                                 <div class="row">
                                                                         <div class="col-md-3">
                                                                                 <label for="childrens-lit" class="container">
-                                                                                        <input type="checkbox" id="childrens-lit">Children's
+                                                                                        <input type="checkbox" id="childrensLit">Children's
                                                                                         Lit
                                                                                 </label>
                                                                         </div>
@@ -218,9 +218,10 @@
                         }
                 });
 
-                console.log(likes);
+                
 
-    console.log(likes);
+    var interest = likes.join(",")
+    console.log(interest)
 
 
         });
