@@ -8,6 +8,37 @@ var axios = require("axios");
 router.use(express.urlencoded({ extended: true }));
 router.use(express.json());
 
+router.post("/api/userLogin", function (req, res) {
+    user.leftJoin("userEmails", "userEmail", ["users.`User-ID`", "userEmails.userEmail", "users.userPassword", "users.userName"], function (result) {
+        var password = req.body.userPassword;
+        // Encrypt user password
+
+        var userName;
+        var userID;
+        console.log(result);
+        for (var i = 0; i < result.length; i++) {
+            if (result[i].userEmail == req.body.userEmail) {
+                if(result[i].userPassword == password) {
+                    userName = result[i].userName;
+                    userID = Object.values(result[i])[0];
+                    console.log("User Sign in: " + userName + "\n" + userID + "\n");
+                } else {
+                    userName = -4;
+                }
+                break;
+            }
+        }
+        
+        if (userName && userID) {
+            res.json({userName: userName, userID: userID});
+        } else if (userName === -4) {
+            res.json({error: "Incorrect Password"});
+        }else {
+            res.json({error: "Email Does Not Exist"});
+        }
+    });
+});
+
 router.post("/api/registerUser", function (req, res) {
     // Registration Authentication
     // Check User Name for invalid characters
@@ -84,8 +115,6 @@ function getBooks(title, cb) {
                     identifiers: identifiers,
                     id: books[i].id,
                     embeddable: books[i].accessInfo.embeddable
-
-
                 });
 
             }
