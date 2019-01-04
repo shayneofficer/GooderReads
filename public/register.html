@@ -46,7 +46,7 @@
                                 var invalidChar = [];
                                 $("#user-name").on("keyup", function (event) {
                                     var ek = event.key.charCodeAt(0);
-                                    if ((ek > 31 && ek < 48) || (ek > 57 && ek < 65) || (ek > 90 && ek < 97) || ek > 123) {
+                                    if ((ek > 32 && ek < 48) || (ek > 57 && ek < 65) || (ek > 90 && ek < 97) || ek > 123) {
                                         //Invalid charactar in name
                                         invalidChar.push(event.key);
                                         $("#name-message").html("'" + invalidChar.toString() + "' are invalid characters!").css("color", "red");
@@ -93,7 +93,7 @@
         var invalidChar = [];
         for (var i = 0; i < userName.length; i++) {
             var ascii = userName.charCodeAt(i);
-            if ((ascii > 31 && ascii < 48) || (ascii > 57 && ascii < 65) || (ascii > 90 && ascii < 97) || ascii > 123) {
+            if ((ascii > 32 && ascii < 48) || (ascii > 57 && ascii < 65) || (ascii > 90 && ascii < 97) || ascii > 123) {
                 invalidChar.push(userName[i]);
             }
         }
