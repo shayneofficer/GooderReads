@@ -5,10 +5,10 @@
 {{#each books}}
 <div class="card book-card">
   <div class="row">
-    <img src="{{this.cover}}" alt="X" class="rounded float-left">
+    <img src="{{this.image}}" alt="X" class="rounded float-left">
     <div class="card-body">
       <h5 class="card-title">{{this.title}}</h5>
-      <p class="card-text">{{this.summary}}</p>
+      <p class="card-text">{{this.description}}</p>
       <a href="#" class="btn btn-primary data-toggle">Preview</a>
       <!-- modal containing {{ books.preview }} -->
       <div class="row justify-content-center align-items-center">

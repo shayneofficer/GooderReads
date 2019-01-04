@@ -64,11 +64,10 @@ function getBooks(title, cb) {
 
 
 router.get('/books/:title', function (req, res) {
-    console.log(req.params.title);
+    // console.log(req.params.title);
     getBooks(req.params.title, function (books) {
-        // console.log(books);
         res.render("basic-home", { books: books });
-    })
+    });
 });
 
 module.exports = router;
