@@ -10,6 +10,37 @@ var axios = require("axios")
 router.use(express.urlencoded({ extended: true }));
 router.use(express.json());
 
+router.post("/api/userLogin", function (req, res) {
+    user.leftJoin("userEmails", "userEmail", ["users.`User-ID`", "userEmails.userEmail", "users.userPassword", "users.userName"], function (result) {
+        var password = req.body.userPassword;
+        // Encrypt user password
+
+        var userName;
+        var userID;
+        console.log(result);
+        for (var i = 0; i < result.length; i++) {
+            if (result[i].userEmail == req.body.userEmail) {
+                if(result[i].userPassword == password) {
+                    userName = result[i].userName;
+                    userID = Object.values(result[i])[0];
+                    console.log("User Sign in: " + userName + "\n" + userID + "\n");
+                } else {
+                    userName = -4;
+                }
+                break;
+            }
+        }
+        
+        if (userName && userID) {
+            res.json({userName: userName, userID: userID});
+        } else if (userName === -4) {
+            res.json({error: "Incorrect Password"});
+        }else {
+            res.json({error: "Email Does Not Exist"});
+        }
+    });
+});
+
 router.post("/api/registerUser", function (req, res) {
     // Registration Authentication
     // Check User Name for invalid characters
@@ -22,9 +53,9 @@ router.post("/api/registerUser", function (req, res) {
     }
     // Authentication checklist
     if (invalidChar.length) {
-        res.json({error: 'User Name contains invalid characters'});
+        res.json({ error: 'User Name contains invalid characters' });
     } else if (req.body.userPassword.length < 8) {
-        res.json({error: 'Password not long enough! Please use a password that is 8 characters long!'});
+        res.json({ error: 'Password not long enough! Please use a password that is 8 characters long!' });
     } else {
         userEmail.selectWhere("userEmail", req.body.userEmail, function (result) {
             if (!result.length) {
@@ -53,46 +84,41 @@ router.post("/api/registerUser", function (req, res) {
 });
 
 function getBooks(title, cb) {
-  axios
-  .get("https://www.googleapis.com/books/v1/volumes?q=" + title
-    
-  )
-  .then(function(response) {
-    var books = response.data.items
-    
-            var booksArr = [];
-            for (var i = 0; i < books.length; i++) {
-                var bookInfo = books[i].volumeInfo;
-                // console.log(books[i])
-                var identifiers = [];
-                var images =[];
-                for (var j = 0; j < bookInfo.industryIdentifiers.length; j++) {
-                    identifiers.push({ type: bookInfo.industryIdentifiers[j].type, identifier: bookInfo.industryIdentifiers[j].identifier })
-                }
-                
-                for (var j = Object.values(bookInfo.imageLinks).length -1; j >= 0; j--){
-                  images.push(Object.values(bookInfo.imageLinks)[j])
-                }
-                booksArr.push({
-                    title: bookInfo.title,
-                    author: bookInfo.authors,
-                    publisher: bookInfo.publisher,
-                    publishedDate: bookInfo.publishedDate,
-                    description: bookInfo.description,
-                    image: images,
-                    categories: bookInfo.categories,
-                    pageCount: bookInfo.pageCount,
-                    ratingsCount: bookInfo.ratingsCount,
-                    identifiers: identifiers,
-                    id: books[i].id,
-                    embeddable: books[i].accessInfo.embeddable
+    axios.get("https://www.googleapis.com/books/v1/volumes?q=" + title).then(function (response) {
+        var books = response.data.items
 
-
-                });
-                
+        var booksArr = [];
+        for (var i = 0; i < books.length; i++) {
+            var bookInfo = books[i].volumeInfo;
+            // console.log(books[i])
+            var identifiers = [];
+            var images = [];
+            for (var j = 0; j < bookInfo.industryIdentifiers.length; j++) {
+                identifiers.push({ type: bookInfo.industryIdentifiers[j].type, identifier: bookInfo.industryIdentifiers[j].identifier })
             }
-            cb(booksArr)
-      
+
+            for (var j = Object.values(bookInfo.imageLinks).length - 1; j >= 0; j--) {
+                images.push(Object.values(bookInfo.imageLinks)[j])
+            }
+            booksArr.push({
+                title: bookInfo.title,
+                author: bookInfo.authors,
+                publisher: bookInfo.publisher,
+                publishedDate: bookInfo.publishedDate,
+                description: bookInfo.description,
+                image: images,
+                categories: bookInfo.categories,
+                pageCount: bookInfo.pageCount,
+                ratingsCount: bookInfo.ratingsCount,
+                identifiers: identifiers,
+                id: books[i].id,
+                embeddable: books[i].accessInfo.embeddable
+
+
+            });
+
+        }
+        cb(booksArr)
     });
 }
 
@@ -106,5 +132,3 @@ router.get('/books/:title', function (req, res) {
 
 
 module.exports = router;
-
-  getBooks("harry potter", "")

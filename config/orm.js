@@ -60,6 +60,15 @@ var orm = {
             if (err) throw err;
             cb(result);
         });
+    },
+    
+    // Left Join Function
+    leftJoin: function(table1, table2, primaryKeyT1, primaryKeyT2, cols, cb) {
+        var queryString = "SELECT "+cols.toString()+" FROM ?? LEFT JOIN ?? ON ??.?? = ??.?? WHERE ??.?? IS NOT NULL;"
+        connection.query(queryString, [table1, table2, table1, primaryKeyT1, table2, primaryKeyT1, table2, primaryKeyT2], function(err, result) {
+            if (err) throw err;
+            cb(result);
+        });
     }
 }
 

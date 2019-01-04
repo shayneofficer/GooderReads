@@ -15,7 +15,7 @@ CREATE TABLE userEmails (
   `userEmail` varchar(255) NOT NULL,
   `User-ID` int(11) NOT NULL,
   PRIMARY KEY (`userEmail`)
-) ENGINE=MyISAM;
+)
 
 --
 -- Table structure for table users
