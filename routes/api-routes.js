@@ -4,6 +4,7 @@ var express = require("express");
 var path = require("path");
 var router = express.Router();
 var books = require('google-books-search')
+var axios = require("axios")
 
 
 router.use(express.urlencoded({ extended: true }));
@@ -33,14 +34,25 @@ router.post("/api/registerUser", function (req, res) {
 });
 
 function getBooks(title, cb) {
-    books.search(title, function (error, results) {
-        if (!error) {
+  axios
+  .get("https://www.googleapis.com/books/v1/volumes?q=" + title
+    
+  )
+  .then(function(response) {
+    var books = response.data.items
+    
             var booksArr = [];
-            for (var i = 0; i < results.length; i++) {
-                var bookInfo = results[i];
+            for (var i = 0; i < books.length; i++) {
+                var bookInfo = books[i].volumeInfo;
+                // console.log(books[i])
                 var identifiers = [];
+                var images =[];
                 for (var j = 0; j < bookInfo.industryIdentifiers.length; j++) {
                     identifiers.push({ type: bookInfo.industryIdentifiers[j].type, identifier: bookInfo.industryIdentifiers[j].identifier })
+                }
+                
+                for (var j = Object.values(bookInfo.imageLinks).length -1; j >= 0; j--){
+                  images.push(Object.values(bookInfo.imageLinks)[j])
                 }
                 booksArr.push({
                     title: bookInfo.title,
@@ -48,19 +60,27 @@ function getBooks(title, cb) {
                     publisher: bookInfo.publisher,
                     publishedDate: bookInfo.publishedDate,
                     description: bookInfo.description,
-                    image: bookInfo.thumbnail,
+                    image: images,
                     categories: bookInfo.categories,
                     pageCount: bookInfo.pageCount,
-                    identifier: identifiers
+                    ratingsCount: bookInfo.ratingsCount,
+                    identifiers: identifiers,
+                    id: books[i].id,
+                    embeddable: books[i].accessInfo.embeddable
+
+
                 });
+                
             }
-            cb(booksArr)
-        }
-        else {
-            console.log(error);
-        }
+            console.log(booksArr)
+            // cb(booksArr)
+      
+        
       });
     }
        
 
 module.exports = router;
+
+
+  getBooks("harry potter", "")
