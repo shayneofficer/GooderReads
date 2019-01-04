@@ -59,8 +59,16 @@ function getBooks(title, cb) {
         else {
             console.log(error);
         }
-      });
-    }
-       
+    });
+}
+
+
+router.get('/books/:title', function (req, res) {
+    console.log(req.params.title);
+    getBooks(req.params.title, function (books) {
+        // console.log(books);
+        res.render("basic-home", { books: books });
+    })
+});
 
 module.exports = router;

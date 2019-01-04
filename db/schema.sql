@@ -57,3 +57,22 @@ CREATE TABLE ratings (
   PRIMARY KEY  (`User-ID`,`ISBN`)
 ) ENGINE=MyISAM;
 
+--
+-- Table structure for genres
+--
+
+CREATE TABLE genres (
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `genreName` varchar(255),
+  PRIMARY KEY `ID`
+)
+
+--
+-- Table structure for user genre preferences
+--
+
+CREATE TABLE genrePreferences (
+  `User-ID` int(11) NOT NULL,
+  `Genre-ID` int(11) NOT NULL,
+  PRIMARY KEY  (`User-ID`,`Genre-ID`)
+)
