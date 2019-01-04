@@ -67,7 +67,7 @@
                                                                         </div>
                                                                         <div class="col-md-3">
                                                                                 <label for="chick-lit" class="container">
-                                                                                        <input type="checkbox" id="chick-lit">Chick
+                                                                                        <input type="checkbox" id="chickLit">Chick
                                                                                         Lit
                                                                                 </label>
                                                                         </div>
@@ -76,7 +76,7 @@
                                                                 <div class="row">
                                                                         <div class="col-md-3">
                                                                                 <label for="childrens-lit" class="container">
-                                                                                        <input type="checkbox" id="childrens-lit">Children's
+                                                                                        <input type="checkbox" id="childrensLit">Children's
                                                                                         Lit
                                                                                 </label>
                                                                         </div>
@@ -195,7 +195,7 @@
                                                                         </div>
                                                                 </div>
                                                                 <br>
-                                                                <button type="submit" class="btn btn-primary submit">Register</button>
+                                                                <button type="submit" class="btn btn-primary submit" onclick="window.location.href='/index'">Register</button>
                                                                 <a href="/register"><button type="button" class="btn btn-danger">Back</button></a>
                                                 </form>
                                         </div>
@@ -218,8 +218,10 @@
                         }
                 });
 
-                console.log(likes);
+                
 
+    var interest = likes.join(",")
+    console.log(interest)
 
 
         });
