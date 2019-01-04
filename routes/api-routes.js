@@ -100,7 +100,7 @@ function getBooks(title, cb) {
         )
         .then(function (response) {
             var books = response.data.items
-
+            console.log(books)
             var booksArr = [];
             for (var i = 0; i < books.length; i++) {
                 var bookInfo = books[i].volumeInfo;
@@ -122,16 +122,18 @@ function getBooks(title, cb) {
                     publisher: bookInfo.publisher,
                     publishedDate: bookInfo.publishedDate,
                     description: bookInfo.description,
+                    id: books[i].id,
                     image: image,
                     categories: bookInfo.categories,
                     pageCount: bookInfo.pageCount,
                     ratingsCount: bookInfo.ratingsCount,
                     identifiers: identifiers,
-                    id: books[i].id,
                     embeddable: books[i].accessInfo.embeddable
                 });
-
-            }
+                console.log(booksArr[i].identifiers[0].identifier)
+              
+              }
+            console.log(books)
             cb(booksArr)
 
         }).catch(function (err) {
