@@ -7,7 +7,9 @@ $("#lightMode").hide();
 $("#nav").addClass("navbar-dark bg-dark-slow");
 $("#searchBtn").addClass("btn-outline-light");
 $("#loginFormSubmit").addClass("btn-primary");
-$("#loginFormRegister").addClass("btn-primary");
+$("#loginFormRegister").addClass("btn-outline-primary");
+$("#registerFormSubmit").addClass("btn-primary");
+$("#registerFormLogin").addClass("btn-outline-primary");
 $("#content-heading").addClass("text-dark");
 
 $("#darkMode").on("click", function (event) {
@@ -25,7 +27,7 @@ $("#darkMode").on("click", function (event) {
   if ($("#nav").hasClass("navbar-dark bg-dark-slow")) {
     $("#nav").removeClass("navbar-dark bg-dark-slow");
   }
-  $("#nav").addClass("navbar-light bg-light-slow");
+  $("#nav").addClass("navbar-light bg-grey-slow");
 
   if ($("#searchBtn").hasClass("btn-outline-light")) {
     $("#searchBtn").removeClass("btn-outline-light");
@@ -35,9 +37,6 @@ $("#darkMode").on("click", function (event) {
   if ($("#content-heading").hasClass("text-dark")) {
     $("#content-heading").removeClass("text-dark");
   }
-
-  $(".modal-header").addClass("bg-dark-slow");
-  $(".modal-footer").addClass("bg-dark-slow");
 });
 
 $("#lightMode").on("click", function (event) {
@@ -52,8 +51,8 @@ $("#lightMode").on("click", function (event) {
   }
   $(".main-container").addClass("bg-light-slow");
 
-  if ($("#nav").hasClass("navbar-light bg-light-slow")) {
-    $("#nav").removeClass("navbar-light bg-light-slow");
+  if ($("#nav").hasClass("navbar-light bg-grey-slow")) {
+    $("#nav").removeClass("navbar-light bg-grey-slow");
   }
   $("#nav").addClass("navbar-dark bg-dark-slow");
 
@@ -61,17 +60,13 @@ $("#lightMode").on("click", function (event) {
     $("#searchBtn").removeClass("btn-outline-dark");
   }
   $("#searchBtn").addClass("btn-outline-light");
-
-  $("#content-heading").addClass("text-dark");
 });
 
-$("#searchBtn").on("click", function (event) {
-  event.preventDefault();
 
-  var title = $("#book-title-search").val().trim();
-  var titleFixed = title.split(" ").join("+");
+$("#loginFormRegister").on("click", function (event) {
+  $("#modalLoginForm").modal("toggle");
+});
 
-  $.get("/search/" + titleFixed).then(function () {
-    window.location.href = "/search/" + titleFixed;
-  });
-})
+$("#registerFormLogin").on("click", function (event) {
+  $("#registerForm").modal("toggle");
+});
