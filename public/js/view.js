@@ -37,9 +37,6 @@ $("#darkMode").on("click", function (event) {
   if ($("#content-heading").hasClass("text-dark")) {
     $("#content-heading").removeClass("text-dark");
   }
-
-  $(".modal-header").addClass("bg-dark-slow");
-  $(".modal-footer").addClass("bg-dark-slow");
 });
 
 $("#lightMode").on("click", function (event) {
@@ -63,8 +60,6 @@ $("#lightMode").on("click", function (event) {
     $("#searchBtn").removeClass("btn-outline-dark");
   }
   $("#searchBtn").addClass("btn-outline-light");
-
-  $("#content-heading").addClass("text-dark");
 });
 
 

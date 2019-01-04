@@ -79,6 +79,11 @@
 .form-control {
   border: solid var(--dark) thin;
 }
+
+.modal-header,
+.modal-footer {
+  background-color: var(--dark);
+}
 #darkMode {
   color: #FFFFFF;
 }
