@@ -25,7 +25,7 @@
                         <form role="form">
                             <div class="form-group">
                                 <label for="user-name">User Name</label>
-                                <input type="text" class="form-control" id="user-name" required>
+                                <input type="text" class="form-control" id="user-name" required><span id='name-message'></span>
                             </div>
                             <div class="form-group">
                                 <label for="user-password">Password (min character length of 8)</label>
@@ -39,9 +39,33 @@
                                 <label for="user-email">Email</label>
                                 <input type="text" class="form-control" id="user-email" required>
                             </div>
-                            <button type="submit" class="btn btn-primary submit" onclick="window.location.href='/genre'">Continue</button>
+                            <button type="submit" class="btn btn-primary submit">Continue</button>
                             <a href="/"><button type="button" class="btn btn-danger">Back</button></a>
+                            <span id="error-message"></span>
                             <script>
+                                var invalidChar = [];
+                                $("#user-name").on("keyup", function (event) {
+                                    var ek = event.key.charCodeAt(0);
+                                    if ((ek > 31 && ek < 48) || (ek > 57 && ek < 65) || (ek > 90 && ek < 97) || ek > 123) {
+                                        //Invalid charactar in name
+                                        invalidChar.push(event.key);
+                                        $("#name-message").html("'" + invalidChar.toString() + "' are invalid characters!").css("color", "red");
+                                    } else {
+                                        var name = $("#user-name").val().trim().toLowerCase();
+                                        for (var i = invalidChar.length - 1; i >= 0; i--) {
+                                            if (name.indexOf(invalidChar[i]) < 0) {
+                                                invalidChar.splice(i, 1);
+                                            }
+                                        }
+                                        if (invalidChar.length) {
+                                            $("#name-message").html("'" + invalidChar.toString() + "' are invalid characters!").css("color", "red");
+                                        } else {
+                                            $("#name-message").empty();
+                                        }
+                                    }
+                                    // console.log(invalidChar);
+                                });
+
                                 $('#user-password, #confirm-password').on('keyup', function () {
                                     if ($('#user-password').val() == $('#confirm-password').val() && $('#user-password').val().length > 7) {
                                         $('#message').html('Matching').css('color', 'green');
@@ -62,30 +86,51 @@
 <script type="text/javascript">
     $(".submit").on("click", function (event) {
         event.preventDefault();
-        var password = $("#user-password").val().trim()
+        var userName = $("#user-name").val().trim().toLowerCase();
+        var password = $("#user-password").val().trim();
+        var confirmPassword = $("#confirm-password").val().trim();
 
-        // Grab the form elements
-        var newUser = {
-            userName: $("#user-name").val().trim(),
-            userPassword: $("#user-password").val().trim(),
-            userEmail: $("#user-email").val().trim()
-        };
-
-        console.log(newUser);
-
-        $.post("/api/registerUser", newUser,
-            function (data) {
-
-                if (data) {
-                    console.log(data);
-                }
-
-                // Clear the form when submitting
-                $("#user-name").val("");
-                $("#user-password").val("");
-                $("#confirm-password").val("");
-                $("#user-email").val("");
+        var invalidChar = [];
+        for (var i = 0; i < userName.length; i++) {
+            var ascii = userName.charCodeAt(i);
+            if ((ascii > 31 && ascii < 48) || (ascii > 57 && ascii < 65) || (ascii > 90 && ascii < 97) || ascii > 123) {
+                invalidChar.push(userName[i]);
             }
-        );
+        }
+
+        if (invalidChar.length) {
+            $("#name-message").html("'" + invalidChar.toString() + "' are invalid characters!").css("color", "red");
+            $('#error-message').html('User Name contains invalid characters').css('color', 'red');
+        } else if (password.length < 8) {
+            $('#error-message').html('Password not long enough! Please use a password that is 8 characters long!').css('color', 'red');
+        } else if (password != confirmPassword) {
+            $('#error-message').html('Password does not match Confirm Password!').css('color', 'red');
+        } else {
+            // Register new user
+
+            $('#error-message').empty();
+
+            // Grab the form elements
+            var newUser = {
+                userName: $("#user-name").val().trim(),
+                userPassword: $("#user-password").val().trim(),
+                userEmail: $("#user-email").val().trim()
+            };
+
+            $.post("/api/registerUser", newUser,
+                function (data) {
+                    console.log(data);
+                    if (data.error) {
+                        $('#error-message').html(data.error).css('color', 'red');
+                    } else {
+                        // Clear the form when submitting
+                        $("#user-name").val("");
+                        $("#user-password").val("");
+                        $("#confirm-password").val("");
+                        $("#user-email").val("");
+                    }
+                }
+            );
+        }
     });
 </script>

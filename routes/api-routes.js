@@ -28,6 +28,8 @@ router.post("/api/registerUser", function (req, res) {
                     res.json({ id: result.insertId });
                 }
             );
+        } else {
+            res.json({error: "Email already in use!"})
         }
     });
 });
