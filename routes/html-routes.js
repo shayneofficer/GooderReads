@@ -33,11 +33,11 @@ router.get('/user-home', function (req, res) {
 });
 
 router.get('/register', function (req, res) {
-  res.sendFile(path.join(__dirname, '../public/register.html'));
+  res.render('register');
 });
 
-router.get('/genre', function (req, res) {
-  res.sendFile(path.join(__dirname, '../public/genre.html'));
+router.get('/genres', function (req, res) {
+  res.render('genres');
 });
 
 router.get('/index', function (req, res) {
