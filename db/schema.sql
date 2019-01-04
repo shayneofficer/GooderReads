@@ -15,7 +15,7 @@ CREATE TABLE userEmails (
   `userEmail` varchar(255) NOT NULL,
   `User-ID` int(11) NOT NULL,
   PRIMARY KEY (`userEmail`)
-) ENGINE=MyISAM;
+);
 
 --
 -- Table structure for table users
@@ -64,8 +64,8 @@ CREATE TABLE ratings (
 CREATE TABLE genres (
   `ID` int(11) NOT NULL AUTO_INCREMENT,
   `genreName` varchar(255),
-  PRIMARY KEY `ID`
-)
+  PRIMARY KEY (`ID`)
+);
 
 --
 -- Table structure for user genre preferences
@@ -75,4 +75,4 @@ CREATE TABLE genrePreferences (
   `User-ID` int(11) NOT NULL,
   `Genre-ID` int(11) NOT NULL,
   PRIMARY KEY  (`User-ID`,`Genre-ID`)
-)
+);

@@ -1,10 +1,8 @@
 var user = require("../models/users");
 var userEmail = require("../models/userEmails");
 var express = require("express");
-var path = require("path");
 var router = express.Router();
-var books = require('google-books-search')
-var axios = require("axios")
+var axios = require("axios");
 
 
 router.use(express.urlencoded({ extended: true }));
