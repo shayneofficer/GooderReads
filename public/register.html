@@ -75,7 +75,6 @@
         $.post("/api/registerUser", newUser,
             function (data) {
 
-                // If a table is available... tell user they are booked.
                 if (data) {
                     console.log(data);
                 }
@@ -89,4 +88,3 @@
         );
     });
 </script>
-
