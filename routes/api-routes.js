@@ -11,26 +11,45 @@ router.use(express.urlencoded({ extended: true }));
 router.use(express.json());
 
 router.post("/api/registerUser", function (req, res) {
-    userEmail.selectWhere("userEmail", req.body.userEmail, function (result) {
-        if (!result.length) {
-            user.create(
-                ["userName", "userPassword"],
-                [req.body.userName, req.body.userPassword],
-                function (result) {
-                    console.log(`email:${req.body.userEmail} id:${result.insertId}`);
-                    userEmail.create(
-                        ["userEmail", "UserID"],
-                        [req.body.userEmail, result.insertId],
-                        function (res) {
-                            console.log(res);
-                        }
-                    );
-                    // Send back the ID of the new quote
-                    res.json({ id: result.insertId });
-                }
-            );
+    // Registration Authentication
+    // Check User Name for invalid characters
+    var invalidChar = [];
+    for (var i = 0; i < req.body.userName.length; i++) {
+        var ascii = req.body.userName.charCodeAt(i);
+        if ((ascii > 32 && ascii < 48) || (ascii > 57 && ascii < 65) || (ascii > 90 && ascii < 97) || ascii > 123) {
+            invalidChar.push(req.body.userName[i]);
         }
-    });
+    }
+    // Authentication checklist
+    if (invalidChar.length) {
+        res.json({error: 'User Name contains invalid characters'});
+    } else if (req.body.userPassword.length < 8) {
+        res.json({error: 'Password not long enough! Please use a password that is 8 characters long!'});
+    } else {
+        userEmail.selectWhere("userEmail", req.body.userEmail, function (result) {
+            if (!result.length) {
+                // Create new User
+                user.create(
+                    ["userName", "userPassword"],
+                    [req.body.userName, req.body.userPassword],
+                    function (result) {
+                        console.log(`email:${req.body.userEmail} id:${result.insertId}`);
+                        userEmail.create(
+                            ["userEmail", "`User-ID`"],
+                            [req.body.userEmail, result.insertId],
+                            function (res) {
+                                console.log(res);
+                            }
+                        );
+                        // Send back the ID of the new quote
+                        res.json({ id: result.insertId });
+                    }
+                );
+            } else {
+                res.json({ error: "Email already in use!" })
+            }
+        });
+    }
 });
 
 function getBooks(title, cb) {
@@ -72,13 +91,10 @@ function getBooks(title, cb) {
                 });
                 
             }
-
-       
             cb(booksArr)
       
     });
 }
-
 
 router.get('/books/:title', function (req, res) {
     console.log(req.params.title);
@@ -90,6 +106,5 @@ router.get('/books/:title', function (req, res) {
 
 
 module.exports = router;
-
 
   getBooks("harry potter", "")
