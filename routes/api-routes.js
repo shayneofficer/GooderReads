@@ -104,23 +104,25 @@ function getBooks(title, cb) {
             var booksArr = [];
             for (var i = 0; i < books.length; i++) {
                 var bookInfo = books[i].volumeInfo;
-                // console.log(books[i])
                 var identifiers = [];
-                var images = [];
-                for (var j = 0; j < bookInfo.industryIdentifiers.length; j++) {
+                for (var j = 0; j < bookInfo.industryIdentifiers && bookInfo.industryIdentifiers.length; j++) {
                     identifiers.push({ type: bookInfo.industryIdentifiers[j].type, identifier: bookInfo.industryIdentifiers[j].identifier })
                 }
 
-                for (var j = Object.values(bookInfo.imageLinks).length - 1; j >= 0; j--) {
-                    images.push(Object.values(bookInfo.imageLinks)[j])
+                var image;
+                if (!bookInfo.imageLinks) {
+                    image = "http://www.stleos.uq.edu.au/wp-content/uploads/2016/08/image-placeholder-300x400.png";
+                } else {
+                    image = bookInfo.imageLinks.thumbnail;
                 }
+
                 booksArr.push({
                     title: bookInfo.title,
                     author: bookInfo.authors,
                     publisher: bookInfo.publisher,
                     publishedDate: bookInfo.publishedDate,
                     description: bookInfo.description,
-                    image: images,
+                    image: image,
                     categories: bookInfo.categories,
                     pageCount: bookInfo.pageCount,
                     ratingsCount: bookInfo.ratingsCount,
@@ -132,13 +134,13 @@ function getBooks(title, cb) {
             }
             cb(booksArr)
 
+        }).catch(function (err) {
+            if (err) throw err;
         });
 }
 
-router.get('/books/:title', function (req, res) {
-    // console.log(req.params.title);
+router.get('/search/:title', function (req, res) {
     getBooks(req.params.title, function (books) {
-        console.log(books[0].image);
         res.render("basic-home", { books: books });
     });
 });
