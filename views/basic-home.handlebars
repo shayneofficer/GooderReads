@@ -1,0 +1,21 @@
+<div class="row">
+  <h3 class="w-100" id="content-heading">Featured Books</h3>
+</div>
+
+{{#each books}}
+<div class="card book-card">
+  <div class="row">
+    <img src="{{this.image}}" alt="book-cover" class="rounded float-left" width="300" height="400">
+    <div class="card-body">
+      <h5 class="card-title">{{this.title}}</h5>
+      <p class="card-text">{{this.description}}</p>
+      <a href="#" class="btn btn-primary data-toggle">Preview</a>
+      <!-- modal containing {{ books.preview }} -->
+      <div class="row justify-content-center align-items-center">
+        <a href="#"><img class="google-play" src="/assets/google-play-badge.png" alt="X"></a>
+        <a href="#"><img class="amazon" src="/assets/amazon-badge.png" alt="X"></a>
+      </div>
+    </div>
+  </div>
+</div>
+{{/each}}
