@@ -40,6 +40,10 @@ router.get('/genre', function (req, res) {
   res.sendFile(path.join(__dirname, '../public/genre.html'));
 });
 
+router.get('/index', function (req, res) {
+  res.sendFile(path.join(__dirname, '../public/index.html'));
+});
+
 // Default landing page
 router.get('*', function (req, res) {
   //Popular / Featured books 
