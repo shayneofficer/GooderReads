@@ -2,227 +2,225 @@
 <html>
 
 <head>
-        <!-- Latest compiled and minified CSS & JS -->
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-        <script src="https://code.jquery.com/jquery.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-        <link rel="stylesheet" type="text/css" media="screen" href="./css/styles.css" />
-        <script src="./js/view.js"></script>
+  <!-- Latest compiled and minified CSS & JS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script src="https://code.jquery.com/jquery.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" type="text/css" media="screen" href="./css/styles.css" />
+  <script src="./js/view.js"></script>
 </head>
 
 <body>
-        <div class="container">
-                <h1>Select A Genre</h1>
+  <div class="container">
+    <h1>Select A Genre</h1>
+    <div class="row">
+      <div class="col-lg-12">
+        <!-- Regester Page -->
+        <div class="card">
+          <div class="card-header">
+            Picking a genre helps us identify which books fit you most!
+          </div>
+          <div class="card-body">
+            <form role="form">
+              <div class="form-group">
                 <div class="row">
-                        <div class="col-lg-12">
-                                <!-- Regester Page -->
-                                <div class="card">
-                                        <div class="card-header">
-                                                Picking a genre helps us identify which books fit you most!
-                                        </div>
-                                        <div class="card-body">
-                                                <form role="form">
-                                                        <div class="form-group">
-                                                                <div class="row">
-                                                                        <div class="col-md-3">
-                                                                                <label for="action" class="container">
-                                                                                        <input type="checkbox" id="action">Action
-                                                                                </label>
-                                                                        </div>
-                                                                        <div class="col-md-3">
-                                                                                <label for="adventure" class="container">
-                                                                                        <input type="checkbox" id="adventure">Adventure
-                                                                                </label>
-                                                                        </div>
-                                                                        <div class="col-md-3">
-                                                                                <label for="anthology" class="container">
-                                                                                        <input type="checkbox" id="anthology">Anthology
-                                                                                </label>
-                                                                        </div>
-                                                                        <div class="col-md-3">
-                                                                                <label for="art" class="container">
-                                                                                        <input type="checkbox" id="art">Art
-                                                                                </label>
-                                                                        </div>
+                  <div class="col-md-3">
+                    <label for="action" class="container">
+                      <input type="checkbox" id="action">Action
+                    </label>
+                  </div>
+                  <div class="col-md-3">
+                    <label for="adventure" class="container">
+                      <input type="checkbox" id="adventure">Adventure
+                    </label>
+                  </div>
+                  <div class="col-md-3">
+                    <label for="anthology" class="container">
+                      <input type="checkbox" id="anthology">Anthology
+                    </label>
+                  </div>
+                  <div class="col-md-3">
+                    <label for="art" class="container">
+                      <input type="checkbox" id="art">Art
+                    </label>
+                  </div>
 
-                                                                </div>
-                                                                <br>
-                                                                <div class="row">
-                                                                        <div class="col-md-3">
-                                                                                <label for="autobiography" class="container">
-                                                                                        <input type="checkbox" id="autobiography">Autobiography
-                                                                                </label>
-                                                                        </div>
-                                                                        <div class="col-md-3">
-                                                                                <label for="biography" class="container">
-                                                                                        <input type="checkbox" id="biography">Biography
-                                                                                </label>
-                                                                        </div>
-                                                                        <div class="col-md-3">
-                                                                                <label for="book-review" class="container">
-                                                                                        <input type="checkbox" id="book-review">Book
-                                                                                        Review
-                                                                                </label>
-                                                                        </div>
-                                                                        <div class="col-md-3">
-                                                                                <label for="chick-lit" class="container">
-                                                                                        <input type="checkbox" id="chickLit">Chick
-                                                                                        Lit
-                                                                                </label>
-                                                                        </div>
-                                                                </div>
-                                                                <br>
-                                                                <div class="row">
-                                                                        <div class="col-md-3">
-                                                                                <label for="childrens-lit" class="container">
-                                                                                        <input type="checkbox" id="childrensLit">Children's
-                                                                                        Lit
-                                                                                </label>
-                                                                        </div>
-                                                                        <div class="col-md-3">
-                                                                                <label for="comic-book" class="container">
-                                                                                        <input type="checkbox" id="comic-book">Comic
-                                                                                        Book
-                                                                                </label>
-                                                                        </div>
-                                                                        <div class="col-md-3">
-                                                                                <label for="cook-book" class="container">
-                                                                                        <input type="checkbox" id="cook-book">Cook
-                                                                                        Book
-                                                                                </label>
-                                                                        </div>
-                                                                        <div class="col-md-3">
-                                                                                <label for="crime" class="container">
-                                                                                        <input type="checkbox" id="crime">Crime
-                                                                                </label>
-                                                                        </div>
-                                                                </div>
-                                                                <br>
-                                                                <div class="row">
-                                                                        <div class="col-md-3">
-                                                                                <label for="diary" class="container">
-                                                                                        <input type="checkbox" id="diary">Diary
-                                                                                </label>
-                                                                        </div>
-                                                                        <div class="col-md-3">
-                                                                                <label for="drama" class="container">
-                                                                                        <input type="checkbox" id="drama">Drama
-                                                                                </label>
-                                                                        </div>
-                                                                        <div class="col-md-3">
-                                                                                <label for="fantasy" class="container">
-                                                                                        <input type="checkbox" id="fantasy">Fantasy
-                                                                                </label>
-                                                                        </div>
-                                                                        <div class="col-md-3">
-                                                                                <label for="guide" class="container">
-                                                                                        <input type="checkbox" id="guide">Guide
-                                                                                </label>
-                                                                        </div>
-                                                                </div>
-                                                                <br>
-                                                                <div class="row">
-                                                                        <div class="col-md-3">
-                                                                                <label for="history" class="container">
-                                                                                        <input type="checkbox" id="history">History
-                                                                                </label>
-                                                                        </div>
-                                                                        <div class="col-md-3">
-                                                                                <label for="horror" class="container">
-                                                                                        <input type="checkbox" id="horror">Horror
-                                                                                </label>
-                                                                        </div>
-                                                                        <div class="col-md-3">
-                                                                                <label for="mystery" class="container">
-                                                                                        <input type="checkbox" id="mystery">Mystery
-                                                                                </label>
-                                                                        </div>
-                                                                        <div class="col-md-3">
-                                                                                <label for="poetry" class="container">
-                                                                                        <input type="checkbox" id="poetry">Poetry
-                                                                                </label>
-                                                                        </div>
-                                                                </div>
-                                                                <br>
-                                                                <div class="row">
-                                                                        <div class="col-md-3">
-                                                                                <label for="political" class="container">
-                                                                                        <input type="checkbox" id="political">Political
-                                                                                </label>
-                                                                        </div>
-                                                                        <div class="col-md-3">
-                                                                                <label for="religion" class="container">
-                                                                                        <input type="checkbox" id="religion">Religion
-                                                                                </label>
-                                                                        </div>
-                                                                        <div class="col-md-3">
-                                                                                <label for="romance" class="container">
-                                                                                        <input type="checkbox" id="romance">Romance
-                                                                                </label>
-                                                                        </div>
-                                                                        <div class="col-md-3">
-                                                                                <label for="satire" class="container">
-                                                                                        <input type="checkbox" id="satire">Satire
-                                                                                </label>
-                                                                        </div>
-                                                                </div>
-                                                                <br>
-                                                                <div class="row">
-                                                                        <div class="col-md-3">
-                                                                                <label for="science-fiction" class="container">
-                                                                                        <input type="checkbox" id="science-fiction">
-                                                                                        Science Fiction
-                                                                                </label>
-                                                                        </div>
-                                                                        <div class="col-md-3">
-                                                                                <label for="thriller" class="container">
-                                                                                        <input type="checkbox" id="thriller">
-                                                                                        Thriller
-                                                                                </label>
-                                                                        </div>
-                                                                        <div class="col-md-3">
-                                                                                <label for="travel" class="container">
-                                                                                        <input type="checkbox" id="travel">
-                                                                                        Travel
-                                                                                </label>
-                                                                        </div>
-                                                                        <div class="col-md-3">
-                                                                                <label for="young-adult" class="container">
-                                                                                        <input type="checkbox" id="young-adult">
-                                                                                        Young Adult
-                                                                                </label>
-                                                                        </div>
-                                                                </div>
-                                                                <br>
-                                                                <button type="submit" class="btn btn-primary submit" onclick="window.location.href='/index'">Register</button>
-                                                                <a href="/register"><button type="button" class="btn btn-danger">Back</button></a>
-                                                </form>
-                                        </div>
-                                </div>
-                        </div>
                 </div>
+                <br>
+                <div class="row">
+                  <div class="col-md-3">
+                    <label for="autobiography" class="container">
+                      <input type="checkbox" id="autobiography">Autobiography
+                    </label>
+                  </div>
+                  <div class="col-md-3">
+                    <label for="biography" class="container">
+                      <input type="checkbox" id="biography">Biography
+                    </label>
+                  </div>
+                  <div class="col-md-3">
+                    <label for="book-review" class="container">
+                      <input type="checkbox" id="book-review">Book
+                      Review
+                    </label>
+                  </div>
+                  <div class="col-md-3">
+                    <label for="chick-lit" class="container">
+                      <input type="checkbox" id="chick-lit">Chick
+                      Lit
+                    </label>
+                  </div>
+                </div>
+                <br>
+                <div class="row">
+                  <div class="col-md-3">
+                    <label for="childrens-lit" class="container">
+                      <input type="checkbox" id="childrens-lit">Children's
+                      Lit
+                    </label>
+                  </div>
+                  <div class="col-md-3">
+                    <label for="comic-book" class="container">
+                      <input type="checkbox" id="comic-book">Comic
+                      Book
+                    </label>
+                  </div>
+                  <div class="col-md-3">
+                    <label for="cook-book" class="container">
+                      <input type="checkbox" id="cook-book">Cook
+                      Book
+                    </label>
+                  </div>
+                  <div class="col-md-3">
+                    <label for="crime" class="container">
+                      <input type="checkbox" id="crime">Crime
+                    </label>
+                  </div>
+                </div>
+                <br>
+                <div class="row">
+                  <div class="col-md-3">
+                    <label for="diary" class="container">
+                      <input type="checkbox" id="diary">Diary
+                    </label>
+                  </div>
+                  <div class="col-md-3">
+                    <label for="drama" class="container">
+                      <input type="checkbox" id="drama">Drama
+                    </label>
+                  </div>
+                  <div class="col-md-3">
+                    <label for="fantasy" class="container">
+                      <input type="checkbox" id="fantasy">Fantasy
+                    </label>
+                  </div>
+                  <div class="col-md-3">
+                    <label for="guide" class="container">
+                      <input type="checkbox" id="guide">Guide
+                    </label>
+                  </div>
+                </div>
+                <br>
+                <div class="row">
+                  <div class="col-md-3">
+                    <label for="history" class="container">
+                      <input type="checkbox" id="history">History
+                    </label>
+                  </div>
+                  <div class="col-md-3">
+                    <label for="horror" class="container">
+                      <input type="checkbox" id="horror">Horror
+                    </label>
+                  </div>
+                  <div class="col-md-3">
+                    <label for="mystery" class="container">
+                      <input type="checkbox" id="mystery">Mystery
+                    </label>
+                  </div>
+                  <div class="col-md-3">
+                    <label for="poetry" class="container">
+                      <input type="checkbox" id="poetry">Poetry
+                    </label>
+                  </div>
+                </div>
+                <br>
+                <div class="row">
+                  <div class="col-md-3">
+                    <label for="political" class="container">
+                      <input type="checkbox" id="political">Political
+                    </label>
+                  </div>
+                  <div class="col-md-3">
+                    <label for="religion" class="container">
+                      <input type="checkbox" id="religion">Religion
+                    </label>
+                  </div>
+                  <div class="col-md-3">
+                    <label for="romance" class="container">
+                      <input type="checkbox" id="romance">Romance
+                    </label>
+                  </div>
+                  <div class="col-md-3">
+                    <label for="satire" class="container">
+                      <input type="checkbox" id="satire">Satire
+                    </label>
+                  </div>
+                </div>
+                <br>
+                <div class="row">
+                  <div class="col-md-3">
+                    <label for="science-fiction" class="container">
+                      <input type="checkbox" id="science-fiction">
+                      Science Fiction
+                    </label>
+                  </div>
+                  <div class="col-md-3">
+                    <label for="thriller" class="container">
+                      <input type="checkbox" id="thriller">
+                      Thriller
+                    </label>
+                  </div>
+                  <div class="col-md-3">
+                    <label for="travel" class="container">
+                      <input type="checkbox" id="travel">
+                      Travel
+                    </label>
+                  </div>
+                  <div class="col-md-3">
+                    <label for="young-adult" class="container">
+                      <input type="checkbox" id="young-adult">
+                      Young Adult
+                    </label>
+                  </div>
+                </div>
+                <br>
+                <button type="submit" class="btn btn-primary submit">Register</button>
+                <a href="/register"><button type="button" class="btn btn-danger">Back</button></a>
+            </form>
+          </div>
         </div>
+      </div>
+    </div>
+  </div>
 </body>
 
 </html>
 
 <script type="text/javascript">
-        $(".submit").on("click", function (event) {
-                event.preventDefault();
-                var likes = [];
+  $(".submit").on("click", function (event) {
+    event.preventDefault();
+    var likes = [];
 
-                $(":input").each(function () {
-                        if (this.checked) {
-                                likes.push(this.id);
-                        }
-                });
+    $(":input").each(function () {
+      if (this.checked) {
+        likes.push(this.id);
+      }
+    });
 
-                
-
-    var interest = likes.join(",")
-    console.log(interest)
+    console.log(likes);
 
 
-        });
+
+  });
 </script>
