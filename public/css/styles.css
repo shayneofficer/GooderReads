@@ -1,24 +1,8 @@
-.navbar {
-  font-size: 1.2em;
-  padding: 0.5em 10% 0.5em 10% !important;
-  margin-bottom: 1em;
-  justify-content: space-between !important;
-}
-
-.navbar-brand {
-  font-size: 1.5em !important; 
-}
-
-#navbarSupportedContent {
-  width: fit-content;
-  flex-grow: 0;
-  flex-basis: auto;
-}
-
 .main-container {
-  width: 80%;
+  width: 100%;
+  padding: 1em 10% 0 10%;
   margin: auto;
-  background-color: blanchedalmond
+  background-color: #ffffff;
 }
 
 .book-card {
@@ -69,11 +53,7 @@ margin: 5px;
 
 @media only screen and (max-width: 992px) {
   .main-container {
-    width: 90%;
-  }
-
-  .navbar {
-    padding: 0.5em 5% 0.5em 5%;
+    padding: 0 5% 0 5%;
   }
 }
 

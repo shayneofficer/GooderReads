@@ -8,6 +8,16 @@ USE gooderreads_db;
 -- Server version	4.0.20a-debug
 
 --
+-- Table structure for table user emails
+--
+
+CREATE TABLE userEmails (
+  `userEmail` varchar(255) NOT NULL,
+  `UserID` int(11) NOT NULL,
+  PRIMARY KEY (`userEmail`)
+) ENGINE=MyISAM;
+
+--
 -- Table structure for table users
 --
 
@@ -17,7 +27,6 @@ CREATE TABLE users (
   `Age` int(11) default NULL,
   `userName` varchar(255) NOT NULL DEFAULT '',
   `userPassword` varchar(255) NOT NULL DEFAULT '',
-  `userEmail` varchar(255) NOT NULL DEFAULT '',
   PRIMARY KEY  (`User-ID`)
 ) ENGINE=MyISAM;
 

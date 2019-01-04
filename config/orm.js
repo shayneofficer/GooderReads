@@ -43,12 +43,13 @@ var orm = {
         queryString += cols.toString();
         queryString += ") VALUES (";
         queryString += printQuestionMarks(vals.length);
-        queryString += ") ";
+        queryString += ");";
 
         console.log(queryString);
 
         connection.query(queryString, vals, function (err, result) {
             if (err) throw err;
+            console.log("result")
             cb(result);
         });
     },
