@@ -6,6 +6,9 @@
   min-width: 90vh;
   padding-bottom: 1em;
 }
+#viewerCanvas{
+margin: auto;
+}
 
 .book-card {
   margin: 2em 0 2em 0;
@@ -62,3 +65,4 @@
     display: none;
   }
 }
+
