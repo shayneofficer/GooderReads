@@ -68,7 +68,7 @@ router.post("/api/registerUser", function (req, res) {
                     // Store hash in your password DB.
                     password = hash;
                 });
-                
+
                 // Create new User
                 user.create(
                     ["userName", "userPassword"],
@@ -100,12 +100,12 @@ function getBooks(title, cb) {
         )
         .then(function (response) {
             var books = response.data.items
-            console.log(books)
+            // console.log(books)
             var booksArr = [];
             for (var i = 0; i < books.length; i++) {
                 var bookInfo = books[i].volumeInfo;
                 var identifiers = [];
-                for (var j = 0; j < bookInfo.industryIdentifiers && bookInfo.industryIdentifiers.length; j++) {
+                for (var j = 0; bookInfo.industryIdentifiers && j < bookInfo.industryIdentifiers.length; j++) {
                     identifiers.push({ type: bookInfo.industryIdentifiers[j].type, identifier: bookInfo.industryIdentifiers[j].identifier })
                 }
 
@@ -130,10 +130,10 @@ function getBooks(title, cb) {
                     identifiers: identifiers,
                     embeddable: books[i].accessInfo.embeddable
                 });
-                console.log(booksArr[i].identifiers[0].identifier)
-              
-              }
-            console.log(books)
+                // console.log(booksArr[i].identifiers[0].identifier)
+
+            }
+            // console.log(books)
             cb(booksArr)
 
         }).catch(function (err) {
@@ -143,7 +143,7 @@ function getBooks(title, cb) {
 
 router.get('/search/:title', function (req, res) {
     getBooks(req.params.title, function (books) {
-        res.render("basic-home", { books: books });
+        res.render("home", { books: books });
     });
 });
 
