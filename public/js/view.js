@@ -60,6 +60,7 @@ $("#lightMode").on("click", function (event) {
     $("#searchBtn").removeClass("btn-outline-dark");
   }
   $("#searchBtn").addClass("btn-outline-light");
+  $("#content-heading").addClass("text-dark");
 });
 
 
@@ -69,4 +70,13 @@ $("#loginFormRegister").on("click", function (event) {
 
 $("#registerFormLogin").on("click", function (event) {
   $("#registerForm").modal("toggle");
+});
+
+$("#searchBtn").on("click", function (event) {
+  event.preventDefault();
+  var title = $("#book-search-title").val().trim().split(" ").join("+");
+
+  $.get("/search/" + title).then(function () {
+    window.location.href = "/search/" + title;
+  });
 });

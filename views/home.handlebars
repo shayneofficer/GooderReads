@@ -5,24 +5,26 @@
 {{#each books}}
 <div class="card book-card">
   <div class="row">
-    <img src="{{this.image}}" alt="book-cover" class="rounded float-left" width="300" height="400">
-    <div class="card-body">
-      <h5 class="card-title">{{this.title}}</h5>
-      <p class="card-text">{{this.description}}</p>
-      {{#if embeddable}}
-
-      <button onclick=initialize("{{identifiers.[0].identifier}}") type="button" class="btn btn-primary" data-toggle="modal"
-        data-target="#bookPreviewer">
-        Preview
-      </button>
-
-
-      {{/if}}
-      <div class="row justify-content-center align-items-center">
-        <a href="#"><img class="google-play" src="/assets/google-play-badge.png" alt="X"></a>
-        <a href="#"><img class="amazon" src="/assets/amazon-badge.png" alt="X"></a>
+    <div class="col-md-2">
+      <img src="{{this.image}}" alt="book-cover" class="rounded search-cover">
+    </div>
+    <div class="col-md-10">
+      <div class="card-body">
+        <h5 class="card-title">{{this.title}} - {{this.author}}</h5>
+        <p class="card-text">{{this.description}}</p>
       </div>
     </div>
+  </div>
+  <div class="row justify-content-around align-items-center">
+    <a href="#"><img class="google-play" src="/assets/google-play-badge.png" alt="X"></a>
+    <a href="https://www.amazon.com/dp/{{this.isbn10}}/ref=cm_cd_asin_lnk" target="_blank"><img class="amazon" src="/assets/amazon-badge.png"
+        alt="X"></a>
+    {{#if embeddable}}
+    <button onclick=initialize("{{identifiers.[0].identifier}}") type="button" class="btn btn-primary" data-toggle="modal"
+      data-target="#bookPreviewer">
+      Preview
+    </button>
+    {{/if}}
   </div>
 </div>
 {{/each}}
@@ -58,5 +60,4 @@
     var viewer = new google.books.DefaultViewer(document.getElementById('viewerCanvas'));
     viewer.load(id);
   }
-
 </script>

@@ -68,7 +68,7 @@ router.post("/api/registerUser", function (req, res) {
                     // Store hash in your password DB.
                     password = hash;
                 });
-                
+
                 // Create new User
                 user.create(
                     ["userName", "userPassword"],
@@ -100,18 +100,21 @@ function getBooks(title, cb) {
         )
         .then(function (response) {
             var books = response.data.items
-            console.log(books)
             var booksArr = [];
             for (var i = 0; i < books.length; i++) {
                 var bookInfo = books[i].volumeInfo;
                 var identifiers = [];
-                for (var j = 0; j < bookInfo.industryIdentifiers && bookInfo.industryIdentifiers.length; j++) {
+                var isbn10;
+                for (var j = 0; bookInfo.industryIdentifiers && j < bookInfo.industryIdentifiers.length; j++) {
                     identifiers.push({ type: bookInfo.industryIdentifiers[j].type, identifier: bookInfo.industryIdentifiers[j].identifier })
+                    if (bookInfo.industryIdentifiers[j].type === 'ISBN_10') {
+                        isbn10 = bookInfo.industryIdentifiers[j].identifier;
+                    }
                 }
 
                 var image;
                 if (!bookInfo.imageLinks) {
-                    image = "http://www.stleos.uq.edu.au/wp-content/uploads/2016/08/image-placeholder-300x400.png";
+                    image = "https://via.placeholder.com/300/400";
                 } else {
                     image = bookInfo.imageLinks.thumbnail;
                 }
@@ -128,12 +131,13 @@ function getBooks(title, cb) {
                     pageCount: bookInfo.pageCount,
                     ratingsCount: bookInfo.ratingsCount,
                     identifiers: identifiers,
+                    isbn10: isbn10,
                     embeddable: books[i].accessInfo.embeddable
                 });
-                console.log(booksArr[i].identifiers[0].identifier)
-              
-              }
-            console.log(books)
+                // console.log(booksArr[i].identifiers[0].identifier)
+
+            }
+            // console.log(books)
             cb(booksArr)
 
         }).catch(function (err) {
@@ -143,7 +147,7 @@ function getBooks(title, cb) {
 
 router.get('/search/:title', function (req, res) {
     getBooks(req.params.title, function (books) {
-        res.render("basic-home", { books: books });
+        res.render("home", { books: books });
     });
 });
 
