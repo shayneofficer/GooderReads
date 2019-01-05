@@ -1,17 +1,17 @@
 :root {
   --light: rgba(255,255,255,1.0);
   --dark: #2A3D4F;
-  --grey: #727272;
+  --grey: #AAB5C1;
   --primary: #DE681C;
 }
 
 @-webkit-keyframes toDark{
-  0%   {background-color: var(--light);}
+  0%   {background-color: var(--grey);}
   100% {background-color: var(--dark);}
 }
 
 @keyframes toDark{
-  0%   {background-color: var(--light);}
+  0%   {background-color: var(--grey);}
   100% {background-color: var(--dark);}
 }
 
@@ -23,6 +23,17 @@
 @keyframes toLight{
   0%   {background-color: var(--dark);}
   100% {background-color: var(--light);}
+}
+
+
+@-webkit-keyframes toGrey{
+  0%   {background-color: var(--dark);}
+  100% {background-color: var(--grey);}
+}
+
+@keyframes toGrey{
+  0%   {background-color: var(--dark);}
+  100% {background-color: var(--grey);}
 }
 
 .bg-dark-slow {
@@ -49,6 +60,14 @@
   animation-duration: 0.5s;
 }
 
+.bg-grey-slow {
+  background-color: var(--grey);
+  -webkit-animation-name: toGrey;
+  -webkit-animation-duration: 0.5s;
+  animation-name: toGrey;
+  animation-duration: 0.5s;
+}
+
 .bg-grey {
   background-color: var(--grey);
 }
@@ -59,6 +78,11 @@
 
 .form-control {
   border: solid var(--dark) thin;
+}
+
+.modal-header,
+.modal-footer {
+  background-color: var(--dark);
 }
 #darkMode {
   color: #FFFFFF;
