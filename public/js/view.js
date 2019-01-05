@@ -60,6 +60,7 @@ $("#lightMode").on("click", function (event) {
     $("#searchBtn").removeClass("btn-outline-dark");
   }
   $("#searchBtn").addClass("btn-outline-light");
+  $("#content-heading").addClass("text-dark");
 });
 
 
