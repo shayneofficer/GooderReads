@@ -1,0 +1,73 @@
+<div class="row">
+  <h3 class="w-100" id="content-heading">Featured Books</h3>
+</div>
+
+{{#each books}}
+<div class="card book-card">
+  <div class="row">
+    <div class="col-md-2">
+      <img src="{{this.image}}" alt="book-cover" class="rounded search-cover">
+    </div>
+    <div class="col-md-10">
+      <div class="card-body">
+        <h5 class="card-title">{{this.title}} - {{this.author}}</h5>
+        <p class="card-text">{{this.description}}</p>
+      </div>
+    </div>
+  </div>
+  <div class="row justify-content-around align-items-center">
+    <a href="#"><img class="google-play" src="/assets/google-play-badge.png" alt="X"></a>
+    <a href="https://www.amazon.com/dp/{{this.isbn10}}/ref=cm_cd_asin_lnk" target="_blank"><img class="amazon" src="/assets/amazon-badge.png"
+        alt="X"></a>
+    {{#if embeddable}}
+    <button onclick=initialize("{{identifiers.[0].identifier}}") type="button" class="btn btn-primary" data-toggle="modal"
+      data-target="#bookPreviewer">
+      Preview
+    </button>
+    {{/if}}
+  </div>
+</div>
+{{/each}}
+
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#bookPreviewer">
+  Launch demo modal
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="bookPreviewer" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalCenterTitle">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div id="viewerCanvas" style="width: 460px; height:660px;"></div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+<script type="text/javascript">
+  google.books.load();
+
+  function initialize(id) {
+    var viewer = new google.books.DefaultViewer(document.getElementById('viewerCanvas'));
+    viewer.load(id, noBookFound, removeBookFooter);
+  }
+
+   function noBookFound()
+      {
+        document.getElementById('viewerCanvas').innerHTML="<h1>Oops! Preview not found for this book!</h1>";
+      }
+
+   function removeBookFooter()
+      {
+        $('#viewerCanvas > div > div:nth-child(2)').css('display','none');
+      }
+</script>
