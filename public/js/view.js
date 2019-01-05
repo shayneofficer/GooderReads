@@ -13,6 +13,12 @@ $("#registerFormLogin").addClass("btn-outline-primary");
 $("#content-heading").addClass("text-dark");
 
 $("#darkMode").on("click", function (event) {
+  localStorage.setItem("mode", "dark")
+  darkMode(event)
+
+});
+
+function darkMode(event){
   $("#darkMode").fadeOut(50);
   setTimeout(function () {
     $("#lightMode").fadeIn("50");
@@ -37,9 +43,15 @@ $("#darkMode").on("click", function (event) {
   if ($("#content-heading").hasClass("text-dark")) {
     $("#content-heading").removeClass("text-dark");
   }
-});
+}
 
 $("#lightMode").on("click", function (event) {
+  localStorage.setItem("mode", "light")
+  lightMode(event)
+ 
+});
+
+function lightMode(event){
   $("#lightMode").fadeOut(50);
   setTimeout(function () {
     $("#darkMode").fadeIn("50");
@@ -61,8 +73,7 @@ $("#lightMode").on("click", function (event) {
   }
   $("#searchBtn").addClass("btn-outline-light");
   $("#content-heading").addClass("text-dark");
-});
-
+}
 
 $("#loginFormRegister").on("click", function (event) {
   $("#modalLoginForm").modal("toggle");
@@ -80,3 +91,15 @@ $("#searchBtn").on("click", function (event) {
     window.location.href = "/search/" + title;
   });
 });
+
+window.onload = function() {
+  var mode = localStorage.getItem("mode")
+  console.log(mode)
+  if (mode === "dark") {
+    darkMode()
+  }
+
+  else if(mode === "light") {
+    lightMode() 
+  }
+}
