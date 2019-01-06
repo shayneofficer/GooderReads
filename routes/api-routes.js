@@ -8,6 +8,10 @@ var axios = require("axios");
 router.use(express.urlencoded({ extended: true }));
 router.use(express.json());
 
+router.post("/api/userGenres", function (req, res) {
+    
+});
+
 router.post("/api/userLogin", function (req, res) {
     user.leftJoin("userEmails", "userEmail", ["users.`User-ID`", "userEmails.userEmail", "users.userPassword", "users.userName"], function (result) {
         var password = req.body.userPassword;

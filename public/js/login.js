@@ -1,3 +1,5 @@
+bcrypt = require("bcryptjs");
+
 $("#loginFormSubmit").on("click", function (event) {
   event.preventDefault();
   var loginInfo = {
