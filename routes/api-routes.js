@@ -1,5 +1,7 @@
 var user = require("../models/users");
 var userEmail = require("../models/userEmails");
+var genre = require("../models/genres");
+var genrePreference = require("../models/genrePreferences");
 var express = require("express");
 var router = express.Router();
 var axios = require("axios");
@@ -9,8 +11,46 @@ var bcrypt = require('bcrypt-nodejs');
 router.use(express.urlencoded({ extended: true }));
 router.use(express.json());
 
-router.post("/api/userGenres", function (req, res) {
+// Get liked genres for user
+router.get("/api/likedGenres", function (req, res) {
+    res.json({});
+});
 
+// Add new liked genres to user
+router.post("/api/likedGenres", function (req, res) {
+    console.log("\nGenres");
+    console.log(req.body);
+
+    genre.all(function(result) {
+        likes = req.body.likes;
+        for(var i = 0; i < likes.length; i++) {
+            for(var j = 0; j < result.length; j++) {
+                if (result[j].genreName == likes[i]) {
+                    likes[i] = Object.values(result[j])[0];
+                    break;
+                }
+            }
+        }
+        console.log("After conversion to genre-id");
+        console.log(likes);
+        genrePreference.selectWhere("`User-ID`", req.body.userID, function(result) {
+            console.log(result);
+            if(!result) result = [];
+            for(var i = 0; i < likes.length; i++) {
+                var match = false;
+                for(var j = 0; j < result.length; j++) {
+                    if(Object.values(result[j])[1] == likes[i]) {
+                        match = true;
+                        break;
+                    }
+                }
+                if (!match) {
+                    console.log("create genre " + likes[i]);
+                    genrePreference.create(["`User-ID`", "`Genre-ID`"], [req.body.userID, likes[i]]);
+                }
+            }
+        });
+    });
 });
 
 router.post("/api/userLogin", function (req, res) {
