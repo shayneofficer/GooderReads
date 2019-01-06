@@ -27,30 +27,11 @@ router.get('/profile', function (req, res) {
 
 // Default landing page
 router.get('*', function (req, res) {
-  // Popular / Featured books
-  var placeholderImg = [
-    'http://www.stleos.uq.edu.au/wp-content/uploads/2016/08/image-placeholder-350x350.png'
-  ]
-  var books = [
-    {
-      title: 'Hunt for Red October',
-      description: 'This is a summary.',
-      image: placeholderImg
-    },
-    {
-      title: 'Harry Pottah',
-      description: 'This is a summary, with a British accent.',
-      image: placeholderImg
-    },
-    {
-      title: 'Lord of the Rings',
-      description: 'This is a boring summary.',
-      image: placeholderImg
-    }
-  ]
-  res.render('home', {
-    books: books
-  })
-})
+
+  
+  // res.render('home', {
+  //   books: books
+  // });
+});
 
 module.exports = router
