@@ -1,13 +1,14 @@
 var invalidChar = [];
-
-$("#user-name").on("keyup", function (event) {
+console.log("connect!")
+$("#registerFormUsername").on("keyup", function (event) {
+  
   var ek = event.key.charCodeAt(0);
   if ((ek > 32 && ek < 48) || (ek > 57 && ek < 65) || (ek > 90 && ek < 97) || ek > 123) {
     //Invalid charactar in name
     invalidChar.push(event.key);
     $("#name-message").html("'" + invalidChar.toString() + "' are invalid characters!").css("color", "red");
   } else {
-    var name = $("#user-name").val().trim().toLowerCase();
+    var name = $("#registerFormUsername").val().trim().toLowerCase();
     for (var i = invalidChar.length - 1; i >= 0; i--) {
       if (name.indexOf(invalidChar[i]) < 0) {
         invalidChar.splice(i, 1);
@@ -22,18 +23,19 @@ $("#user-name").on("keyup", function (event) {
   // console.log(invalidChar);
 });
 
-$('#user-password, #confirm-password').on('keyup', function () {
-  if ($('#user-password').val() == $('#confirm-password').val() && $('#user-password').val().length > 7) {
-    $('#message').html('Matching').css('color', 'green');
+$('#registerFormPass, #registerFormPassConfirm').on('keyup', function () {
+  if ($('#registerFormPass').val() == $('#registerFormPassConfirm').val() && $('#registerFormPass').val().length > 7) {
+    $('#lengthMessage').html('Matching').css('color', 'green');
 
-  } else $('#message').html('Not Matching').css('color', 'red');
+  } else $('#lengthMessage').html('Not Matching').css('color', 'red');
 });
 
-$(".submit").on("click", function (event) {
+$("#registerFormSubmit").on("click", function (event) {
   event.preventDefault();
-  var userName = $("#user-name").val().trim().toLowerCase();
-  var password = $("#user-password").val().trim();
-  var confirmPassword = $("#confirm-password").val().trim();
+
+  var userName = $("#registerFormUsername").val().trim().toLowerCase();
+  var password = $("#registerFormPass").val().trim();
+  var confirmPassword = $("#registerFormPassConfirm").val().trim();
 
   var invalidChar = [];
   for (var i = 0; i < userName.length; i++) {
@@ -57,9 +59,9 @@ $(".submit").on("click", function (event) {
 
     // Grab the form elements
     var newUser = {
-      userName: $("#user-name").val().trim(),
-      userPassword: $("#user-password").val().trim(),
-      userEmail: $("#user-email").val().trim()
+      userName: $("#registerFormUsername").val().trim(),
+      userPassword: $("#registerFormPass").val().trim(),
+      userEmail: $("#registerFormEmail").val().trim()
     };
 
     $.post("/api/registerUser", newUser,
@@ -69,12 +71,14 @@ $(".submit").on("click", function (event) {
           $('#error-message').html(data.error).css('color', 'red');
         } else {
           // Clear the form when submitting
-          $("#user-name").val("");
-          $("#user-password").val("");
-          $("#confirm-password").val("");
-          $("#user-email").val("");
+          $("#registerFormUsername").val("");
+          $("#registerFormPass").val("");
+          $("#registerFormPassConfirm").val("");
+          $("#registerFormEmail").val("");
         }
       }
     );
+    window.location.href = "/genres";
+    $("#registerForm").modal("hide");
   }
 });
