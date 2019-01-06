@@ -76,3 +76,18 @@ CREATE TABLE genrePreferences (
   `Genre-ID` int(11) NOT NULL,
   PRIMARY KEY  (`User-ID`,`Genre-ID`)
 );
+
+CREATE TABLE featuredBooks (
+`ISBN10` VARCHAR(255) NOT NULL,
+`author` VARCHAR(55) NOT NULL,
+`title` VARCHAR(255) NOT NULL,
+`description` LONGTEXT NOT NULL,
+`categories` VARCHAR(255) NOT NULL,
+`embeddable` BOOLEAN NOT NULL,
+`id` VARCHAR(255),
+`identifiers` VARCHAR(55),
+`rating` int(55) NOT NULL,
+`image` VARCHAR(255) NOT NULL,
+`ratingsCount` int(255) NOT NULL,
+PRIMARY KEY (`ISBN10`)
+);

@@ -28,3 +28,15 @@ ratings = {
 }
 
 module.exports = ratings;
+
+
+rating = {
+  grabTopRatings: function(amount, cb){
+    orm.selectTop("ratings", "ISBN", "Book-Rating", amount, "Book-Title", "Image-URL-M", function(res){
+      cb(res)
+    })
+  }
+
+
+}
+module.exports = rating

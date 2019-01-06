@@ -1,5 +1,7 @@
-var express = require('express')
-var router = express.Router()
+var express = require('express');
+var router = express.Router();
+var featuredBooks = require("../models/featuredBooks")
+
 
 router.use(
   express.urlencoded({
@@ -27,11 +29,12 @@ router.get('/profile', function (req, res) {
 
 // Default landing page
 router.get('*', function (req, res) {
-
   
-  // res.render('home', {
-  //   books: books
-  // });
+  featuredBooks.selectFeaturedBooks(10, 0, "rating", function(response){
+  res.render("home",{books: response})
+  })
+ 
 });
 
-module.exports = router
+
+module.exports = router;
