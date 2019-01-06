@@ -49,7 +49,7 @@ var orm = {
 
         connection.query(queryString, vals, function (err, result) {
             if (err) throw err;
-            console.log("result")
+            console.log(result);
             cb(result);
         });
     },
@@ -57,7 +57,6 @@ var orm = {
     selectWhere: function (table, searchCol, val, cb) {
         var queryString = "SELECT * FROM ?? WHERE ?? = ?";
         connection.query(queryString, [table, searchCol, val], function (err, result) {
-            if (err) throw err;
             cb(result);
         });
     },

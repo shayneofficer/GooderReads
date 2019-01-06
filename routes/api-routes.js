@@ -6,12 +6,11 @@ var axios = require("axios");
 var bcrypt = require('bcrypt-nodejs');
 var saltRounds = 10;
 
-
 router.use(express.urlencoded({ extended: true }));
 router.use(express.json());
 
 router.post("/api/userGenres", function (req, res) {
-    
+
 });
 
 router.post("/api/userLogin", function (req, res) {
@@ -24,7 +23,8 @@ router.post("/api/userLogin", function (req, res) {
         console.log(result);
         for (var i = 0; i < result.length; i++) {
             if (result[i].userEmail == req.body.userEmail) {
-                if (bcrypt.compareSync(password, hash)) {
+                console.log(result[i.userPassword])
+                if (bcrypt.compareSync(password, result[i].userPassword)) {
                     userName = result[i].userName;
                     userID = Object.values(result[i])[0];
                     console.log("User Sign in: " + userName + "\n" + userID + "\n");
@@ -48,8 +48,6 @@ router.post("/api/userLogin", function (req, res) {
 router.post("/api/registerUser", function (req, res) {
     // Registration Authentication
     // Check User Name for invalid characters
-    
-    
 
     var invalidChar = [];
     for (var i = 0; i < req.body.userName.length; i++) {
@@ -64,26 +62,32 @@ router.post("/api/registerUser", function (req, res) {
     } else if (req.body.userPassword.length < 8) {
         res.json({ error: 'Password not long enough! Please use a password that is 8 characters long!' });
     } else {
+        console.log(req.body);
         userEmail.selectWhere("userEmail", req.body.userEmail, function (result) {
             if (!result.length) {
                 // Encrypt password Server Side Sets Password to hash Value
-                var password = bcrypt.hashSync(req.body.userPassword)
+                var password = bcrypt.hashSync(req.body.userPassword);
+                var loginInfo = { userName: req.body.userName };
 
                 // Create new User
                 user.create(
                     ["userName", "userPassword"],
                     [req.body.userName, password],
                     function (result) {
+                        console.log("\nusers");
                         console.log(`email:${req.body.userEmail} id:${result.insertId}`);
                         userEmail.create(
                             ["userEmail", "`User-ID`"],
                             [req.body.userEmail, result.insertId],
                             function (res) {
+                                console.log("\nuserEmails");
                                 console.log(res);
                             }
                         );
-                        // Send back the ID of the new quote
-                        res.json({ id: result.insertId });
+
+                        // Send back the ID & userName of the new User
+                        loginInfo.userID = result.insertId;
+                        res.json(loginInfo);
                     }
                 );
             } else {
@@ -134,7 +138,7 @@ function getBooks(title, cb) {
                     isbn10: isbn10,
                     embeddable: books[i].accessInfo.embeddable
                 });
-                
+
 
             }
             cb(booksArr)
