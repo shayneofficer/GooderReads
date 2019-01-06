@@ -64,20 +64,20 @@ $("#registerFormSubmit").on("click", function (event) {
       userEmail: $("#registerFormEmail").val().trim()
     };
 
-    // $.post("/api/registerUser", newUser,
-    //   function (data) {
-    //     console.log(data);
-    //     if (data.error) {
-    //       $('#error-message').html(data.error).css('color', 'red');
-    //     } else {
-    //       // Clear the form when submitting
-    //       $("#registerFormUsername").val("");
-    //       $("#registerFormPass").val("");
-    //       $("#registerFormPassConfirm").val("");
-    //       $("#registerFormEmail").val("");
-    //     }
-    //   }
-    // );
+    $.post("/api/registerUser", newUser,
+      function (data) {
+        console.log(data);
+        if (data.error) {
+          $('#error-message').html(data.error).css('color', 'red');
+        } else {
+          // Clear the form when submitting
+          $("#registerFormUsername").val("");
+          $("#registerFormPass").val("");
+          $("#registerFormPassConfirm").val("");
+          $("#registerFormEmail").val("");
+        }
+      }
+    );
     window.location.href = "/genres";
     $("#registerForm").modal("hide");
   }
