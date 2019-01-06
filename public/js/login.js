@@ -1,4 +1,4 @@
-bcrypt = require("bcryptjs");
+bcrypt = require("bcryptjs"); // Require doesnt not work with client/browser js
 
 $("#loginFormSubmit").on("click", function (event) {
   event.preventDefault();
