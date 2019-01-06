@@ -1,14 +1,25 @@
+$('#submit-genres').on('click', function (event) {
+  event.preventDefault()
+  var likes = []
 
-$("#submit-genres").on("click", function (event) {
-  event.preventDefault();
-  var likes = [];
+  $('.selected').each(function () {
+    likes.push(this.id)
+  })
+  console.log(likes)
+})
 
-  $(":input").each(function () {
-    if (this.checked) {
-      console.log(this);
-      likes.push(this.id);
-    }
-  });
+$('.genre-btn').on('click', function (event) {
+  event.preventDefault()
 
-  console.log(likes);
-});
+  if ($(this).hasClass('selected')) {
+    $(this).removeClass('selected')
+  } else {
+    $(this).addClass('selected')
+  }
+})
+
+$('#reset').on('click', function (event) {
+  event.preventDefault()
+
+  $('.selected').removeClass('selected')
+})
