@@ -2,7 +2,7 @@
 var invalidChar = [];
 console.log("connect!")
 $("#registerFormUsername").on("keyup", function (event) {
-  
+
   var ek = event.key.charCodeAt(0);
   if ((ek > 32 && ek < 48) || (ek > 57 && ek < 65) || (ek > 90 && ek < 97) || ek > 123) {
     //Invalid charactar in name
@@ -61,27 +61,31 @@ $("#registerFormSubmit").on("click", function (event) {
     // Grab the form elements
     var newUser = {
       userName: $("#registerFormUsername").val().trim(),
-      userPassword:$("#registerFormPass").val().trim(),
+      userPassword: $("#registerFormPass").val().trim(),
       userEmail: $("#registerFormEmail").val().trim()
     };
 
-    console.log(newUser.userPassword)
-
     $.post("/api/registerUser", newUser,
       function (data) {
-        console.log(data);
         if (data.error) {
           $('#error-message').html(data.error).css('color', 'red');
         } else {
-          // Clear the form when submitting
+
+          // Clear Register Form
           $("#registerFormUsername").val("");
           $("#registerFormPass").val("");
           $("#registerFormPassConfirm").val("");
           $("#registerFormEmail").val("");
+          
+          // Set Login from returned data
+          sessionStorage.setItem("userName", data.userName);
+          sessionStorage.setItem("userID", data.userID);
+
+          // Hide Register Modal
+          $("#registerForm").modal("hide");
+          signedIn();
         }
       }
     );
-    window.location.href = "/genres";
-    $("#registerForm").modal("hide");
   }
 });

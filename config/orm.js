@@ -49,7 +49,7 @@ var orm = {
 
         connection.query(queryString, vals, function (err, result) {
             if (err) throw err;
-            console.log("result")
+            console.log(result);
             cb(result);
         });
     },
@@ -57,7 +57,6 @@ var orm = {
     selectWhere: function (table, searchCol, val, cb) {
         var queryString = "SELECT * FROM ?? WHERE ?? = ?";
         connection.query(queryString, [table, searchCol, val], function (err, result) {
-            if (err) throw err;
             cb(result);
         });
     },
@@ -66,6 +65,14 @@ var orm = {
     leftJoin: function(table1, table2, primaryKeyT1, primaryKeyT2, cols, cb) {
         var queryString = "SELECT "+cols.toString()+" FROM ?? LEFT JOIN ?? ON ??.?? = ??.?? WHERE ??.?? IS NOT NULL;"
         connection.query(queryString, [table1, table2, table1, primaryKeyT1, table2, primaryKeyT1, table2, primaryKeyT2], function(err, result) {
+            if (err) throw err;
+            cb(result);
+        });
+    },
+
+    leftJoinWhere: function(table1, table2, primaryKeyT1, primaryKeyT2, cols, val, cb) {
+        var queryString = "SELECT "+cols.toString()+" FROM ?? LEFT JOIN ?? ON ??.?? = ??.?? WHERE ??.?? = ?;"
+        connection.query(queryString, [table1, table2, table1, primaryKeyT1, table2, primaryKeyT1, table2, primaryKeyT2, val], function(err, result) {
             if (err) throw err;
             cb(result);
         });
