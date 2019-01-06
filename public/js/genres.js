@@ -23,3 +23,8 @@ $('#reset').on('click', function (event) {
 
   $('.selected').removeClass('selected')
 })
+
+$(window).on('load', function () {
+  $('#welcomeModal').modal('show')
+  console.log('loaded')
+})
