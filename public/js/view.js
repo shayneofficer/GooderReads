@@ -2,6 +2,20 @@ var GREY = "#444444";
 var WHITE = "#FFFFFF";
 var BLACK = "#000000";
 
+// Check If User Is Logged In
+console.log("userName: " + sessionStorage.getItem("userName"));
+console.log("userID: " + sessionStorage.getItem("userID"));
+
+if (sessionStorage.getItem("userName") && sessionStorage.getItem("userID") >= 0) {
+  console.log("If")
+  signedIn();
+} else {
+  console.log("Else")
+  sessionStorage.setItem("userName", "");
+  sessionStorage.setItem("userID", -4);
+  signedOut();
+}
+
 //dark mode enabled by default
 $("#lightMode").hide();
 $("#nav").addClass("navbar-dark bg-dark-slow");
@@ -100,4 +114,29 @@ window.onload = function () {
   } else {
     lightMode()
   }
+}
+
+// User Login Status
+// Sign Out Button
+$("#sign-out").on("click", function (event) {
+  sessionStorage.setItem("userName", "");
+  sessionStorage.setItem("userID", -4);
+});
+
+function signedIn() {
+  console.log("signedIn");
+  $("#login").hide();
+  $("#register").hide();
+  $("#user-name").html(sessionStorage.getItem("userName"));
+  $("#user-name").show();
+  $("#sign-out").show();
+}
+
+function signedOut() {
+  console.log("signedOut");
+  $("#login").show();
+  $("#register").show();
+  $("#user-name").html(sessionStorage.getItem("userName"));
+  $("#user-name").hide();
+  $("#sign-out").hide();
 }

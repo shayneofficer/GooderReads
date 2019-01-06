@@ -68,6 +68,14 @@ var orm = {
             if (err) throw err;
             cb(result);
         });
+    },
+
+    leftJoinWhere: function(table1, table2, primaryKeyT1, primaryKeyT2, cols, val, cb) {
+        var queryString = "SELECT "+cols.toString()+" FROM ?? LEFT JOIN ?? ON ??.?? = ??.?? WHERE ??.?? = ?;"
+        connection.query(queryString, [table1, table2, table1, primaryKeyT1, table2, primaryKeyT1, table2, primaryKeyT2, val], function(err, result) {
+            if (err) throw err;
+            cb(result);
+        });
     }
 }
 

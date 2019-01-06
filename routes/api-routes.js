@@ -14,7 +14,7 @@ router.post("/api/userGenres", function (req, res) {
 });
 
 router.post("/api/userLogin", function (req, res) {
-    user.leftJoin("userEmails", "userEmail", ["users.`User-ID`", "userEmails.userEmail", "users.userPassword", "users.userName"], function (result) {
+    user.leftJoinWhere("userEmails", "userEmail", ["users.`User-ID`", "userEmails.userEmail", "users.userPassword", "users.userName"], req.body.userEmail, function (result) {
         var password = req.body.userPassword;
         // Encrypt user password
 
