@@ -3,7 +3,7 @@ var userEmail = require("../models/userEmails");
 var express = require("express");
 var router = express.Router();
 var axios = require("axios");
-var bcrypt = require('bcryptjs');
+var bcrypt = require('bcrypt-nodejs');
 var saltRounds = 10;
 
 
@@ -24,10 +24,7 @@ router.post("/api/userLogin", function (req, res) {
         console.log(result);
         for (var i = 0; i < result.length; i++) {
             if (result[i].userEmail == req.body.userEmail) {
-                if (bcrypt.compare(password, hash, function (err, res) {
-                    return res
-                })
-                ) {
+                if (bcrypt.compareSync(password, hash)) {
                     userName = result[i].userName;
                     userID = Object.values(result[i])[0];
                     console.log("User Sign in: " + userName + "\n" + userID + "\n");
@@ -51,6 +48,9 @@ router.post("/api/userLogin", function (req, res) {
 router.post("/api/registerUser", function (req, res) {
     // Registration Authentication
     // Check User Name for invalid characters
+    
+    
+
     var invalidChar = [];
     for (var i = 0; i < req.body.userName.length; i++) {
         var ascii = req.body.userName.charCodeAt(i);
@@ -66,12 +66,8 @@ router.post("/api/registerUser", function (req, res) {
     } else {
         userEmail.selectWhere("userEmail", req.body.userEmail, function (result) {
             if (!result.length) {
-                // Encrypt password Server Side
-                var password = req.body.userPassword;
-                bcrypt.hash(password, saltRounds, function (err, hash) {
-                    // Store hash in your password DB.
-                    password = hash;
-                });
+                // Encrypt password Server Side Sets Password to hash Value
+                var password = bcrypt.hashSync(req.body.userPassword)
 
                 // Create new User
                 user.create(

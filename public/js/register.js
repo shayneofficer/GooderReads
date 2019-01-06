@@ -1,3 +1,4 @@
+
 var invalidChar = [];
 console.log("connect!")
 $("#registerFormUsername").on("keyup", function (event) {
@@ -60,9 +61,11 @@ $("#registerFormSubmit").on("click", function (event) {
     // Grab the form elements
     var newUser = {
       userName: $("#registerFormUsername").val().trim(),
-      userPassword: $("#registerFormPass").val().trim(),
+      userPassword:$("#registerFormPass").val().trim(),
       userEmail: $("#registerFormEmail").val().trim()
     };
+
+    console.log(newUser.userPassword)
 
     $.post("/api/registerUser", newUser,
       function (data) {
