@@ -53,6 +53,14 @@ margin: auto;
   height: auto;
 }
 
+#title {
+  font-family: 'Patua One', cursive;
+}
+
+#head {
+  font-family: 'Khand', sans-serif;
+}
+
 
 @media only screen and (max-width: 992px) {
   .main-container {

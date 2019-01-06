@@ -4,7 +4,7 @@ var express = require("express");
 var router = express.Router();
 var axios = require("axios");
 var bcrypt = require('bcrypt-nodejs');
-var saltRounds = 10;
+
 
 
 router.use(express.urlencoded({ extended: true }));
