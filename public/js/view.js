@@ -18,7 +18,7 @@ $("#darkMode").on("click", function (event) {
 
 });
 
-function darkMode(event){
+function darkMode(event) {
   $("#darkMode").fadeOut(50);
   setTimeout(function () {
     $("#lightMode").fadeIn("50");
@@ -48,10 +48,10 @@ function darkMode(event){
 $("#lightMode").on("click", function (event) {
   localStorage.setItem("mode", "light")
   lightMode(event)
- 
+
 });
 
-function lightMode(event){
+function lightMode(event) {
   $("#lightMode").fadeOut(50);
   setTimeout(function () {
     $("#darkMode").fadeIn("50");
@@ -92,14 +92,12 @@ $("#searchBtn").on("click", function (event) {
   });
 });
 
-window.onload = function() {
+window.onload = function () {
   var mode = localStorage.getItem("mode")
   console.log(mode)
   if (mode === "dark") {
     darkMode()
-  }
-
-  else if(mode === "light") {
-    lightMode() 
+  } else {
+    lightMode()
   }
 }
