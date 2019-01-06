@@ -28,7 +28,7 @@ CREATE TABLE users (
   `userName` varchar(255) NOT NULL DEFAULT '',
   `userPassword` varchar(255) NOT NULL DEFAULT '',
   PRIMARY KEY  (`User-ID`)
-) ENGINE=MyISAM;
+);
 
 --
 -- Table structure for table books
@@ -44,7 +44,7 @@ CREATE TABLE books (
   `Image-URL-M` varchar(255) binary default NULL,
   `Image-URL-L` varchar(255) binary default NULL,
   PRIMARY KEY  (`ISBN`)
-) ENGINE=MyISAM;
+);
 
 --
 -- Table structure for table ratings
@@ -55,7 +55,7 @@ CREATE TABLE ratings (
   `ISBN` varchar(13) NOT NULL default '',
   `Book-Rating` int(11) NOT NULL default '0',
   PRIMARY KEY  (`User-ID`,`ISBN`)
-) ENGINE=MyISAM;
+);
 
 --
 -- Table structure for genres

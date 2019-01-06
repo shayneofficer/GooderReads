@@ -4,16 +4,15 @@ $("#loginFormSubmit").on("click", function (event) {
     userEmail: $("#loginFormEmail").val().trim(),
     userPassword: $("#loginFormPass").val().trim()
   }
-  
-  bcrypt.hash(loginInfo.userPassword, 10, function(err, hash) {
-    console.log("hash-value \n")
-    console.log(hash) 
-  });
 
   $.post("/api/userLogin", loginInfo,
     function (data) {
       if(data.error) {
         $("#error-login").html(data.error).css('color', 'red');
+      } else {
+        sessionStorage.setItem("userName", data.userName);
+        sessionStorage.setItem("userID", data.userID);
+        $("#modalLoginForm").modal("hide");
       }
     }
   );
