@@ -111,9 +111,7 @@ window.onload = function () {
   console.log(mode)
   if (mode === "dark") {
     darkMode()
-  }
-
-  else if (mode === "light") {
+  } else {
     lightMode()
   }
 }
