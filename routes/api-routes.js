@@ -134,10 +134,9 @@ function getBooks(title, cb) {
                     isbn10: isbn10,
                     embeddable: books[i].accessInfo.embeddable
                 });
-                // console.log(booksArr[i].identifiers[0].identifier)
+                
 
             }
-            // console.log(books)
             cb(booksArr)
 
         }).catch(function (err) {
