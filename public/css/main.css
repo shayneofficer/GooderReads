@@ -3,7 +3,7 @@
   padding: 1em 10% 0 10%;
   margin: auto;
   background-color: #ffffff;
-  min-width: 90vh;
+  min-height: 90vh;
   padding-bottom: 1em;
 }
 #viewerCanvas{
@@ -68,12 +68,17 @@ margin: auto;
 
 #content-heading {
   font-family: 'Fugaz One', sans-serif;
+  margin-top: 0.5em;
+  margin-bottom: 0;
 }
 
 
 @media only screen and (max-width: 992px) {
   .main-container {
     padding: 0 5% 0 5%;
+  }
+  #mode-toggle {
+    text-align: right;
   }
 }
 
