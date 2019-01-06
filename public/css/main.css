@@ -66,6 +66,11 @@ margin: auto;
   margin-right: 0.5em;
 }
 
+#content-heading {
+  font-family: 'Fugaz One', sans-serif;
+}
+
+
 @media only screen and (max-width: 992px) {
   .main-container {
     padding: 0 5% 0 5%;
