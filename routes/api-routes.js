@@ -3,6 +3,8 @@ var userEmail = require("../models/userEmails");
 var express = require("express");
 var router = express.Router();
 var axios = require("axios");
+var bcrypt = require('bcryptjs');
+var saltRounds = 10;
 
 
 router.use(express.urlencoded({ extended: true }));
@@ -22,7 +24,10 @@ router.post("/api/userLogin", function (req, res) {
         console.log(result);
         for (var i = 0; i < result.length; i++) {
             if (result[i].userEmail == req.body.userEmail) {
-                if(result[i].userPassword == password) {
+                if (bcrypt.compare(password, hash, function (err, res) {
+                    return res
+                })
+                ) {
                     userName = result[i].userName;
                     userID = Object.values(result[i])[0];
                     console.log("User Sign in: " + userName + "\n" + userID + "\n");
@@ -32,13 +37,13 @@ router.post("/api/userLogin", function (req, res) {
                 break;
             }
         }
-        
+
         if (userName && userID) {
-            res.json({userName: userName, userID: userID});
+            res.json({ userName: userName, userID: userID });
         } else if (userName === -4) {
-            res.json({error: "Incorrect Password"});
-        }else {
-            res.json({error: "Email Does Not Exist"});
+            res.json({ error: "Incorrect Password" });
+        } else {
+            res.json({ error: "Email Does Not Exist" });
         }
     });
 });
@@ -61,10 +66,17 @@ router.post("/api/registerUser", function (req, res) {
     } else {
         userEmail.selectWhere("userEmail", req.body.userEmail, function (result) {
             if (!result.length) {
+                // Encrypt password Server Side
+                var password = req.body.userPassword;
+                bcrypt.hash(password, saltRounds, function (err, hash) {
+                    // Store hash in your password DB.
+                    password = hash;
+                });
+
                 // Create new User
                 user.create(
                     ["userName", "userPassword"],
-                    [req.body.userName, req.body.userPassword],
+                    [req.body.userName, password],
                     function (result) {
                         console.log(`email:${req.body.userEmail} id:${result.insertId}`);
                         userEmail.create(
@@ -92,46 +104,53 @@ function getBooks(title, cb) {
         )
         .then(function (response) {
             var books = response.data.items
-
             var booksArr = [];
             for (var i = 0; i < books.length; i++) {
                 var bookInfo = books[i].volumeInfo;
-                // console.log(books[i])
                 var identifiers = [];
-                var images = [];
-                for (var j = 0; j < bookInfo.industryIdentifiers.length; j++) {
+                var isbn10;
+                for (var j = 0; bookInfo.industryIdentifiers && j < bookInfo.industryIdentifiers.length; j++) {
                     identifiers.push({ type: bookInfo.industryIdentifiers[j].type, identifier: bookInfo.industryIdentifiers[j].identifier })
+                    if (bookInfo.industryIdentifiers[j].type === 'ISBN_10') {
+                        isbn10 = bookInfo.industryIdentifiers[j].identifier;
+                    }
                 }
 
-                for (var j = Object.values(bookInfo.imageLinks).length - 1; j >= 0; j--) {
-                    images.push(Object.values(bookInfo.imageLinks)[j])
+                var image;
+                if (!bookInfo.imageLinks) {
+                    image = "https://via.placeholder.com/300/400";
+                } else {
+                    image = bookInfo.imageLinks.thumbnail;
                 }
+
                 booksArr.push({
                     title: bookInfo.title,
                     author: bookInfo.authors,
                     publisher: bookInfo.publisher,
                     publishedDate: bookInfo.publishedDate,
                     description: bookInfo.description,
-                    image: images,
+                    id: books[i].id,
+                    image: image,
                     categories: bookInfo.categories,
                     pageCount: bookInfo.pageCount,
                     ratingsCount: bookInfo.ratingsCount,
                     identifiers: identifiers,
-                    id: books[i].id,
+                    isbn10: isbn10,
                     embeddable: books[i].accessInfo.embeddable
                 });
+                
 
             }
             cb(booksArr)
 
+        }).catch(function (err) {
+            if (err) throw err;
         });
 }
 
-router.get('/books/:title', function (req, res) {
-    // console.log(req.params.title);
+router.get('/search/:title', function (req, res) {
     getBooks(req.params.title, function (books) {
-        console.log(books[0].image);
-        res.render("basic-home", { books: books });
+        res.render("home", { books: books });
     });
 });
 

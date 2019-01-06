@@ -6,6 +6,9 @@
   min-width: 90vh;
   padding-bottom: 1em;
 }
+#viewerCanvas{
+margin: auto;
+}
 
 .book-card {
   margin: 2em 0 2em 0;
@@ -44,6 +47,12 @@
   margin: 0 !important;
 }
 
+.search-cover {
+  margin-top: 20px;
+  width: 100%;
+  height: auto;
+}
+
 
 @media only screen and (max-width: 992px) {
   .main-container {
@@ -56,3 +65,4 @@
     display: none;
   }
 }
+
