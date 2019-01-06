@@ -70,7 +70,8 @@ $("#registerFormSubmit").on("click", function (event) {
         if (data.error) {
           $('#error-message').html(data.error).css('color', 'red');
         } else {
-          // Clear the form when submitting
+
+          // Clear Register Form
           $("#registerFormUsername").val("");
           $("#registerFormPass").val("");
           $("#registerFormPassConfirm").val("");
@@ -79,7 +80,10 @@ $("#registerFormSubmit").on("click", function (event) {
           // Set Login from returned data
           sessionStorage.setItem("userName", data.userName);
           sessionStorage.setItem("userID", data.userID);
+
+          // Hide Register Modal
           $("#registerForm").modal("hide");
+          signedIn();
         }
       }
     );

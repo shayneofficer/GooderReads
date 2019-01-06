@@ -36,6 +36,12 @@ var user = {
     orm.leftJoin("users", table2, "User-ID", primaryKeyT2, cols, function (res) {
       cb(res);
     });
+  },
+
+  leftJoinWhere: function (table2, primaryKeyT2, cols, val, cb) {
+    orm.leftJoinWhere("users", table2, "User-ID", primaryKeyT2, cols, val, function (res) {
+      cb(res);
+    });
   }
 };
 
