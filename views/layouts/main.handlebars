@@ -75,6 +75,7 @@
     </div>
   </nav>
 <div id="body">
+  <div id="body-bg-div"></div>
   <div class="main-container">
     {{{ body }}}
   </div>
@@ -102,7 +103,10 @@
             <label data-error="wrong" data-success="right" for="loginFormPass">Password</label>
             <input type="password" id="loginFormPass" class="form-control validate">
           </div>
-
+          <div class="row justify-content-center">
+            <span id="error-login"></span>
+          </div>
+          <br>
           <div class="row justify-content-center">
             <button class="btn btn-primary" type="submit" id="loginFormSubmit">Sign In</button>
           </div>
