@@ -165,26 +165,39 @@ router.post("/api/registerUser", function (req, res) {
     }
 });
 
+router.get("/api/book-rating/:isbn/:userID", function (req, res) {
+    ratings.selectWhereMulti(["`ISBN`", "`User-ID`"], ['"' + req.params.isbn + '"', req.params.userID], function (result) {
+        if (result.length == 0) {
+            res.json(null);
+        } else {
+            res.json(result);
+        }
+    })
+});
+
 // Rate a book
 router.post("/api/rate-book/", function (req, res) {
-    console.log(req.body);
-    ratings.selectWhereMulti(["`ISBN`", "`User-ID`"], ['"' + req.body.isbn + '"', req.body.userID], function (result) {
-        console.log(result);
-        if (result.length == 0) {
-            console.log("if")
-            ratings.create(["`ISBN`", "`Book-Rating`", "`User-ID`"], [req.body.isbn, req.body.rating, req.body.userID], function (result) {
-                res.json(result);
-            });
-        } else {
-            console.log("else")
-            ratings.delete(["`ISBN`", "`User-ID`"], ['"' + req.body.isbn + '"', req.body.userID], function (result) {
-                console.log(result);
+    if (Number.isNaN(parseInt(req.body.userID))) {
+        res.json({ error: "Please Log In before rating a book" });
+    } else {
+        ratings.selectWhereMulti(["`ISBN`", "`User-ID`"], ['"' + req.body.isbn + '"', req.body.userID], function (result) {
+            console.log(result);
+            if (result.length == 0) {
+                console.log("if")
                 ratings.create(["`ISBN`", "`Book-Rating`", "`User-ID`"], [req.body.isbn, req.body.rating, req.body.userID], function (result) {
                     res.json(result);
                 });
-            });
-        }
-    });
+            } else {
+                console.log("else")
+                ratings.delete(["`ISBN`", "`User-ID`"], ['"' + req.body.isbn + '"', req.body.userID], function (result) {
+                    console.log(result);
+                    ratings.create(["`ISBN`", "`Book-Rating`", "`User-ID`"], [req.body.isbn, req.body.rating, req.body.userID], function (result) {
+                        res.json(result);
+                    });
+                });
+            }
+        });
+    }
 });
 
 function getBooks(title, cb) {

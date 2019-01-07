@@ -9,7 +9,7 @@ ratings = {
         });
     },
     delete: function (cols, vals, cb) {
-        orm.delete("ratings", cols, vals, function(res){
+        orm.delete("ratings", cols, vals, function (res) {
             cb(res);
         });
     },

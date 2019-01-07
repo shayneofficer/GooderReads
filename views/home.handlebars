@@ -21,10 +21,10 @@
           <button onclick=initialize("{{identifiers.[0].identifier}}") type="button" class="btn btn-primary"
             data-toggle="modal" data-target="#bookPreviewer">Preview</button>
           {{/if}}
-          <div class="dropdown" class="ratings-dropdown">
-            <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" id="ratingsDropdown" data-toggle="dropdown"
-              aria-haspopup="true" aria-expanded="false">
-              Dropdown button
+          <div class="dropdown">
+            <button class="btn btn-secondary btn-sm dropdown-toggle ratings-dropdown" type="button" id="ratingsDropdown" data-toggle="dropdown"
+              aria-haspopup="true" aria-expanded="false" data-isbn={{this.isbn10}}>
+              Rate the Book
             </button>
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
               <a class="dropdown-item rate-book" data-isbn={{this.isbn10}} value=1 href="#">1</a>
