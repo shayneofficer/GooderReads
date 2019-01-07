@@ -2,10 +2,7 @@ var GREY = "#444444";
 var WHITE = "#FFFFFF";
 var BLACK = "#000000";
 
-// Check If User Is Logged In
-console.log("userName: " + sessionStorage.getItem("userName"));
-console.log("userID: " + sessionStorage.getItem("userID"));
-
+$('signed-in-icon').hide()
 var mode = localStorage.getItem("mode")
 $('#lightMode').hide();
 if (mode === "dark") {
@@ -146,10 +143,10 @@ $('#user-icon').on('click', function (event) {
 });
 
 function signedIn() {
-  console.log("signedIn");
   $("#login").hide();
   $("#register").hide();
   $("#user-name").html(sessionStorage.getItem("userName"));
+  $('#signed-in-icon').show();
   $("#user-name").show();
   $("#sign-out").show();
 }
@@ -160,10 +157,10 @@ function profile() {
 }
 
 function signedOut() {
-  console.log("signedOut");
   $("#login").show();
   $("#register").show();
   $("#user-name").html(sessionStorage.getItem("userName"));
+  $('#signed-in-icon').hide();
   $("#user-name").hide();
   $("#sign-out").hide();
 }
