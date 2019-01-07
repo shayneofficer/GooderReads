@@ -88,6 +88,10 @@
   color: #FFFFFF;
 }
 
+.navbar-brand {
+  color: #ffffff;
+}
+
 
 .btn-outline-light:hover,
 .btn-outline-light:active {
