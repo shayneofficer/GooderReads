@@ -6,9 +6,9 @@ router.use(express.urlencoded({
 }));
 router.use(express.json());
 
-router.get('/register', function (req, res) {
-  res.render('register');
-});
+// router.get('/register', function (req, res) {
+//   res.render('register');
+// });
 
 router.get('/genres', function (req, res) {
   res.render('new_genres');
