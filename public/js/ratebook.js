@@ -4,6 +4,15 @@ $(".rate-book").on("click", function(event) {
 
   console.log(rating);
   $.post("/api/rate-book/", rating, function(data){
-    console.log(data);
+    if(data.error) {
+      alert(data.error);
+    }
   });
 });
+
+if(sessionStorage.getItem("userName") == "" || sessionStorage.getItem("userID") < 0) {
+  console.log("hide dropdown");
+  $(".ratings-dropdown").hide();
+} else {
+  $(".ratings-dropdown").show();
+}
