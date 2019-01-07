@@ -20,13 +20,12 @@ $('#submit-genres').on('click', function (event) {
   $.post('/api/likedGenres', genres, function (data) {
     console.log(data)
   })
-  window.location.replace('/profile')
+  window.location.replace('/home')
 })
 
 /**
  * Toggles the selection state of a genre.
  */
-
 $('.genre-btn').on('click', function (event) {
   event.preventDefault()
 
@@ -44,24 +43,3 @@ $('#reset').on('click', function (event) {
   event.preventDefault()
   getLikedGenres()
 })
-
-//retrieves user information and sets the genre page to show selected genres
-function getLikedGenres () {
-  $.get('/api/likedGenres/' + sessionStorage.getItem('userID'), function (data) {
-    //shows welcome modal only if it's their first time selecting genres
-    if (data.genres.length <= 0) {
-
-      $('#welcomeModal').modal('show');
-    }
-    $('.genre-btn').each(function () {
-      $(this).removeClass('selected')
-      for (var i = 0; i < data.genres.length; i++) {
-        if (this.id == data.genres[i]) {
-          $(this).addClass('selected')
-          break
-        }
-      }
-    })
-  })
-}
-

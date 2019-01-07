@@ -8,7 +8,7 @@ var BLACK = '#000000'
 /**
  * Changes styling of page elements to a darker them.
  */
-function darkMode () {
+function darkMode() {
   $('#darkMode').hide()
   setTimeout(function () {
     $('#lightMode').fadeIn('50')
@@ -49,7 +49,7 @@ function darkMode () {
 /**
  * Changes styling of the page to light theme.
  */
-function lightMode () {
+function lightMode() {
   $('#lightMode').fadeOut(50)
   setTimeout(function () {
     $('#darkMode').fadeIn('50')
@@ -88,7 +88,7 @@ function lightMode () {
 /**
  * Changes page content to 'signed out' default
  */
-function signedOut () {
+function signedOut() {
   $('#login').show()
   $('#register').show()
   $('#user-name').html('')
@@ -100,7 +100,7 @@ function signedOut () {
 /**
  * Changes page content to reflect the 'signed in' user's information
  */
-function signedIn () {
+function signedIn() {
   $('#login').hide()
   $('#register').hide()
   $('#user-name').html(sessionStorage.getItem('userName'))
@@ -115,7 +115,7 @@ function signedIn () {
  * update them and save changes. If the user hasn't saved any genre preferences,
  * it shows a welcome message.
  */
-function getLikedGenres () {
+function getLikedGenres() {
   $.get('/api/likedGenres/' + sessionStorage.getItem('userID'), function (data) {
     if (data.genres.length <= 0) {
       console.log('Genres length: ' + data.genres.length)
@@ -136,7 +136,7 @@ function getLikedGenres () {
 /**
  * Validates user login information upon submitting the form.
  */
-function validateLogin (cb) {
+function validateLogin(cb) {
   var loginInfo = {
     userEmail: $('#loginFormEmail')
       .val()
