@@ -1,11 +1,14 @@
-// On Load get Prefered Genres
+/**
+ * If the user is signed in, gets their saved preferred genres
+ */
+if (sessionStorage.getItem('userID') >= 0) {
+  getLikedGenres()
+}
 
-$(window).on('load', function () {
-  if (sessionStorage.getItem('userID') >= 0) {
-    getLikedGenres()
-  }
-})
-
+/**
+ * Updates (overwrites) the users saved preferred genres with the current
+ * values in the form.
+ */
 $('#submit-genres').on('click', function (event) {
   event.preventDefault()
   var genres = { likes: [], userID: sessionStorage.getItem('userID') }
@@ -20,6 +23,9 @@ $('#submit-genres').on('click', function (event) {
   window.location.replace('/home')
 })
 
+/**
+ * Toggles the selection state of a genre.
+ */
 $('.genre-btn').on('click', function (event) {
   event.preventDefault()
 
@@ -30,6 +36,9 @@ $('.genre-btn').on('click', function (event) {
   }
 })
 
+/**
+ * Resets genre form to the previous saved state (none selected if new user)
+ */
 $('#reset').on('click', function (event) {
   event.preventDefault()
   getLikedGenres()

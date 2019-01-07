@@ -21,6 +21,7 @@ router.get('/preferences', function (req, res) {
 })
 
 router.get('/profile', function (req, res) {
+  
   res.render('profile')
 })
 
