@@ -1,12 +1,15 @@
 $('#submit-genres').on('click', function (event) {
   event.preventDefault()
-  var likes = []
+  var genres = { likes: [], userID: sessionStorage.getItem("userID") };
 
   $('.selected').each(function () {
-    likes.push(this.id)
+    genres.likes.push(this.id)
   })
-  console.log(likes)
-})
+  console.log(genres);
+  $.post("/api/likedGenres", genres, function (data) {
+    
+  });
+});
 
 $('.genre-btn').on('click', function (event) {
   event.preventDefault()
