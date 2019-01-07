@@ -6,21 +6,17 @@
 <div class="card book-card">
   <div class="row">
     <div class="col-md-2">
-      <img src="{{this.image}}" alt="book-cover" class="rounded search-cover">
+      <img src="{{this.cover}}" alt="book-cover" class="rounded search-cover">
     </div>
     <div class="col-md-10">
       <div class="card-body">
         <h5 class="card-title">{{this.title}} - {{this.author}}</h5>
-        <p class="card-text">{{this.description}}</p>
-          <div class="row justify-content-around align-items-center">
-            <a href="#"><img class="google-play" src="/assets/google-play-badge.png" alt="X"></a>
-            <a href="https://www.amazon.com/dp/{{this.isbn10}}/ref=cm_cd_asin_lnk" target="_blank"><img class="amazon" src="/assets/amazon-badge.png"
-            alt="X"></a>
-            {{#if embeddable}}
-            <button onclick=initialize("{{identifiers.[0].identifier}}") type="button" class="btn btn-primary" data-toggle="modal"
-            data-target="#bookPreviewer">Preview</button>
-            {{/if}}
-          </div>
+        <p class="card-text">Your rating: {{this.rating}} / 10</p>
+        <div class="row justify-content-around align-items-center">
+          <a href="#"><img class="google-play" src="/assets/google-play-badge.png" alt="X"></a>
+          <a href="https://www.amazon.com/dp/{{this.isbn10}}/ref=cm_cd_asin_lnk" target="_blank"><img class="amazon"
+              src="/assets/amazon-badge.png" alt="amazon-link"></a>
+        </div>
       </div>
     </div>
   </div>
@@ -56,13 +52,13 @@
     viewer.load(id, noBookFound, removeBookFooter);
   }
 
-   function noBookFound()
-      {
-        document.getElementById('viewerCanvas').innerHTML="<h1>Oops! Preview not found for this book!</h1>";
-      }
+  function noBookFound() {
+    document.getElementById('viewerCanvas').innerHTML = "<h1>Oops! Preview not found for this book!</h1>";
+  }
 
-   function removeBookFooter()
-      {
-        $('#viewerCanvas > div > div:nth-child(2)').css('display','none');
-      }
+  function removeBookFooter() {
+    $('#viewerCanvas > div > div:nth-child(2)').css('display', 'none');
+  }
 </script>
+
+<script type="text/javascript" src="/js/profile.js"></script>

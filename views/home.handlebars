@@ -56,14 +56,12 @@
     var viewer = new google.books.DefaultViewer(document.getElementById('viewerCanvas'));
     viewer.load(id, noBookFound, removeBookFooter);
   }
-
-  function noBookFound()
-  {
+  
+  function noBookFound() {
     document.getElementById('viewerCanvas').innerHTML = "<h1>Oops! Preview not found for this book!</h1>";
   }
 
-  function removeBookFooter()
-  {
+  function removeBookFooter() {
     $('#viewerCanvas > div > div:nth-child(2)').css('display', 'none');
   }
 
