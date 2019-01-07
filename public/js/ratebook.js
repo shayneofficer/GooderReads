@@ -6,6 +6,8 @@ $(".rate-book").on("click", function (event) {
   $.post("/api/rate-book/", rating, function (data) {
     if (data.error) {
       alert(data.error);
+    } else {
+      location.reload();
     }
   });
 });
