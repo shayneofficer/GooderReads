@@ -1,5 +1,7 @@
 var user = require("../models/users");
 var userEmail = require("../models/userEmails");
+var genre = require("../models/genres");
+var genrePreference = require("../models/genrePreferences");
 var express = require("express");
 var router = express.Router();
 var axios = require("axios");
@@ -9,8 +11,71 @@ var bcrypt = require('bcrypt-nodejs');
 router.use(express.urlencoded({ extended: true }));
 router.use(express.json());
 
-router.post("/api/userGenres", function (req, res) {
+// Get liked genres for user
+router.get("/api/likedGenres/:userID", function (req, res) {
+    genrePreference.selectWhere("User-ID", req.params.userID, function (genrePrefs) {
+        genre.all(function (genres) {
+            var liked = [];
+            for (var i = 0; i < genrePrefs.length; i++) {
+                for (var j = 0; j < genres.length; j++) {
+                    if (Object.values(genrePrefs[i])[1] == Object.values(genres[j])[0]) {
+                        liked.push(genres[j].genreName);
+                        break;
+                    }
+                }
+            }
+            res.json({genres: liked});
+        });
+    });
+});
 
+// Add new liked genres to user
+router.post("/api/likedGenres", function (req, res) {
+    genre.all(function (result) {
+        likes = req.body.likes;
+        for (var i = 0; i < likes.length; i++) {
+            for (var j = 0; j < result.length; j++) {
+                if (result[j].genreName == likes[i]) {
+                    likes[i] = Object.values(result[j])[0];
+                    break;
+                }
+            }
+        }
+
+        genrePreference.selectWhere("User-ID", req.body.userID, function (result) {
+            console.log(result);
+            if (!result) result = [];
+            for (var i = 0; i < result.length; i++) {
+                var match = false;
+                for (var j = 0; j < likes.length; j++) {
+                    if (Object.values(result[i])[1] == likes[j]) {
+                        match = true;
+                        break;
+                    }
+                }
+                if (!match) {
+                    console.log("delete genre " + result[i]);
+                    genrePreference.delete(["`User-ID`", "`Genre-ID`"], [req.body.userID, Object.values(result[i])[1]]);
+                }
+            }
+
+            for (var i = 0; i < likes.length; i++) {
+                var match = false;
+                for (var j = 0; j < result.length; j++) {
+                    if (Object.values(result[j])[1] == likes[i]) {
+                        match = true;
+                        break;
+                    }
+                }
+                if (!match) {
+                    console.log("create genre " + likes[i]);
+                    genrePreference.create(["`User-ID`", "`Genre-ID`"], [req.body.userID, likes[i]]);
+                }
+            }
+
+            res.json({ message: "genrePreferences updated" });
+        });
+    });
 });
 
 router.post("/api/userLogin", function (req, res) {

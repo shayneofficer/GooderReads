@@ -87,3 +87,14 @@
 #darkMode {
   color: #FFFFFF;
 }
+
+
+.btn-outline-light:hover,
+.btn-outline-light:active {
+  color: var(--dark) !important;
+}
+.selected {
+  background-color: #AAB5C1;
+  color: var(--dark);
+}
+

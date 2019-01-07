@@ -22,7 +22,7 @@ function objToSql(ob) {
             }
             // e.g. {name: 'Lana Del Grey'} => ["name='Lana Del Grey'"]
             // e.g. {sleepy: true} => ["sleepy=true"]
-            arr.push(`${key}=${value}`);
+            arr.push(key + "=" + value);
         }
     }
     return arr.toString();
@@ -54,25 +54,50 @@ var orm = {
         });
     },
 
-    selectWhere: function (table, searchCol, val, cb) {
-        var queryString = "SELECT * FROM ?? WHERE ?? = ?";
-        connection.query(queryString, [table, searchCol, val], function (err, result) {
-            cb(result);
-        });
+    delete: function (table, cols, vals, cb) {
+        var queryString = "DELETE FROM ?? WHERE "
+        if (cols.length != vals.length && cols.length <= 0) {
+            err = "Error: BAD_INPUTS_ERROR: ";
+            if (cols.length <= 0) err += "Number of Columns is 0";
+            else if (vals.length <= 0) err += "Number of Values is 0";
+            else err += "Number of Columns does not match number of Values";
+            throw err;
+        } else {
+            queryString += cols[0] + " = " + vals[0];
+            for (var i = 1; i < cols.length; i++) {
+                queryString += " AND " + cols[i] + " = " + vals[i];
+            }
+            queryString += ";";
+            console.log(queryString);
+
+            connection.query(queryString, [table], function (err, result) {
+                if (err) throw err;
+                cb(result);
+            });
+        }
     },
-    
-    // Left Join Function
-    leftJoin: function(table1, table2, primaryKeyT1, primaryKeyT2, cols, cb) {
-        var queryString = "SELECT "+cols.toString()+" FROM ?? LEFT JOIN ?? ON ??.?? = ??.?? WHERE ??.?? IS NOT NULL;"
-        connection.query(queryString, [table1, table2, table1, primaryKeyT1, table2, primaryKeyT1, table2, primaryKeyT2], function(err, result) {
+
+    selectWhere: function (table, searchCol, val, cb) {
+        var queryString = "SELECT * FROM ?? WHERE ?? = ?;";
+        // console.log(`SELECT * FROM ${table} WHERE ${searchCol} = ${val};`);
+        connection.query(queryString, [table, searchCol, val], function (err, result) {
             if (err) throw err;
             cb(result);
         });
     },
 
-    leftJoinWhere: function(table1, table2, primaryKeyT1, primaryKeyT2, cols, val, cb) {
-        var queryString = "SELECT "+cols.toString()+" FROM ?? LEFT JOIN ?? ON ??.?? = ??.?? WHERE ??.?? = ?;"
-        connection.query(queryString, [table1, table2, table1, primaryKeyT1, table2, primaryKeyT1, table2, primaryKeyT2, val], function(err, result) {
+    // Left Join Function
+    leftJoin: function (table1, table2, primaryKeyT1, primaryKeyT2, cols, cb) {
+        var queryString = "SELECT " + cols.toString() + " FROM ?? LEFT JOIN ?? ON ??.?? = ??.?? WHERE ??.?? IS NOT NULL;"
+        connection.query(queryString, [table1, table2, table1, primaryKeyT1, table2, primaryKeyT1, table2, primaryKeyT2], function (err, result) {
+            if (err) throw err;
+            cb(result);
+        });
+    },
+
+    leftJoinWhere: function (table1, table2, primaryKeyT1, primaryKeyT2, cols, val, cb) {
+        var queryString = "SELECT " + cols.toString() + " FROM ?? LEFT JOIN ?? ON ??.?? = ??.?? WHERE ??.?? = ?;"
+        connection.query(queryString, [table1, table2, table1, primaryKeyT1, table2, primaryKeyT1, table2, primaryKeyT2, val], function (err, result) {
             if (err) throw err;
             cb(result);
         });
