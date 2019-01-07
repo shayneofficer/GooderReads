@@ -12,15 +12,34 @@
       <div class="card-body">
         <h5 class="card-title">{{this.title}} - {{this.author}}</h5>
         <p class="card-text">{{this.description}}</p>
-          <div class="row justify-content-around align-items-center">
-            <a href="https://play.google.com/store/books/details?id={{this.id}}" target="_blank"><img class="google-play" src="/assets/google-play-badge.png" alt="X"></a>
-            <a href="https://www.amazon.com/dp/{{this.isbn10}}/ref=cm_cd_asin_lnk" target="_blank"><img class="amazon" src="/assets/amazon-badge.png"
-            alt="X"></a>
-            {{#if embeddable}}
-            <button onclick=initialize("{{identifiers.[0].identifier}}") type="button" class="btn btn-primary" data-toggle="modal"
-            data-target="#bookPreviewer">Preview</button>
-            {{/if}}
+        <div class="row justify-content-around align-items-center">
+          <a href="https://play.google.com/store/books/details?id={{this.id}}" target="_blank"><img class="google-play"
+              src="/assets/google-play-badge.png" alt="X"></a>
+          <a href="https://www.amazon.com/dp/{{this.isbn10}}/ref=cm_cd_asin_lnk" target="_blank"><img class="amazon"
+              src="/assets/amazon-badge.png" alt="X"></a>
+          {{#if embeddable}}
+          <button onclick=initialize("{{identifiers.[0].identifier}}") type="button" class="btn btn-primary"
+            data-toggle="modal" data-target="#bookPreviewer">Preview</button>
+          {{/if}}
+          <div class="dropdown" class="ratings-dropdown">
+            <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" id="ratingsDropdown" data-toggle="dropdown"
+              aria-haspopup="true" aria-expanded="false">
+              Dropdown button
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              <a class="dropdown-item rate-book" data-isbn={{this.isbn10}} value=1 href="#">1</a>
+              <a class="dropdown-item rate-book" data-isbn={{this.isbn10}} value=2 href="#">2</a>
+              <a class="dropdown-item rate-book" data-isbn={{this.isbn10}} value=3 href="#">3</a>
+              <a class="dropdown-item rate-book" data-isbn={{this.isbn10}} value=4 href="#">4</a>
+              <a class="dropdown-item rate-book" data-isbn={{this.isbn10}} value=5 href="#">5</a>
+              <a class="dropdown-item rate-book" data-isbn={{this.isbn10}} value=6 href="#">6</a>
+              <a class="dropdown-item rate-book" data-isbn={{this.isbn10}} value=7 href="#">7</a>
+              <a class="dropdown-item rate-book" data-isbn={{this.isbn10}} value=8 href="#">8</a>
+              <a class="dropdown-item rate-book" data-isbn={{this.isbn10}} value=9 href="#">9</a>
+              <a class="dropdown-item rate-book" data-isbn={{this.isbn10}} value=10 href="#">10</a>
+            </div>
           </div>
+        </div>
       </div>
     </div>
   </div>
@@ -51,12 +70,11 @@
 <script type="text/javascript">
   google.books.load();
 
-  function initialize(id)
-  {
+  function initialize(id) {
     var viewer = new google.books.DefaultViewer(document.getElementById('viewerCanvas'));
     viewer.load(id, noBookFound, removeBookFooter);
   }
-  
+
   function noBookFound() {
     document.getElementById('viewerCanvas').innerHTML = "<h1>Oops! Preview not found for this book!</h1>";
   }
