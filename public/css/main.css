@@ -19,14 +19,6 @@ margin: auto;
   overflow-y: scroll;
 }
 
-::-webkit-scrollbar {
-  background: transparent;
-}
-::-webkit-scrollbar-thumb {
-  background-color: rgba(51, 51, 51, 0.7);
-  border-radius: 0.2em;
-}
-
 .amazon,
 .google-play {
   width: 75%;
@@ -62,7 +54,7 @@ margin: auto;
   font-family: 'Khand', sans-serif;
 }
 #body {
-  background-image: url("/../assets/hypnotize.png")
+  background-image: url("/../assets/hypnotize.png");
 }
 
 .btn {
@@ -88,10 +80,14 @@ margin: auto;
 }
 
 #viewerCanvas {
-  height: 70vh;
+  height: 80vh;
   width: 95%;
 }
 
+#previewerDialog {
+  width: 60%;
+  max-width: 60%;
+}
 
 @media only screen and (max-width: 992px) {
   .main-container {
@@ -112,7 +108,7 @@ margin: auto;
   }
 
   #viewerCanvas {
-    height: 80vh;
+    height: 90vh;
   }
 }
 
