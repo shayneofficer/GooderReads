@@ -23,7 +23,7 @@ $(".ratings-dropdown").each(function () {
       if (data) {
         $(".ratings-dropdown").each(function () {
           if ($(this).data("isbn") == Object.values(data[0])[1]) {
-            $(this).html("Book Rating: " + Object.values(data[0])[2]);
+            $(this).html("Your Rating: " + Object.values(data[0])[2]);
           }
         });
       }
