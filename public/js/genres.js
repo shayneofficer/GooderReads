@@ -1,12 +1,14 @@
-// On Load get Prefered Genres
-$(window).on('load', function () {
-  if (sessionStorage.getItem('userID') >= 0) {
-    getLikedGenres()
-  }
-})
+/**
+ * If the user is signed in, gets their saved preferred genres
+ */
+if (sessionStorage.getItem('userID') >= 0) {
+  getLikedGenres()
+}
 
-// on click the genres selected will be pushed to an array which will be attached to the user ID
-// and the user back to their profile page
+/**
+ * Updates (overwrites) the users saved preferred genres with the current
+ * values in the form.
+ */
 $('#submit-genres').on('click', function (event) {
   event.preventDefault()
   var genres = { likes: [], userID: sessionStorage.getItem('userID') }
@@ -21,7 +23,10 @@ $('#submit-genres').on('click', function (event) {
   window.location.replace('/profile')
 })
 
-//gives the genre buttons a class which can be used to identify which genres a user has liked
+/**
+ * Toggles the selection state of a genre.
+ */
+
 $('.genre-btn').on('click', function (event) {
   event.preventDefault()
 
@@ -32,7 +37,9 @@ $('.genre-btn').on('click', function (event) {
   }
 })
 
-//resets all the genre buttons to unselected
+/**
+ * Resets genre form to the previous saved state (none selected if new user)
+ */
 $('#reset').on('click', function (event) {
   event.preventDefault()
   getLikedGenres()
