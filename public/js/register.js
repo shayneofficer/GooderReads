@@ -22,7 +22,6 @@ $("#registerFormUsername").on("keyup", function (event) {
       $("#name-message").empty();
     }
   }
-
 });
 
 //confirms the password 

@@ -77,6 +77,31 @@ var orm = {
             });
         }
     },
+
+    selectWhereMulti: function (table, cols, vals, cb) {
+        console.log("selectWhereMulti");
+        var queryString = "SELECT * FROM ?? WHERE ";
+        if (cols.length != vals.length && cols.length <= 0) {
+            err = "Error: BAD_INPUTS_ERROR: ";
+            if (cols.length <= 0) err += "Number of Columns is 0";
+            else if (vals.length <= 0) err += "Number of Values is 0";
+            else err += "Number of Columns does not match number of Values";
+            throw err;
+        } else {
+            queryString += cols[0] + " = " + vals[0];
+            for (var i = 1; i < cols.length; i++) {
+                queryString += " AND " + cols[i] + " = " + vals[i];
+            }
+            queryString += ";";
+            console.log(queryString);
+
+            connection.query(queryString, [table], function (err, result) {
+                if (err) throw err;
+                cb(result);
+            });
+        }
+    },
+
     //Select everything from a variable table where search is value
     selectWhere: function (table, searchCol, val, cb) {
         var queryString = "SELECT * FROM ?? WHERE ?? = ?;";

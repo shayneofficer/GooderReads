@@ -8,6 +8,11 @@ ratings = {
             cb(res);
         });
     },
+    delete: function (cols, vals, cb) {
+        orm.delete("ratings", cols, vals, function(res){
+            cb(res);
+        });
+    },
 
     create: function (cols, vals, cb) {
         orm.create("ratings", cols, vals, function (res) {
@@ -15,8 +20,8 @@ ratings = {
         });
     },
 
-    selectWhere: function (searchCol, val, cb) {
-        orm.selectWhere("ratings", searchCol, val, function (res) {
+    selectWhereMulti: function (cols, vals, cb) {
+        orm.selectWhereMulti("ratings", cols, vals, function (res) {
             cb(res);
         });
     },

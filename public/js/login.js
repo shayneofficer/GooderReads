@@ -19,9 +19,10 @@ $("#loginFormSubmit").on("click", function (event) {
         $("#loginFormPass").val("");
         // Hide Login modal
         $("#modalLoginForm").modal("hide");
-        profile();
         signedIn();
+        window.location.replace('/profile');
       }
     }
   );
 });
+

@@ -1,11 +1,16 @@
+
 var GREY = "#444444";
 var WHITE = "#FFFFFF";
 var BLACK = "#000000";
 //uses session storage to check if user has set light or dark mode
+/**
+ * Sets the default styling, and loads in dark mode if the user was using dark mode
+ * in their previous session. Light mode is default.
+ */
+
 $('signed-in-icon').hide()
-var mode = localStorage.getItem("mode")
 $('#lightMode').hide();
-if (mode === "dark") {
+if (localStorage.getItem('mode') === "dark") {
   darkMode()
 }
 
@@ -19,55 +24,22 @@ if (sessionStorage.getItem("userName") && sessionStorage.getItem("userID") >= 0)
   sessionStorage.setItem("userID", -4);
   signedOut();
 }
-//runs the darkmode function which reduces bright colors on the screen
+
+ // Calls darkMode() to switch styling to dark theme, and saves that as the user's prefered
+ //view mode in their local storage.
+
 $("#darkMode").on("click", function (event) {
   localStorage.setItem("mode", "dark")
   darkMode()
-
 });
 
-function darkMode() {
-  $('#darkMode').hide()
-  setTimeout(function () {
-    $("#lightMode").fadeIn("50");
-  }, 50);
-  // Change background to Dark Color
-  if ($(".main-container").hasClass("bg-light-slow")) {
-    $(".main-container").removeClass("bg-light-slow");
-  }
-  $(".main-container").addClass("bg-dark-slow");
-
-  if ($("#nav").hasClass("navbar-dark")) {
-    $("#nav").removeClass("navbar-dark");
-  }
-  $("#nav").addClass("navbar-light bg-grey-slow");
-
-  if ($("#searchBtn").hasClass("btn-outline-light")) {
-    $("#searchBtn").removeClass("btn-outline-light");
-  }
-  $("#searchBtn").addClass("btn-outline-dark");
-
-  if ($("#content-heading").hasClass("text-dark")) {
-    $("#content-heading").removeClass("text-dark");
-  }
-  
-  if ($("#user-icon").hasClass("text-white")) {
-    $("#user-icon").removeClass("text-white")
-  }
-  $("#user-icon").addClass("text-dark");
-
-  if ($("#home-icon").hasClass("text-white")) {
-    $("#home-icon").removeClass("text-white")
-  }
-  $("#home-icon").addClass("text-dark");
-
-  $('#body').css('background-image', 'none');
-}
-
+/**
+ * Calls lightMode() to switch styling to light theme, and saves that as the user's preferred
+ * view mode in their local storage.
+ */
 $("#lightMode").on("click", function (event) {
   localStorage.setItem("mode", "light")
   lightMode(event)
-
 });
 
 function lightMode() {
@@ -130,9 +102,19 @@ window.onload = function () {
 // User Login Status
 // Sign Out Button empties user information
 $("#sign-out").on("click", function (event) {
+
+/**
+ * If the user has previously signed in during this session, gets the username and
+ * user ID from ession storage. They are validated on the back-end to ensure they
+ * match, meaning someone can't just save any username or ID in their session storage
+ * to access someone else's account. If the user is NOT signed in, the user ID is less
+ * than 0.
+ */
+if (sessionStorage.getItem("userName") && sessionStorage.getItem("userID") >= 0) {
+  signedIn();
+} else {
   sessionStorage.setItem("userName", "");
   sessionStorage.setItem("userID", -4);
-});
 
 $('#user-icon').on('click', function (event) {
   event.preventDefault()
@@ -167,3 +149,7 @@ function signedOut() {
   $("#user-name").hide();
   $("#sign-out").hide();
 }
+
+  signedOut();
+}
+
