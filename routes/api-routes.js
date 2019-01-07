@@ -266,7 +266,7 @@ router.get('/search/:title', function (req, res) {
 });
 
 router.get('/profile/:userID', function (req, res) {
-    ratings.selectWhere(`User-ID`, req.params.userID, function (result) {
+    ratings.selectWhereMulti(["`User-ID`"], req.params.userID, function (result) {
         getRatings(result, result.length, [], res);
     });
 });
