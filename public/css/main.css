@@ -76,18 +76,42 @@ margin: auto;
   margin-bottom: 0;
 }
 
+#genres-container {
+  width: 80%;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+#genres-card {
+  margin-top: 1em;
+}
+
 
 @media only screen and (max-width: 992px) {
   .main-container {
     padding: 0 5% 0 5%;
   }
+
   #mode-toggle {
     text-align: right;
+  }
+
+  #genres-container {
+    width: 100%;
   }
 }
 
 @media only screen and (min-width: 992px) {
   #loginIcon {
+    display: none;
+  }
+
+  #user-icon {
+    display: none;
+  }
+
+  #home-icon {
     display: none;
   }
 }

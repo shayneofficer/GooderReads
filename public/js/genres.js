@@ -17,7 +17,7 @@ $('#submit-genres').on('click', function (event) {
   $.post('/api/likedGenres', genres, function (data) {
     console.log(data)
   })
-  window.location.repalce('/home')
+  window.location.replace('/home')
 })
 
 $('.genre-btn').on('click', function (event) {
