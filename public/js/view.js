@@ -1,7 +1,7 @@
 var GREY = "#444444";
 var WHITE = "#FFFFFF";
 var BLACK = "#000000";
-
+//uses session storage to check if user has set light or dark mode
 $('signed-in-icon').hide()
 var mode = localStorage.getItem("mode")
 $('#lightMode').hide();
@@ -9,6 +9,7 @@ if (mode === "dark") {
   darkMode()
 }
 
+//uses session storage to check if user is signed in
 if (sessionStorage.getItem("userName") && sessionStorage.getItem("userID") >= 0) {
   console.log("If")
   signedIn();
@@ -18,7 +19,7 @@ if (sessionStorage.getItem("userName") && sessionStorage.getItem("userID") >= 0)
   sessionStorage.setItem("userID", -4);
   signedOut();
 }
-
+//runs the darkmode function which reduces bright colors on the screen
 $("#darkMode").on("click", function (event) {
   localStorage.setItem("mode", "dark")
   darkMode()
@@ -127,7 +128,7 @@ window.onload = function () {
 }
 
 // User Login Status
-// Sign Out Button
+// Sign Out Button empties user information
 $("#sign-out").on("click", function (event) {
   sessionStorage.setItem("userName", "");
   sessionStorage.setItem("userID", -4);
@@ -142,6 +143,7 @@ $('#user-icon').on('click', function (event) {
   }
 });
 
+//changes the nav bar to show the user is signed in
 function signedIn() {
   $("#login").hide();
   $("#register").hide();
@@ -156,6 +158,7 @@ function profile() {
   
 }
 
+//changes the nav bar to reflect the user is signed out
 function signedOut() {
   $("#login").show();
   $("#register").show();

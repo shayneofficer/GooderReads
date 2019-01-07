@@ -8,7 +8,7 @@ function printQuestionMarks(num) {
     }
     return arr.toString();
 }
-
+//vestigal may come in use later
 function objToSql(ob) {
     var arr = [];
 
@@ -29,6 +29,7 @@ function objToSql(ob) {
 }
 
 var orm = {
+    //select everything from the MySQL database
     all: function (table, cb) {
         var queryString = "SELECT * FROM " + table + ";";
         connection.query(queryString, function (error, result) {
@@ -36,7 +37,7 @@ var orm = {
             cb(result);
         });
     },
-
+    //table inserts
     create: function (table, cols, vals, cb) {
         var queryString = "INSERT INTO " + table;
         queryString += " (";
@@ -53,7 +54,7 @@ var orm = {
             cb(result);
         });
     },
-
+    //delete from table function
     delete: function (table, cols, vals, cb) {
         var queryString = "DELETE FROM ?? WHERE "
         if (cols.length != vals.length && cols.length <= 0) {
@@ -76,10 +77,9 @@ var orm = {
             });
         }
     },
-
+    //Select everything from a variable table where search is value
     selectWhere: function (table, searchCol, val, cb) {
         var queryString = "SELECT * FROM ?? WHERE ?? = ?;";
-        // console.log(`SELECT * FROM ${table} WHERE ${searchCol} = ${val};`);
         connection.query(queryString, [table, searchCol, val], function (err, result) {
             if (err) throw err;
             cb(result);
@@ -94,7 +94,7 @@ var orm = {
             cb(result);
         });
     },
-
+    //left Join Function Where table2.key is value
     leftJoinWhere: function (table1, table2, primaryKeyT1, primaryKeyT2, cols, val, cb) {
         var queryString = "SELECT " + cols.toString() + " FROM ?? LEFT JOIN ?? ON ??.?? = ??.?? WHERE ??.?? = ?;"
         connection.query(queryString, [table1, table2, table1, primaryKeyT1, table2, primaryKeyT1, table2, primaryKeyT2, val], function (err, result) {

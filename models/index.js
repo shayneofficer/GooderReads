@@ -1,4 +1,5 @@
-'use strict';
+//extra file for future use to utilize sequelize function
+// 'use strict';
 
 var fs = require('fs');
 var path = require('path');

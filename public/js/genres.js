@@ -1,11 +1,12 @@
 // On Load get Prefered Genres
-
 $(window).on('load', function () {
   if (sessionStorage.getItem('userID') >= 0) {
     getLikedGenres()
   }
 })
 
+// on click the genres selected will be pushed to an array which will be attached to the user ID
+// and the user back to their profile page
 $('#submit-genres').on('click', function (event) {
   event.preventDefault()
   var genres = { likes: [], userID: sessionStorage.getItem('userID') }
@@ -17,9 +18,10 @@ $('#submit-genres').on('click', function (event) {
   $.post('/api/likedGenres', genres, function (data) {
     console.log(data)
   })
-  window.location.replace('/home')
+  window.location.replace('/profile')
 })
 
+//gives the genre buttons a class which can be used to identify which genres a user has liked
 $('.genre-btn').on('click', function (event) {
   event.preventDefault()
 
@@ -30,16 +32,18 @@ $('.genre-btn').on('click', function (event) {
   }
 })
 
+//resets all the genre buttons to unselected
 $('#reset').on('click', function (event) {
   event.preventDefault()
   getLikedGenres()
 })
 
+//retrieves user information and sets the genre page to show selected genres
 function getLikedGenres () {
   $.get('/api/likedGenres/' + sessionStorage.getItem('userID'), function (data) {
     //shows welcome modal only if it's their first time selecting genres
     if (data.genres.length <= 0) {
-      console.log('Genres length: ' + data.genres.length)
+
       $('#welcomeModal').modal('show');
     }
     $('.genre-btn').each(function () {

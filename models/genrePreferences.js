@@ -1,5 +1,7 @@
+//requires ORM for Mysql usage
 var orm = require("../config/orm.js");
 
+//create delete and select genre preferences
 genrePreference = {
   all: function (cb) {
     orm.all("genrePreferences", function (res) {
