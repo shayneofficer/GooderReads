@@ -39,5 +39,6 @@ if (sessionStorage.getItem("userName") && sessionStorage.getItem("userID") >= 0)
 } else {
   sessionStorage.setItem("userName", "");
   sessionStorage.setItem("userID", -4);
+
   signedOut();
 }
