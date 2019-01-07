@@ -11,8 +11,12 @@ router.get('/register', function (req, res) {
 });
 
 router.get('/genres', function (req, res) {
-  res.render('genres');
+  res.render('new_genres');
 });
+
+router.get('/new_genres', function (req, res) {
+  res.render('new_genres')
+})
 
 // Default landing page
 router.get('*', function (req, res) {

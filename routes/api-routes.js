@@ -21,25 +21,41 @@ router.post("/api/likedGenres", function (req, res) {
     console.log("\nGenres");
     console.log(req.body);
 
-    genre.all(function(result) {
+    genre.all(function (result) {
         likes = req.body.likes;
-        for(var i = 0; i < likes.length; i++) {
-            for(var j = 0; j < result.length; j++) {
+        for (var i = 0; i < likes.length; i++) {
+            for (var j = 0; j < result.length; j++) {
                 if (result[j].genreName == likes[i]) {
                     likes[i] = Object.values(result[j])[0];
                     break;
                 }
             }
         }
-        console.log("After conversion to genre-id");
+
+        console.log("\nAfter conversion to genre-id");
         console.log(likes);
-        genrePreference.selectWhere("`User-ID`", req.body.userID, function(result) {
+
+        genrePreference.selectWhere("User-ID", req.body.userID, function (result) {
             console.log(result);
-            if(!result) result = [];
-            for(var i = 0; i < likes.length; i++) {
+            if (!result) result = [];
+            for (var i = 0; i < result.length; i++) {
                 var match = false;
-                for(var j = 0; j < result.length; j++) {
-                    if(Object.values(result[j])[1] == likes[i]) {
+                for (var j = 0; j < likes.length; j++) {
+                    if (Object.values(result[i])[1] == likes[j]) {
+                        match = true;
+                        break;
+                    }
+                }
+                if (!match) {
+                    console.log("delete genre " + result[i]);
+                    genrePreference.delete(["`User-ID`", "`Genre-ID`"], [req.body.userID, Object.values(result[i])[1]]);
+                }
+            }
+
+            for (var i = 0; i < likes.length; i++) {
+                var match = false;
+                for (var j = 0; j < result.length; j++) {
+                    if (Object.values(result[j])[1] == likes[i]) {
                         match = true;
                         break;
                     }

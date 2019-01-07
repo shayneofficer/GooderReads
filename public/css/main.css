@@ -61,6 +61,15 @@ margin: auto;
   font-family: 'Khand', sans-serif;
 }
 
+.btn {
+  margin-left: 0.5em;
+  margin-right: 0.5em;
+}
+
+#content-heading {
+  font-family: 'Fugaz One', sans-serif;
+}
+
 
 @media only screen and (max-width: 992px) {
   .main-container {
