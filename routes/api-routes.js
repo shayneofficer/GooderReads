@@ -82,7 +82,7 @@ router.post("/api/userLogin", function (req, res) {
     user.leftJoinWhere("userEmails", "userEmail", ["users.`User-ID`", "userEmails.userEmail", "users.userPassword", "users.userName"], req.body.userEmail, function (result) {
         var password = req.body.userPassword;
         // Encrypt user password
-
+        console.log(password)
         var userName;
         var userID;
         console.log(result);

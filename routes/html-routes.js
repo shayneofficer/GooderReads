@@ -20,6 +20,10 @@ router.get('/preferences', function (req, res) {
   res.render('genres')
 })
 
+router.get('/profile', function (req, res) {
+  res.render('profile')
+})
+
 // Default landing page
 router.get('*', function (req, res) {
   // Popular / Featured books
