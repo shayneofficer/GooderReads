@@ -2,6 +2,8 @@ var user = require("../models/users");
 var userEmail = require("../models/userEmails");
 var genre = require("../models/genres");
 var genrePreference = require("../models/genrePreferences");
+var ratings = require("../models/ratings");
+
 var express = require("express");
 var router = express.Router();
 var axios = require("axios");
@@ -24,7 +26,7 @@ router.get("/api/likedGenres/:userID", function (req, res) {
                     }
                 }
             }
-            res.json({genres: liked});
+            res.json({ genres: liked });
         });
     });
 });
@@ -219,5 +221,11 @@ router.get('/search/:title', function (req, res) {
     });
 });
 
+router.get('/profile/:userID', function (req, res) {
+    var user = req.params.userID;
+    ratings.selectWhere(`User-ID`, req.params.userID, function (result) {
+        res.render("profile", { books: result });
+    });
+});
 
 module.exports = router;
