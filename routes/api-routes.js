@@ -236,8 +236,6 @@ router.get('/profile/:userID', function (req, res) {
     });
 });
 
-module.exports = router;
-
 function getRatings(result, count, reviewInfo, res) {
     if (count === 0) {
         res.render("profile", { books: reviewInfo });
@@ -260,3 +258,5 @@ function getRatings(result, count, reviewInfo, res) {
         });
     }
 }
+
+module.exports = router;

@@ -49,7 +49,7 @@ function darkMode() {
   if ($("#content-heading").hasClass("text-dark")) {
     $("#content-heading").removeClass("text-dark");
   }
-  
+
   if ($("#user-icon").hasClass("text-white")) {
     $("#user-icon").removeClass("text-white")
   }
@@ -136,7 +136,7 @@ $("#sign-out").on("click", function (event) {
 $('#user-icon').on('click', function (event) {
   event.preventDefault()
   if (sessionStorage.getItem('userID') >= 0) {
-    window.location.replace('/preferences')
+    window.location.replace('/home')
   } else {
     $('#modalLoginForm').modal('show')
   }
@@ -152,8 +152,8 @@ function signedIn() {
 }
 
 function profile() {
-  window.location ="/profile"
-  
+  window.location = "/profile"
+
 }
 
 function signedOut() {
