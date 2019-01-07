@@ -11,12 +11,8 @@ router.use(express.json());
 // });
 
 router.get('/genres', function (req, res) {
-  res.render('new_genres');
+  res.render('genres');
 });
-
-router.get('/new_genres', function (req, res) {
-  res.render('new_genres')
-})
 
 // Default landing page
 router.get('*', function (req, res) {
