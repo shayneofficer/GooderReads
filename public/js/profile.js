@@ -3,8 +3,9 @@ window.onload = function () {
         // Do nothing
     } else {
         var user = sessionStorage.getItem("userID");
-    }
-    $.get("/profile/" + user).then(function () {
+        $.get("/profile/" + user).then(function () {
 
-    });
+        });
+    }
+
 }

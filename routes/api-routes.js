@@ -8,6 +8,7 @@ var express = require("express");
 var router = express.Router();
 var axios = require("axios");
 var bcrypt = require('bcrypt-nodejs');
+var isbn = require("node-isbn");
 
 
 router.use(express.urlencoded({ extended: true }));
@@ -190,11 +191,19 @@ function getBooks(title, cb) {
                     image = bookInfo.imageLinks.thumbnail;
                 }
 
+                var snippet;
+                if (!books[i].searchInfo) {
+                    snippet = "No description available."
+                } else {
+                    snippet = books[i].searchInfo.textSnippet;
+                }
+
                 booksArr.push({
                     title: bookInfo.title,
                     author: bookInfo.authors,
                     publisher: bookInfo.publisher,
                     publishedDate: bookInfo.publishedDate,
+                    snippet: snippet,
                     description: bookInfo.description,
                     id: books[i].id,
                     image: image,
@@ -222,10 +231,32 @@ router.get('/search/:title', function (req, res) {
 });
 
 router.get('/profile/:userID', function (req, res) {
-    var user = req.params.userID;
     ratings.selectWhere(`User-ID`, req.params.userID, function (result) {
-        res.render("profile", { books: result });
+        getRatings(result, result.length, [], res);
     });
 });
 
 module.exports = router;
+
+function getRatings(result, count, reviewInfo, res) {
+    if (count === 0) {
+        res.render("profile", { books: reviewInfo });
+    } else {
+        isbn.resolve(Object.values(result[count - 1])[1], function (err, book) {
+            if (err) {
+                console.log('Book not found', err);
+            } else {
+                var rate = Object.values(result[count - 1])[2];
+                var rev = {
+                    title: book.title,
+                    author: book.authors.join(", "),
+                    cover: book.imageLinks.thumbnail,
+                    description: book.description,
+                    rating: rate
+                };
+                reviewInfo.push(rev);
+            }
+            return getRatings(result, count - 1, reviewInfo, res);
+        });
+    }
+}
