@@ -2,19 +2,15 @@ var GREY = "#444444";
 var WHITE = "#FFFFFF";
 var BLACK = "#000000";
 
-//dark mode enabled by default
-$("#lightMode").hide();
-$("#nav").addClass("navbar-dark bg-dark-slow");
-$("#searchBtn").addClass("btn-outline-light");
-$("#loginFormSubmit").addClass("btn-primary");
-$("#loginFormRegister").addClass("btn-outline-primary");
-$("#registerFormSubmit").addClass("btn-primary");
-$("#registerFormLogin").addClass("btn-outline-primary");
-$("#content-heading").addClass("text-dark");
-
 // Check If User Is Logged In
 console.log("userName: " + sessionStorage.getItem("userName"));
 console.log("userID: " + sessionStorage.getItem("userID"));
+
+var mode = localStorage.getItem("mode")
+$('#lightMode').hide();
+if (mode === "dark") {
+  darkMode()
+}
 
 if (sessionStorage.getItem("userName") && sessionStorage.getItem("userID") >= 0) {
   console.log("If")
@@ -33,7 +29,7 @@ $("#darkMode").on("click", function (event) {
 });
 
 function darkMode() {
-  $("#darkMode").fadeOut(50);
+  $('#darkMode').hide()
   setTimeout(function () {
     $("#lightMode").fadeIn("50");
   }, 50);
@@ -44,8 +40,8 @@ function darkMode() {
   }
   $(".main-container").addClass("bg-dark-slow");
 
-  if ($("#nav").hasClass("navbar-dark bg-dark-slow")) {
-    $("#nav").removeClass("navbar-dark bg-dark-slow");
+  if ($("#nav").hasClass("navbar-dark")) {
+    $("#nav").removeClass("navbar-dark");
   }
   $("#nav").addClass("navbar-light bg-grey-slow");
 
@@ -57,6 +53,18 @@ function darkMode() {
   if ($("#content-heading").hasClass("text-dark")) {
     $("#content-heading").removeClass("text-dark");
   }
+  
+  if ($("#user-icon").hasClass("text-white")) {
+    $("#user-icon").removeClass("text-white")
+  }
+  $("#user-icon").addClass("text-dark");
+
+  if ($("#home-icon").hasClass("text-white")) {
+    $("#home-icon").removeClass("text-white")
+  }
+  $("#home-icon").addClass("text-dark");
+
+  $('#nav')
 }
 
 $("#lightMode").on("click", function (event) {
@@ -87,6 +95,16 @@ function lightMode() {
   }
   $("#searchBtn").addClass("btn-outline-light");
   $("#content-heading").addClass("text-dark");
+
+  if ($("#user-icon").hasClass("text-dark")) {
+    $("#user-icon").removeClass("text-dark")
+  }
+  $("#user-icon").addClass("text-white");
+
+  if ($("#home-icon").hasClass("text-dark")) {
+    $("#home-icon").removeClass("text-dark")
+  }
+  $("#home-icon").addClass("text-white");
 }
 
 $("#loginFormRegister").on("click", function (event) {
@@ -107,10 +125,7 @@ $("#searchBtn").on("click", function (event) {
 });
 
 window.onload = function () {
-  var mode = localStorage.getItem("mode")
-  if (mode === "dark") {
-    darkMode()
-  }
+
 }
 
 // User Login Status
@@ -118,6 +133,15 @@ window.onload = function () {
 $("#sign-out").on("click", function (event) {
   sessionStorage.setItem("userName", "");
   sessionStorage.setItem("userID", -4);
+});
+
+$('#user-icon').on('click', function (event) {
+  event.preventDefault()
+  if (sessionStorage.getItem('userID') >= 0) {
+    window.location.replace('/preferences')
+  } else {
+    $('#modalLoginForm').modal('show')
+  }
 });
 
 function signedIn() {
