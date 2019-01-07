@@ -65,6 +65,8 @@ router.post("/api/likedGenres", function (req, res) {
                     genrePreference.create(["`User-ID`", "`Genre-ID`"], [req.body.userID, likes[i]]);
                 }
             }
+            
+            res.json({message: "genrePreferences updated"});
         });
     });
 });
