@@ -84,6 +84,7 @@
 .modal-footer {
   background-color: var(--dark);
 }
+
 #darkMode {
   color: #FFFFFF;
 }
@@ -92,13 +93,22 @@
   color: #ffffff;
 }
 
-
 .btn-outline-light:hover,
 .btn-outline-light:active {
   color: var(--dark) !important;
 }
+
 .selected {
   background-color: #AAB5C1;
   color: var(--dark);
 }
+
+::-webkit-scrollbar {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background-color: var(--primary);
+  border-radius: 0.2em;
+}
+
 

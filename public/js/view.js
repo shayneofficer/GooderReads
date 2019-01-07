@@ -33,7 +33,6 @@ function darkMode() {
   setTimeout(function () {
     $("#lightMode").fadeIn("50");
   }, 50);
-
   // Change background to Dark Color
   if ($(".main-container").hasClass("bg-light-slow")) {
     $(".main-container").removeClass("bg-light-slow");
@@ -64,7 +63,7 @@ function darkMode() {
   }
   $("#home-icon").addClass("text-dark");
 
-  $('#nav')
+  $('#body').css('background-image', 'none');
 }
 
 $("#lightMode").on("click", function (event) {
@@ -78,6 +77,8 @@ function lightMode() {
   setTimeout(function () {
     $("#darkMode").fadeIn("50");
   }, 50);
+
+  $('#body').css('background-image', 'url("/../assets/hypnotize.png")')
 
   // Change background to Light Color
   if ($(".main-container").hasClass("bg-dark-slow")) {
