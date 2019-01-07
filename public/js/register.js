@@ -1,8 +1,9 @@
-
+//creates the register information and verifys information
 var invalidChar = [];
 $("#registerFormUsername").on("keyup", function (event) {
 
   var ek = event.key.charCodeAt(0);
+  //Checks to make sure keys are actual letters
   if ((ek > 32 && ek < 48) || (ek > 57 && ek < 65) || (ek > 90 && ek < 97) || ek > 123) {
     //Invalid charactar in name
     invalidChar.push(event.key);
@@ -15,20 +16,22 @@ $("#registerFormUsername").on("keyup", function (event) {
       }
     }
     if (invalidChar.length) {
+      //gives error message if there are invalid characters
       $("#name-message").html("'" + invalidChar.toString() + "' are invalid characters!").css("color", "red");
     } else {
       $("#name-message").empty();
     }
   }
-  
 });
 
+//confirms the password 
 $('#registerFormPass, #registerFormPassConfirm').on('keyup', function () {
   if ($('#registerFormPass').val() == $('#registerFormPassConfirm').val() && $('#registerFormPass').val().length > 7) {
     $('#lengthMessage').html('Matching').css('color', 'green');
 
   } else $('#lengthMessage').html('Not Matching').css('color', 'red');
 });
+
 
 $("#registerFormSubmit").on("click", function (event) {
   event.preventDefault();
@@ -44,7 +47,7 @@ $("#registerFormSubmit").on("click", function (event) {
       invalidChar.push(userName[i]);
     }
   }
-
+  //sets error messages
   if (invalidChar.length) {
     $("#name-message").html("'" + invalidChar.toString() + "' are invalid characters!").css("color", "red");
     $('#error-message').html('User Name contains invalid characters').css('color', 'red');
@@ -63,7 +66,8 @@ $("#registerFormSubmit").on("click", function (event) {
       userPassword: $("#registerFormPass").val().trim(),
       userEmail: $("#registerFormEmail").val().trim()
     };
-
+    
+    //uses the post api route to create a newuser using the values supplied
     $.post("/api/registerUser", newUser,
       function (data) {
         if (data.error) {
@@ -82,7 +86,6 @@ $("#registerFormSubmit").on("click", function (event) {
 
           signedIn();
           // redirect to Account page 
-          window.location.replace('/preferences')
         }
       }
     );

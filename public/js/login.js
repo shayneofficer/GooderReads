@@ -1,10 +1,11 @@
+//on click prevents the page from refresing and creats the login info based on the username and pass
 $("#loginFormSubmit").on("click", function (event) {
   event.preventDefault();
   var loginInfo = {
     userEmail: $("#loginFormEmail").val().trim(),
     userPassword: $("#loginFormPass").val().trim()
   }
-
+//sends the info to the API route to authticate the username and password
   $.post("/api/userLogin", loginInfo,
     function (data) {
       if(data.error) {
@@ -13,8 +14,6 @@ $("#loginFormSubmit").on("click", function (event) {
         sessionStorage.setItem("userName", data.userName);
         sessionStorage.setItem("userID", data.userID);
 
-        console.log("SS.userName: " + sessionStorage.getItem("userName"));
-        console.log("SS.userID: " + sessionStorage.getItem("userID"));
         // Clear Login values
         $("#loginFormEmail").val("");
         $("#loginFormPass").val("");

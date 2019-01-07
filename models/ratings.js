@@ -1,6 +1,8 @@
+//requires ORM for Mysql usage
 var orm = require("../config/orm.js");
 
-genre = {
+//create delete and select ratings preferences
+ratings = {
     all: function (cb) {
         orm.all("ratings", function (res) {
             cb(res);
@@ -25,4 +27,4 @@ genre = {
     },
 }
 
-module.exports = genre;
+module.exports = ratings;
