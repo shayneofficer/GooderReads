@@ -1,8 +1,15 @@
+//requires ORM for Mysql usage
 var orm = require("../config/orm.js");
 
-genre = {
+//create delete and select ratings preferences
+ratings = {
     all: function (cb) {
         orm.all("ratings", function (res) {
+            cb(res);
+        });
+    },
+    delete: function (cols, vals, cb) {
+        orm.delete("ratings", cols, vals, function(res){
             cb(res);
         });
     },
@@ -13,11 +20,11 @@ genre = {
         });
     },
 
-    selectWhere: function (searchCol, val, cb) {
-        orm.selectWhere("ratings", searchCol, val, function (res) {
+    selectWhereMulti: function (cols, vals, cb) {
+        orm.selectWhereMulti("ratings", cols, vals, function (res) {
             cb(res);
         });
     },
 }
 
-module.exports = genre;
+module.exports = ratings;

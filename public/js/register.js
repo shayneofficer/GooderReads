@@ -11,6 +11,7 @@ function validateRegister (cb) {
     .trim()
 
   var invalidChar = []
+
   for (var i = 0; i < userName.length; i++) {
     var ascii = userName.charCodeAt(i)
     if (
@@ -22,7 +23,7 @@ function validateRegister (cb) {
       invalidChar.push(userName[i])
     }
   }
-
+  //sets error messages
   if (invalidChar.length) {
     $('#name-message')
       .html("'" + invalidChar.toString() + "' are invalid characters!")

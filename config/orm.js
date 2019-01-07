@@ -8,7 +8,7 @@ function printQuestionMarks(num) {
     }
     return arr.toString();
 }
-
+//vestigal may come in use later
 function objToSql(ob) {
     var arr = [];
 
@@ -29,6 +29,7 @@ function objToSql(ob) {
 }
 
 var orm = {
+    //select everything from the MySQL database
     all: function (table, cb) {
         var queryString = "SELECT * FROM " + table + ";";
         connection.query(queryString, function (error, result) {
@@ -36,7 +37,7 @@ var orm = {
             cb(result);
         });
     },
-
+    //table inserts
     create: function (table, cols, vals, cb) {
         var queryString = "INSERT INTO " + table;
         queryString += " (";
@@ -53,7 +54,7 @@ var orm = {
             cb(result);
         });
     },
-
+    //delete from table function
     delete: function (table, cols, vals, cb) {
         var queryString = "DELETE FROM ?? WHERE "
         if (cols.length != vals.length && cols.length <= 0) {
@@ -77,9 +78,33 @@ var orm = {
         }
     },
 
+    selectWhereMulti: function (table, cols, vals, cb) {
+        console.log("selectWhereMulti");
+        var queryString = "SELECT * FROM ?? WHERE ";
+        if (cols.length != vals.length && cols.length <= 0) {
+            err = "Error: BAD_INPUTS_ERROR: ";
+            if (cols.length <= 0) err += "Number of Columns is 0";
+            else if (vals.length <= 0) err += "Number of Values is 0";
+            else err += "Number of Columns does not match number of Values";
+            throw err;
+        } else {
+            queryString += cols[0] + " = " + vals[0];
+            for (var i = 1; i < cols.length; i++) {
+                queryString += " AND " + cols[i] + " = " + vals[i];
+            }
+            queryString += ";";
+            console.log(queryString);
+
+            connection.query(queryString, [table], function (err, result) {
+                if (err) throw err;
+                cb(result);
+            });
+        }
+    },
+
+    //Select everything from a variable table where search is value
     selectWhere: function (table, searchCol, val, cb) {
         var queryString = "SELECT * FROM ?? WHERE ?? = ?;";
-        // console.log(`SELECT * FROM ${table} WHERE ${searchCol} = ${val};`);
         connection.query(queryString, [table, searchCol, val], function (err, result) {
             if (err) throw err;
             cb(result);
@@ -94,7 +119,7 @@ var orm = {
             cb(result);
         });
     },
-
+    //left Join Function Where table2.key is value
     leftJoinWhere: function (table1, table2, primaryKeyT1, primaryKeyT2, cols, val, cb) {
         var queryString = "SELECT " + cols.toString() + " FROM ?? LEFT JOIN ?? ON ??.?? = ??.?? WHERE ??.?? = ?;"
         connection.query(queryString, [table1, table2, table1, primaryKeyT1, table2, primaryKeyT1, table2, primaryKeyT2, val], function (err, result) {
