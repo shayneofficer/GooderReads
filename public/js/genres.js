@@ -34,22 +34,3 @@ $('#reset').on('click', function (event) {
   event.preventDefault()
   getLikedGenres()
 })
-
-function getLikedGenres () {
-  $.get('/api/likedGenres/' + sessionStorage.getItem('userID'), function (data) {
-    //shows welcome modal only if it's their first time selecting genres
-    if (data.genres.length <= 0) {
-      console.log('Genres length: ' + data.genres.length)
-      $('#welcomeModal').modal('show');
-    }
-    $('.genre-btn').each(function () {
-      $(this).removeClass('selected')
-      for (var i = 0; i < data.genres.length; i++) {
-        if (this.id == data.genres[i]) {
-          $(this).addClass('selected')
-          break
-        }
-      }
-    })
-  })
-}
