@@ -87,6 +87,11 @@ margin: auto;
   margin-top: 1em;
 }
 
+#viewerCanvas {
+  height: 70vh;
+  width: 95%;
+}
+
 
 @media only screen and (max-width: 992px) {
   .main-container {
@@ -99,6 +104,15 @@ margin: auto;
 
   #genres-container {
     width: 100%;
+  }
+
+  #previewerDialog {
+    width: 80%;
+    max-width: 80%;
+  }
+
+  #viewerCanvas {
+    height: 80vh;
   }
 }
 
