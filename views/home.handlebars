@@ -12,15 +12,15 @@
       <div class="card-body">
         <h5 class="card-title">{{this.title}} - {{this.author}}</h5>
         <p class="card-text">{{this.description}}</p>
-        <div class="row justify-content-around align-items-center">
-          <a href=""><img class="google-play" src="/assets/google-play-badge.png" alt="X"></a>
-          <a href="https://www.amazon.com/dp/{{this.isbn10}}/ref=cm_cd_asin_lnk" target="_blank"><img class="amazon"
-              src="/assets/amazon-badge.png" alt="X"></a>
-          {{#if embeddable}}
-          <button onclick=initialize("{{identifiers.[0].identifier}}") type="button" class="btn btn-primary preview-btn"
-            data-toggle="modal" data-target="#bookPreviewer">Preview</button>
-          {{/if}}
-        </div>
+          <div class="row justify-content-around align-items-center">
+            <a href="https://play.google.com/store/books/details?id={{this.id}}"><img class="google-play" src="/assets/google-play-badge.png" alt="X"></a>
+            <a href="https://www.amazon.com/dp/{{this.isbn10}}/ref=cm_cd_asin_lnk" target="_blank"><img class="amazon" src="/assets/amazon-badge.png"
+            alt="X"></a>
+            {{#if embeddable}}
+            <button onclick=initialize("{{identifiers.[0].identifier}}") type="button" class="btn btn-primary" data-toggle="modal"
+            data-target="#bookPreviewer">Preview</button>
+            {{/if}}
+          </div>
       </div>
     </div>
   </div>
