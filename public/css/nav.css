@@ -31,6 +31,11 @@
   overflow: hidden;
 }
 
+#user-icon,
+#home-icon {
+  margin: 0 0.5em 0 0.5em;
+}
+
 @media only screen and (max-width: 992px) {
   .navbar {
     padding: 0.5em 5% 0.5em 5% !important;
@@ -41,10 +46,23 @@
     vertical-align: baseline;
     line-height: 1em;
   }
+  #mode-toggle {
+    width: 100% !important;
+    text-align: right;
+  }
 }
 
 @media only screen and (min-width: 992px) {
   #loginIcon {
     display: none;
+  }
+  #nav-group-right {
+    display: none;
+  }
+}
+
+@media only screen and (min-width: 992px) and (max-width: 1240px) {
+  .navbar {
+    padding: 0.5em 3% 0.5em 3% !important;
   }
 }
