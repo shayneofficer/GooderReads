@@ -23,8 +23,8 @@
           {{/if}}
           <div class="dropdown">
             <button class="btn btn-secondary btn-sm dropdown-toggle ratings-dropdown" type="button" id="ratingsDropdown" data-toggle="dropdown"
-              aria-haspopup="true" aria-expanded="false">
-              Dropdown button
+              aria-haspopup="true" aria-expanded="false" data-isbn={{this.isbn10}}>
+              Book Rating
             </button>
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
               <a class="dropdown-item rate-book" data-isbn={{this.isbn10}} value=1 href="#">1</a>

@@ -165,10 +165,20 @@ router.post("/api/registerUser", function (req, res) {
     }
 });
 
+router.get("/api/book-rating/:isbn/:userID", function (req, res) {
+    ratings.selectWhereMulti(["`ISBN`", "`User-ID`"], ['"' + req.params.isbn + '"', req.params.userID], function (result) {
+        if (result.length == 0) {
+            res.json(null);
+        } else {
+            res.json(result);
+        }
+    })
+});
+
 // Rate a book
 router.post("/api/rate-book/", function (req, res) {
     if (Number.isNaN(parseInt(req.body.userID))) {
-        res.json({error: "Please Log In before rating a book"});
+        res.json({ error: "Please Log In before rating a book" });
     } else {
         ratings.selectWhereMulti(["`ISBN`", "`User-ID`"], ['"' + req.body.isbn + '"', req.body.userID], function (result) {
             console.log(result);

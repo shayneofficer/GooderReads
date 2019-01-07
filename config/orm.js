@@ -46,6 +46,7 @@ var orm = {
         queryString += ");";
 
         console.log(queryString);
+        console.log(vals);
 
         connection.query(queryString, vals, function (err, result) {
             if (err) throw err;
@@ -69,6 +70,7 @@ var orm = {
             }
             queryString += ";";
             console.log(queryString);
+            console.log(table);
 
             connection.query(queryString, [table], function (err, result) {
                 if (err) throw err;
@@ -78,7 +80,6 @@ var orm = {
     },
 
     selectWhereMulti: function (table, cols, vals, cb) {
-        console.log("selectWhereMulti");
         var queryString = "SELECT * FROM ?? WHERE ";
         if (cols.length != vals.length && cols.length <= 0) {
             err = "Error: BAD_INPUTS_ERROR: ";
@@ -92,7 +93,7 @@ var orm = {
                 queryString += " AND " + cols[i] + " = " + vals[i];
             }
             queryString += ";";
-            console.log(queryString);
+            // console.log(queryString);
 
             connection.query(queryString, [table], function (err, result) {
                 if (err) throw err;
