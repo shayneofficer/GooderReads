@@ -78,6 +78,9 @@ margin: auto;
 #genres-card {
   margin-top: 1em;
 }
+#user-name{
+  font-family: 'Patua One', cursive;
+}
 
 #viewerCanvas {
   height: 80vh;
@@ -124,5 +127,6 @@ margin: auto;
   #home-icon {
     display: none;
   }
+
 }
 
