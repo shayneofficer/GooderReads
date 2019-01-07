@@ -153,6 +153,11 @@ function signedIn() {
   $("#sign-out").show();
 }
 
+function profile() {
+  window.location ="/profile"
+  
+}
+
 function signedOut() {
   console.log("signedOut");
   $("#login").show();
