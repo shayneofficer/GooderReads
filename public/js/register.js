@@ -81,9 +81,9 @@ $("#registerFormSubmit").on("click", function (event) {
           sessionStorage.setItem("userName", data.userName);
           sessionStorage.setItem("userID", data.userID);
 
-          // Hide Register Modal
-          $("#registerForm").modal("hide");
           signedIn();
+          // redirect to Account page 
+          window.location.replace('/preferences')
         }
       }
     );
