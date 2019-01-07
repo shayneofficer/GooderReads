@@ -12,15 +12,25 @@ router.use(express.urlencoded({ extended: true }));
 router.use(express.json());
 
 // Get liked genres for user
-router.get("/api/likedGenres", function (req, res) {
-    res.json({});
+router.get("/api/likedGenres/:userID", function (req, res) {
+    genrePreference.selectWhere("User-ID", req.params.userID, function (genrePrefs) {
+        genre.all(function (genres) {
+            var liked = [];
+            for (var i = 0; i < genrePrefs.length; i++) {
+                for (var j = 0; j < genres.length; j++) {
+                    if (Object.values(genrePrefs[i])[1] == Object.values(genres[j])[0]) {
+                        liked.push(genres[j].genreName);
+                        break;
+                    }
+                }
+            }
+            res.json({genres: liked});
+        });
+    });
 });
 
 // Add new liked genres to user
 router.post("/api/likedGenres", function (req, res) {
-    console.log("\nGenres");
-    console.log(req.body);
-
     genre.all(function (result) {
         likes = req.body.likes;
         for (var i = 0; i < likes.length; i++) {
@@ -31,9 +41,6 @@ router.post("/api/likedGenres", function (req, res) {
                 }
             }
         }
-
-        console.log("\nAfter conversion to genre-id");
-        console.log(likes);
 
         genrePreference.selectWhere("User-ID", req.body.userID, function (result) {
             console.log(result);
@@ -65,8 +72,8 @@ router.post("/api/likedGenres", function (req, res) {
                     genrePreference.create(["`User-ID`", "`Genre-ID`"], [req.body.userID, likes[i]]);
                 }
             }
-            
-            res.json({message: "genrePreferences updated"});
+
+            res.json({ message: "genrePreferences updated" });
         });
     });
 });
