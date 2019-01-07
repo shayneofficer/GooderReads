@@ -13,7 +13,7 @@
         <h5 class="card-title">{{this.title}} - {{this.author}}</h5>
         <p class="card-text">{{this.description}}</p>
           <div class="row justify-content-around align-items-center">
-            <a href="#"><img class="google-play" src="/assets/google-play-badge.png" alt="X"></a>
+            <a href="https://play.google.com/store/books/details?id={{this.id}}"><img class="google-play" src="/assets/google-play-badge.png" alt="X"></a>
             <a href="https://www.amazon.com/dp/{{this.isbn10}}/ref=cm_cd_asin_lnk" target="_blank"><img class="amazon" src="/assets/amazon-badge.png"
             alt="X"></a>
             {{#if embeddable}}
@@ -28,7 +28,7 @@
 </div>
 {{/each}}
 
-<!-- Modal -->
+<!-- Preview Modal -->
 <div class="modal fade" id="bookPreviewer" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
   aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
