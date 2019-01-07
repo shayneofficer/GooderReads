@@ -1,23 +1,24 @@
 // On Load get Prefered Genres
 
-if (sessionStorage.getItem("userID") >= 0) {
-  getLikedGenres();
-} else {
-  // Go to Home page
-}
+$(window).on('load', function () {
+  if (sessionStorage.getItem('userID') >= 0) {
+    getLikedGenres()
+  }
+})
 
 $('#submit-genres').on('click', function (event) {
-  event.preventDefault();
-  var genres = { likes: [], userID: sessionStorage.getItem("userID") };
+  event.preventDefault()
+  var genres = { likes: [], userID: sessionStorage.getItem('userID') }
 
   $('.selected').each(function () {
     genres.likes.push(this.id)
-  });
-  console.log(genres);
-  $.post("/api/likedGenres", genres, function (data) {
-    console.log(data);
-  });
-});
+  })
+  console.log(genres)
+  $.post('/api/likedGenres', genres, function (data) {
+    console.log(data)
+  })
+  window.location.repalce('/home')
+})
 
 $('.genre-btn').on('click', function (event) {
   event.preventDefault()
@@ -30,25 +31,25 @@ $('.genre-btn').on('click', function (event) {
 })
 
 $('#reset').on('click', function (event) {
-  event.preventDefault();
-  getLikedGenres();
+  event.preventDefault()
+  getLikedGenres()
 })
 
-$(window).on('load', function () {
-  $('#welcomeModal').modal('show');
-  console.log('loaded');
-})
-
-function getLikedGenres() {
-  $.get("/api/likedGenres/" + sessionStorage.getItem("userID"), function (data) {
+function getLikedGenres () {
+  $.get('/api/likedGenres/' + sessionStorage.getItem('userID'), function (data) {
+    //shows welcome modal only if it's their first time selecting genres
+    if (data.genres.length <= 0) {
+      console.log('Genres length: ' + data.genres.length)
+      $('#welcomeModal').modal('show');
+    }
     $('.genre-btn').each(function () {
-      $(this).removeClass('selected');
+      $(this).removeClass('selected')
       for (var i = 0; i < data.genres.length; i++) {
         if (this.id == data.genres[i]) {
-          $(this).addClass('selected');
-          break;
+          $(this).addClass('selected')
+          break
         }
       }
-    });
-  });
+    })
+  })
 }

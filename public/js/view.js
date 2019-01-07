@@ -2,6 +2,16 @@ var GREY = "#444444";
 var WHITE = "#FFFFFF";
 var BLACK = "#000000";
 
+//dark mode enabled by default
+$("#lightMode").hide();
+$("#nav").addClass("navbar-dark bg-dark-slow");
+$("#searchBtn").addClass("btn-outline-light");
+$("#loginFormSubmit").addClass("btn-primary");
+$("#loginFormRegister").addClass("btn-outline-primary");
+$("#registerFormSubmit").addClass("btn-primary");
+$("#registerFormLogin").addClass("btn-outline-primary");
+$("#content-heading").addClass("text-dark");
+
 // Check If User Is Logged In
 console.log("userName: " + sessionStorage.getItem("userName"));
 console.log("userID: " + sessionStorage.getItem("userID"));
@@ -16,27 +26,17 @@ if (sessionStorage.getItem("userName") && sessionStorage.getItem("userID") >= 0)
   signedOut();
 }
 
-//dark mode enabled by default
-$("#lightMode").hide();
-$("#nav").addClass("navbar-dark bg-dark-slow");
-$("#searchBtn").addClass("btn-outline-light");
-$("#loginFormSubmit").addClass("btn-primary");
-$("#loginFormRegister").addClass("btn-outline-primary");
-$("#registerFormSubmit").addClass("btn-primary");
-$("#registerFormLogin").addClass("btn-outline-primary");
-$("#content-heading").addClass("text-dark");
-
 $("#darkMode").on("click", function (event) {
   localStorage.setItem("mode", "dark")
-  darkMode(event)
+  darkMode()
 
 });
 
-function darkMode(event) {
+function darkMode() {
   $("#darkMode").fadeOut(50);
   setTimeout(function () {
     $("#lightMode").fadeIn("50");
-  }, 200);
+  }, 50);
 
   // Change background to Dark Color
   if ($(".main-container").hasClass("bg-light-slow")) {
@@ -65,11 +65,11 @@ $("#lightMode").on("click", function (event) {
 
 });
 
-function lightMode(event) {
+function lightMode() {
   $("#lightMode").fadeOut(50);
   setTimeout(function () {
     $("#darkMode").fadeIn("50");
-  }, 200);
+  }, 50);
 
   // Change background to Light Color
   if ($(".main-container").hasClass("bg-dark-slow")) {
@@ -108,11 +108,8 @@ $("#searchBtn").on("click", function (event) {
 
 window.onload = function () {
   var mode = localStorage.getItem("mode")
-  console.log(mode)
   if (mode === "dark") {
     darkMode()
-  } else {
-    lightMode()
   }
 }
 
