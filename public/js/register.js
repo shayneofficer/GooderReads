@@ -1,6 +1,5 @@
 
 var invalidChar = [];
-console.log("connect!")
 $("#registerFormUsername").on("keyup", function (event) {
 
   var ek = event.key.charCodeAt(0);
@@ -21,7 +20,7 @@ $("#registerFormUsername").on("keyup", function (event) {
       $("#name-message").empty();
     }
   }
-  // console.log(invalidChar);
+  
 });
 
 $('#registerFormPass, #registerFormPassConfirm').on('keyup', function () {
