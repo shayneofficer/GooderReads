@@ -10,7 +10,8 @@ window.onload(function () {
         })
       })
     } else {
-      // What happens when the user is already logged in
+      
+     
     }
   }
 })
