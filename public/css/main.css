@@ -86,13 +86,14 @@ margin: auto;
 }
 
 #viewerCanvas {
-  height: 80vh;
+  height: 73vh;
   width: 95%;
 }
 
 #previewerDialog {
   width: 60%;
   max-width: 60%;
+  margin-top: 1em;
 }
 
 @media only screen and (max-width: 992px) {
@@ -111,10 +112,11 @@ margin: auto;
   #previewerDialog {
     width: 80%;
     max-width: 80%;
+    margin-top: 3em;
   }
 
   #viewerCanvas {
-    height: 90vh;
+    height: 85vh;
   }
 }
 
