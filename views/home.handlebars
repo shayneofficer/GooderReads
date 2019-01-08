@@ -19,9 +19,9 @@
           {{/if}}
         </p>
         <div class="row justify-content-around align-items-center">
-          <a href="https://play.google.com/store/books/details?id={{this.id}}" target="_blank"><img class="google-play"
+          <a href="https://play.google.com/store/books/details?id={{this.id}}" target="_blank"class="store-link"><img class="google-play"
               src="/assets/google-play-badge.png" alt="X"></a>
-          <a href="https://www.amazon.com/dp/{{this.isbn10}}/ref=cm_cd_asin_lnk" target="_blank"><img class="amazon"
+          <a href="https://www.amazon.com/dp/{{this.isbn10}}/ref=cm_cd_asin_lnk" target="_blank" class="store-link"><img class="amazon"
               src="/assets/amazon-badge.png" alt="X"></a>
           {{#if embeddable}}
           <button onclick=initialize("{{this.id}}") type="button" class="btn btn-primary" data-toggle="modal"

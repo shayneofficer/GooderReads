@@ -111,6 +111,11 @@
   color: var(--primary);
 }
 
+.star-container {
+  margin-top: -10px;
+  text-align: center;
+}
+
 .star-container:hover {
   cursor: pointer;
 }
