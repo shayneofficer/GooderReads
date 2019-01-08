@@ -261,19 +261,19 @@ function getBooks(title, cb) {
             if (err) throw err;
         });
 }
-
+// route for searching for books by title
 router.get('/search/:title', function (req, res) {
     getBooks(req.params.title, function (books) {
         res.render("home", { books: books });
     });
 });
-
+// route for grabbing users ratings
 router.get('/profile/:userID', function (req, res) {
     ratings.selectWhereMulti(["`User-ID`"], req.params.userID, function (result) {
         getRatings(result, result.length, [], res);
     });
 });
-
+// function for grabbing the ratings
 function getRatings(result, count, reviewInfo, res) {
     if (count === 0) {
         res.render("profile", { books: reviewInfo });

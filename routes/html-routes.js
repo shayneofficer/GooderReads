@@ -10,18 +10,16 @@ router.use(
 )
 router.use(express.json())
 
-// router.get('/register', function (req, res) {
-//   res.render('register');
-// });
 
+//route for loading genres
 router.get('/genres', function (req, res) {
   res.render('genres')
 })
-
+//another for loading genres
 router.get('/preferences', function (req, res) {
   res.render('genres')
 })
-
+// route for loading profile page
 router.get('/profile', function (req, res) {
   
   res.render('profile')

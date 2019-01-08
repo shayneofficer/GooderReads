@@ -94,7 +94,7 @@ var orm = {
                 queryString += " AND " + cols[i] + " = " + vals[i];
             }
             queryString += ";";
-            // console.log(queryString);
+            
 
             connection.query(queryString, [table], function (err, result) {
                 if (err) throw err;
@@ -111,7 +111,7 @@ var orm = {
             cb(result);
         });
     },
-
+// method for for grabing from a table an amount of results, with an offset feature, and order it by a col
     selectFeaturedBooks: function(table, amount, offset, orderBy, cb){
         var queryString = "SELECT * from ?? ORDER BY ?? LIMIT ?, ?;"
         connection.query(queryString, [table, orderBy, offset, amount], function(err, result) {
@@ -137,9 +137,7 @@ var orm = {
             cb(result);
         });
     },
-    emptyTable: function(table){
-      connection.query("DELETE FROM ??;", [table])
-    },
+   
 //selects top rated books to use to populate featured books
     selectTop: function(table1, groupBy, orderBy, amount, title, image, cb){
       var queryString ="SELECT ?? as title, ?? as image, ??.??, COUNT(??) as ratingsCount, AVG(??) AS avgRating FROM ?? LEFT JOIN books ON ??.?? = books.?? WHERE `Book-Rating` >= ? GROUP BY ?? ORDER BY ratingsCount DESC limit 110, 30;"
