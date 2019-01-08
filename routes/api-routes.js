@@ -3,14 +3,13 @@ var userEmail = require("../models/userEmails");
 var genre = require("../models/genres");
 var genrePreference = require("../models/genrePreferences");
 var ratings = require("../models/ratings");
-
 var express = require("express");
 var router = express.Router();
 var axios = require("axios");
 var bcrypt = require('bcrypt-nodejs');
 var isbn = require("node-isbn");
 var featuredBooks = require("../models/featuredBooks")
-var rating = require("../models/ratings")
+
 
 
 
@@ -301,7 +300,7 @@ function getRatings(result, count, reviewInfo, res) {
 //function for populating featuredBooks table
 function makeFeaturedBooks(){
 
-rating.grabTopRatings(9, function (results) {
+ratings.grabTopRatings(9, function (results) {
     
   var data = results
   
