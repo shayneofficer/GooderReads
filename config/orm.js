@@ -112,6 +112,15 @@ var orm = {
         });
     },
 
+    selectFeaturedBooks: function(table, amount, offset, orderBy, cb){
+        var queryString = "SELECT * from ?? ORDER BY ?? LIMIT ?, ?;"
+        connection.query(queryString, [table, orderBy, offset, amount], function(err, result) {
+            if (err) throw err;
+            cb(result);
+        });
+    },
+     
+    
     // Left Join Function
     leftJoin: function (table1, table2, primaryKeyT1, primaryKeyT2, cols, cb) {
         var queryString = "SELECT " + cols.toString() + " FROM ?? LEFT JOIN ?? ON ??.?? = ??.?? WHERE ??.?? IS NOT NULL;"
@@ -127,6 +136,17 @@ var orm = {
             if (err) throw err;
             cb(result);
         });
+    },
+    emptyTable: function(table){
+      connection.query("DELETE FROM ??;", [table])
+    },
+//selects top rated books to use to populate featured books
+    selectTop: function(table1, groupBy, orderBy, amount, title, image, cb){
+      var queryString ="SELECT ?? as title, ?? as image, ??.??, COUNT(??) as ratingsCount, AVG(??) AS avgRating FROM ?? LEFT JOIN books ON ??.?? = books.?? WHERE `Book-Rating` >= ? GROUP BY ?? ORDER BY ratingsCount DESC limit 110, 30;"
+      connection.query(queryString, [title, image, table1, groupBy, orderBy, orderBy, table1, table1, groupBy, groupBy, amount, groupBy], function(err, res){
+        if (err) throw err;
+        cb(res)
+      })
     }
 }
 

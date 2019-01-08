@@ -1,5 +1,7 @@
-var express = require('express')
-var router = express.Router()
+var express = require('express');
+var router = express.Router();
+var featuredBooks = require("../models/featuredBooks")
+
 
 router.use(
   express.urlencoded({
@@ -27,30 +29,12 @@ router.get('/profile', function (req, res) {
 
 // Default landing page
 router.get('*', function (req, res) {
-  // Popular / Featured books
-  var placeholderImg = [
-    'http://www.stleos.uq.edu.au/wp-content/uploads/2016/08/image-placeholder-350x350.png'
-  ]
-  var books = [
-    {
-      title: 'Hunt for Red October',
-      description: 'This is a summary.',
-      image: placeholderImg
-    },
-    {
-      title: 'Harry Pottah',
-      description: 'This is a summary, with a British accent.',
-      image: placeholderImg
-    },
-    {
-      title: 'Lord of the Rings',
-      description: 'This is a boring summary.',
-      image: placeholderImg
-    }
-  ]
-  res.render('home', {
-    books: books
+  
+  featuredBooks.selectFeaturedBooks(10, 0, "rating", function(response){
+  res.render("home",{books: response})
   })
-})
+ 
+});
 
-module.exports = router
+
+module.exports = router;

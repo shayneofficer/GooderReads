@@ -3,12 +3,14 @@ var userEmail = require("../models/userEmails");
 var genre = require("../models/genres");
 var genrePreference = require("../models/genrePreferences");
 var ratings = require("../models/ratings");
-
 var express = require("express");
 var router = express.Router();
 var axios = require("axios");
 var bcrypt = require('bcrypt-nodejs');
 var isbn = require("node-isbn");
+var featuredBooks = require("../models/featuredBooks")
+
+
 
 
 router.use(express.urlencoded({ extended: true }));
@@ -200,6 +202,7 @@ router.post("/api/rate-book/", function (req, res) {
     }
 });
 
+//function used to grab data for featuredBooks table
 function getBooks(title, cb) {
     axios
         .get("https://www.googleapis.com/books/v1/volumes?q=" + title
@@ -293,5 +296,101 @@ function getRatings(result, count, reviewInfo, res) {
         });
     }
 }
+
+//function for populating featuredBooks table
+function makeFeaturedBooks(){
+
+ratings.grabTopRatings(9, function (results) {
+    
+  var data = results
+  
+  for (var i = 0; i < results.length; i++) { 
+  
+    function getBooks(count){
+      
+    axios
+      .get("https://www.googleapis.com/books/v1/volumes?q=" + data[count].title).then(function (response) {
+       
+        
+        var books = response.data.items
+        for (var j = 0; j < books.length; j++) {
+          function addToTable(counter){
+              
+          var bookInfo = books[counter].volumeInfo;
+          
+          var identifiers = [];
+          var isbn10;
+          for (var k = 0; bookInfo.industryIdentifiers && k < bookInfo.industryIdentifiers.length; k++) {
+            function addingIdentifers(l){
+            identifiers.push({ type: bookInfo.industryIdentifiers[l].type, identifier: bookInfo.industryIdentifiers[l].identifier })
+            if (bookInfo.industryIdentifiers[l].type === 'ISBN_10') {
+              isbn10 = bookInfo.industryIdentifiers[l].identifier;
+            }
+            }
+            addingIdentifers(k)
+          }
+          
+          var image;
+          if (!bookInfo.imageLinks) {
+            image = "https://via.placeholder.com/300/400";
+          } else {
+            image = bookInfo.imageLinks.thumbnail;
+          }
+          if (isbn10 === data[count].ISBN){
+
+            
+            var ratings = parseFloat(data[count].avgRating) + parseFloat(bookInfo.averageRating)
+            
+          var book =[
+            isbn10,
+            bookInfo.title,
+            bookInfo.authors.toString(),
+            bookInfo.description,
+            books[counter].id,
+            image,
+            bookInfo.categories,
+            bookInfo.ratingsCount,
+            identifiers.toString(),
+            ratings,  
+            books[counter].accessInfo.embeddable
+          ]
+
+       
+          featuredBooks.selectWhere("isbn10", data[count].ISBN.toString(), function (result) {
+              console.log(result)
+            if (!result.length) {
+            featuredBooks.create(["ISBN10", "title", "author", "description", "id", "image", "categories", "ratingsCount", "identifiers", "rating", "embeddable" ], book)
+            }
+            
+        })
+      }
+     
+
+    }
+    addToTable(j)
+        }
+        
+       
+      
+
+      })
+      
+
+    
+  
+}
+      
+if(results[i].title != null)getBooks(i)
+else console.log("book not found")
+}
+})
+
+
+
+
+}
+
+
+
 
 module.exports = router;
