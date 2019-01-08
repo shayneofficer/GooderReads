@@ -25,6 +25,7 @@ ratings = {
             cb(res);
         });
     },
+    //for grabbing top ratings from ratings to populate featuredBook table
     grabTopRatings: function(amount, cb){
       orm.selectTop("ratings", "ISBN", "Book-Rating", amount, "Book-Title", "Image-URL-M", function(res){
         cb(res)
