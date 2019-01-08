@@ -11,13 +11,11 @@ genrePreference = {
 
   create: function (cols, vals) {
     orm.create("genrePreferences", cols, vals, function (res) {
-      console.log(res);
     });
   },
 
   delete: function (cols, vals) {
     orm.delete("genrePreferences", cols, vals, function (res) {
-      console.log(res);
     });
   },
 

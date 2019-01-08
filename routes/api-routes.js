@@ -48,7 +48,6 @@ router.post("/api/likedGenres", function (req, res) {
         }
 
         genrePreference.selectWhere("User-ID", req.body.userID, function (result) {
-            console.log(result);
             if (!result) result = [];
             for (var i = 0; i < result.length; i++) {
                 var match = false;
@@ -59,7 +58,6 @@ router.post("/api/likedGenres", function (req, res) {
                     }
                 }
                 if (!match) {
-                    console.log("delete genre " + result[i]);
                     genrePreference.delete(["`User-ID`", "`Genre-ID`"], [req.body.userID, Object.values(result[i])[1]]);
                 }
             }
@@ -73,7 +71,6 @@ router.post("/api/likedGenres", function (req, res) {
                     }
                 }
                 if (!match) {
-                    console.log("create genre " + likes[i]);
                     genrePreference.create(["`User-ID`", "`Genre-ID`"], [req.body.userID, likes[i]]);
                 }
             }
@@ -87,17 +84,13 @@ router.post("/api/userLogin", function (req, res) {
     user.leftJoinWhere("userEmails", "userEmail", ["users.`User-ID`", "userEmails.userEmail", "users.userPassword", "users.userName"], req.body.userEmail, function (result) {
         var password = req.body.userPassword;
         // Encrypt user password
-        console.log(password)
         var userName;
         var userID;
-        console.log(result);
         for (var i = 0; i < result.length; i++) {
             if (result[i].userEmail == req.body.userEmail) {
-                console.log(result[i.userPassword])
                 if (bcrypt.compareSync(password, result[i].userPassword)) {
                     userName = result[i].userName;
                     userID = Object.values(result[i])[0];
-                    console.log("User Sign in: " + userName + "\n" + userID + "\n");
                 } else {
                     userName = -4;
                 }
@@ -132,7 +125,6 @@ router.post("/api/registerUser", function (req, res) {
     } else if (req.body.userPassword.length < 8) {
         res.json({ error: 'Password not long enough! Please use a password that is 8 characters long!' });
     } else {
-        console.log(req.body);
         userEmail.selectWhere("userEmail", req.body.userEmail, function (result) {
             if (!result.length) {
                 // Encrypt password Server Side Sets Password to hash Value
@@ -144,14 +136,11 @@ router.post("/api/registerUser", function (req, res) {
                     ["userName", "userPassword"],
                     [req.body.userName, password],
                     function (result) {
-                        console.log("\nusers");
-                        console.log(`email:${req.body.userEmail} id:${result.insertId}`);
                         userEmail.create(
                             ["userEmail", "`User-ID`"],
                             [req.body.userEmail, result.insertId],
                             function (res) {
-                                console.log("\nuserEmails");
-                                console.log(res);
+
                             }
                         );
 
@@ -183,16 +172,12 @@ router.post("/api/rate-book/", function (req, res) {
         res.json({ error: "Please Log In before rating a book" });
     } else {
         ratings.selectWhereMulti(["`ISBN`", "`User-ID`"], ['"' + req.body.isbn + '"', req.body.userID], function (result) {
-            console.log(result);
             if (result.length == 0) {
-                console.log("if")
                 ratings.create(["`ISBN`", "`Book-Rating`", "`User-ID`"], [req.body.isbn, req.body.rating, req.body.userID], function (result) {
                     res.json(result);
                 });
             } else {
-                console.log("else")
                 ratings.delete(["`ISBN`", "`User-ID`"], ['"' + req.body.isbn + '"', req.body.userID], function (result) {
-                    console.log(result);
                     ratings.create(["`ISBN`", "`Book-Rating`", "`User-ID`"], [req.body.isbn, req.body.rating, req.body.userID], function (result) {
                         res.json(result);
                     });
@@ -280,7 +265,6 @@ function getRatings(result, count, reviewInfo, res) {
     } else {
         isbn.resolve(Object.values(result[count - 1])[1], function (err, book) {
             if (err) {
-                console.log('Book not found', err);
             } else {
                 var rate = Object.values(result[count - 1])[2];
                 var rev = {
@@ -298,92 +282,91 @@ function getRatings(result, count, reviewInfo, res) {
 }
 
 //function for populating featuredBooks table
-function makeFeaturedBooks(){
+function makeFeaturedBooks() {
 
-ratings.grabTopRatings(9, function (results) {
-    
-  var data = results
-  
-  for (var i = 0; i < results.length; i++) { 
-  
-    function getBooks(count){
-      
-    axios
-      .get("https://www.googleapis.com/books/v1/volumes?q=" + data[count].title).then(function (response) {
-       
-        
-        var books = response.data.items
-        for (var j = 0; j < books.length; j++) {
-          function addToTable(counter){
-              
-          var bookInfo = books[counter].volumeInfo;
-          
-          var identifiers = [];
-          var isbn10;
-          for (var k = 0; bookInfo.industryIdentifiers && k < bookInfo.industryIdentifiers.length; k++) {
-            function addingIdentifers(l){
-            identifiers.push({ type: bookInfo.industryIdentifiers[l].type, identifier: bookInfo.industryIdentifiers[l].identifier })
-            if (bookInfo.industryIdentifiers[l].type === 'ISBN_10') {
-              isbn10 = bookInfo.industryIdentifiers[l].identifier;
+    ratings.grabTopRatings(9, function (results) {
+
+        var data = results
+
+        for (var i = 0; i < results.length; i++) {
+
+            function getBooks(count) {
+
+                axios
+                    .get("https://www.googleapis.com/books/v1/volumes?q=" + data[count].title).then(function (response) {
+
+
+                        var books = response.data.items
+                        for (var j = 0; j < books.length; j++) {
+                            function addToTable(counter) {
+
+                                var bookInfo = books[counter].volumeInfo;
+
+                                var identifiers = [];
+                                var isbn10;
+                                for (var k = 0; bookInfo.industryIdentifiers && k < bookInfo.industryIdentifiers.length; k++) {
+                                    function addingIdentifers(l) {
+                                        identifiers.push({ type: bookInfo.industryIdentifiers[l].type, identifier: bookInfo.industryIdentifiers[l].identifier })
+                                        if (bookInfo.industryIdentifiers[l].type === 'ISBN_10') {
+                                            isbn10 = bookInfo.industryIdentifiers[l].identifier;
+                                        }
+                                    }
+                                    addingIdentifers(k)
+                                }
+
+                                var image;
+                                if (!bookInfo.imageLinks) {
+                                    image = "https://via.placeholder.com/300/400";
+                                } else {
+                                    image = bookInfo.imageLinks.thumbnail;
+                                }
+                                if (isbn10 === data[count].ISBN) {
+
+
+                                    var ratings = parseFloat(data[count].avgRating) + parseFloat(bookInfo.averageRating)
+
+                                    var book = [
+                                        isbn10,
+                                        bookInfo.title,
+                                        bookInfo.authors.toString(),
+                                        bookInfo.description,
+                                        books[counter].id,
+                                        image,
+                                        bookInfo.categories,
+                                        bookInfo.ratingsCount,
+                                        identifiers.toString(),
+                                        ratings,
+                                        books[counter].accessInfo.embeddable
+                                    ]
+
+
+                                    featuredBooks.selectWhere("isbn10", data[count].ISBN.toString(), function (result) {
+                                        if (!result.length) {
+                                            featuredBooks.create(["ISBN10", "title", "author", "description", "id", "image", "categories", "ratingsCount", "identifiers", "rating", "embeddable"], book)
+                                        }
+
+                                    })
+                                }
+
+
+                            }
+                            addToTable(j)
+                        }
+
+
+
+
+                    })
+
+
+
+
             }
-            }
-            addingIdentifers(k)
-          }
-          
-          var image;
-          if (!bookInfo.imageLinks) {
-            image = "https://via.placeholder.com/300/400";
-          } else {
-            image = bookInfo.imageLinks.thumbnail;
-          }
-          if (isbn10 === data[count].ISBN){
 
-            
-            var ratings = parseFloat(data[count].avgRating) + parseFloat(bookInfo.averageRating)
-            
-          var book =[
-            isbn10,
-            bookInfo.title,
-            bookInfo.authors.toString(),
-            bookInfo.description,
-            books[counter].id,
-            image,
-            bookInfo.categories,
-            bookInfo.ratingsCount,
-            identifiers.toString(),
-            ratings,  
-            books[counter].accessInfo.embeddable
-          ]
-
-       
-          featuredBooks.selectWhere("isbn10", data[count].ISBN.toString(), function (result) {
-              console.log(result)
-            if (!result.length) {
-            featuredBooks.create(["ISBN10", "title", "author", "description", "id", "image", "categories", "ratingsCount", "identifiers", "rating", "embeddable" ], book)
-            }
-            
-        })
-      }
-     
-
-    }
-    addToTable(j)
+            if (results[i].title != null) getBooks(i)
+            else console.log("book not found")
         }
-        
-       
-      
-
-      })
-      
-
-    
-  
-}
-      
-if(results[i].title != null)getBooks(i)
-else console.log("book not found")
-}
-})
+    })
 
 
 

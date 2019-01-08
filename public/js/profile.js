@@ -1,9 +1,5 @@
 window.onload = new function (event) {
-  console.log('on load')
-  console.log(window.location.pathname)
-  if (window.location.pathname == '/profile' || window.location.pathname == '/genres')
-  {
-    console.log('1')
+  if (window.location.pathname == '/profile' || window.location.pathname == '/genres') {
     if (sessionStorage.getItem('userID') < 0) {
       // User is NOT logged in
       var userID
@@ -11,13 +7,11 @@ window.onload = new function (event) {
       $('#loginFormSubmit').on('click', function (event) {
         validateLogin(function () {
           userID = sessionStorage.getItem('userID')
-          console.log(userID)
         })
       })
       $('#registerFormSubmit').on('click', function (event) {
         validateRegister(function () {
           userID = sessionStorage.getItem('userID')
-          console.log(userID)
         })
       })
       $('#loginFormClose').on('click', function (event) {

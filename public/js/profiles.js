@@ -6,12 +6,11 @@ window.onload(function () {
       $('#loginFormSubmit').on('click', function (event) {
         event.preventDefault()
         validateLogin(function () {
-          console.log(sessionStorage.getItem('userID'))
         })
       })
     } else {
-      
-     
+
+
     }
   }
 })

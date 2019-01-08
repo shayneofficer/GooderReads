@@ -32,10 +32,10 @@ $('#sign-out').on('click', function (event) {
  * If the user is logged in, brings them to their account preferences page.
  * If the user is NOT logged in, opens the register modal.
  */
-$('#user-icon').on('click', function (event) {
+$('#signed-in-icon').on('click', function (event) {
   event.preventDefault()
   if (sessionStorage.getItem('userID') >= 0) {
-    window.location.replace('/profile')
+    window.location.replace('/profile/' + sessionStorage.getItem('userID'))
   } else {
     $('#modalLoginForm').modal('show')
   }

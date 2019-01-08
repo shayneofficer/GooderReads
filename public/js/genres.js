@@ -16,9 +16,7 @@ $('#submit-genres').on('click', function (event) {
   $('.selected').each(function () {
     genres.likes.push(this.id)
   })
-  console.log(genres)
   $.post('/api/likedGenres', genres, function (data) {
-    console.log(data)
   })
   window.location.replace('/home')
 })
