@@ -59,10 +59,14 @@ $('.star').on('click', function (event) {
       var star = $(parent).children()[i]
       $(star).addClass('saved-rating');
     }
+
+    // Value of the star clicked
+    var userRating = parseInt($(this).data('val'))
+    userRating *= 2
     // Value of the star clicked
     rating = {
       isbn: $(this).data('isbn'),
-      rating: $(this).data('val'),
+      rating: userRating.toString(),
       userID: sessionStorage.getItem('userID')
     }
 
