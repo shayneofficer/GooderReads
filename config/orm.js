@@ -140,7 +140,7 @@ var orm = {
     emptyTable: function(table){
       connection.query("DELETE FROM ??;", [table])
     },
-
+//selects top rated books to use to populate featured books
     selectTop: function(table1, groupBy, orderBy, amount, title, image, cb){
       var queryString ="SELECT ?? as title, ?? as image, ??.??, COUNT(??) as ratingsCount, AVG(??) AS avgRating FROM ?? LEFT JOIN books ON ??.?? = books.?? WHERE `Book-Rating` >= ? GROUP BY ?? ORDER BY ratingsCount DESC limit 110, 30;"
       connection.query(queryString, [title, image, table1, groupBy, orderBy, orderBy, table1, table1, groupBy, groupBy, amount, groupBy], function(err, res){
