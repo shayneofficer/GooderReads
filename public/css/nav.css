@@ -31,6 +31,10 @@
   overflow: hidden;
 }
 
+#mode-toggle:hover {
+  cursor: pointer;
+}
+
 #user-icon,
 #home-icon {
   margin: 0 0.5em 0 0.5em;
