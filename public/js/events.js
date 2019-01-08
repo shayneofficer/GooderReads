@@ -15,7 +15,7 @@ $('#registerFormLogin').on('click', function (event) {
 $('#loginFormSubmit').on('click', function (event) {
   event.preventDefault()
   validateLogin(function () {
-    window.location.replace('/home')
+    $('#modalLoginForm').modal('hide');
   })
 })
 
