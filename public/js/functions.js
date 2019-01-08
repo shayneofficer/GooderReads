@@ -118,7 +118,6 @@ function signedIn() {
 function getLikedGenres() {
   $.get('/api/likedGenres/' + sessionStorage.getItem('userID'), function (data) {
     if (data.genres.length <= 0) {
-      console.log('Genres length: ' + data.genres.length)
       $('#welcomeModal').modal('show')
     }
     $('.genre-btn').each(function () {
@@ -156,8 +155,6 @@ function validateLogin(cb) {
       sessionStorage.setItem('userName', data.userName)
       sessionStorage.setItem('userID', data.userID)
 
-      console.log('SS.userName: ' + sessionStorage.getItem('userName'))
-      console.log('SS.userID: ' + sessionStorage.getItem('userID'))
       // Clear Login values
       $('#loginFormEmail').val('')
       $('#loginFormPass').val('')

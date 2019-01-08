@@ -20,22 +20,26 @@ $('.star')
 /**
  * Load the user's saved ratings if they have any
  */
-// $.get(
-//   '/api/book-rating/' +
-//     $(this).data('isbn') +
-//     '/' +
-//     sessionStorage.getItem('userID'),
-//   function (data) {
-//     if (data) {
-//       console.log(data)
-//       if ($(this).data('isbn') == Object.values(data[0])[1]) {
-//         var userRating = Object.values(data[0])[2]
-//         console.log(userRating)
-//         // $(this).html('Your Rating: ' + Object.values(data[0])[2])
-//       }
-//     }
-//   }
-// )
+
+$(".star-container").each(function () {
+  if (!sessionStorage.getItem("userName") == "" && sessionStorage.getItem("userID") >= 0) {
+    $.get(
+      '/api/book-rating/' +
+      $(this).data('isbn') +
+      '/' +
+      sessionStorage.getItem('userID'),
+      function (data) {
+        if (data) {
+          $(".star-container").each(function () {
+            if ($(this).data('isbn') == Object.values(data[0])[1]) {
+              $(this).html('Your Rating: ' + Object.values(data[0])[2] / 2 + ' Stars')
+            }
+          })
+        }
+      }
+    )
+  }
+})
 
 /**
  * Star on click event (posts to server)

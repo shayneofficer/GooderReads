@@ -24,12 +24,12 @@
           <a href="https://www.amazon.com/dp/{{this.isbn10}}/ref=cm_cd_asin_lnk" target="_blank"><img class="amazon"
               src="/assets/amazon-badge.png" alt="X"></a>
           {{#if embeddable}}
-          <button onclick=initialize("{{this.id}}") type="button" class="btn btn-primary"
-            data-toggle="modal" data-target="#bookPreviewer">Preview</button>
+          <button onclick=initialize("{{this.id}}") type="button" class="btn btn-primary" data-toggle="modal"
+            data-target="#bookPreviewer">Preview</button>
           {{/if}}
           <!-- Stars rating system -->
 
-          <div class="star-container">
+          <div class="star-container" data-isbn={{this.isbn10}}>
             <div class="row" style="margin-bottom: 0.5em !important;">
               Your Rating:
             </div>
@@ -90,19 +90,16 @@
 <script type="text/javascript">
   google.books.load();
 
-  function initialize(id)
-  {
+  function initialize(id) {
     var viewer = new google.books.DefaultViewer(document.getElementById('viewerCanvas'));
     viewer.load(id, noBookFound, removeBookFooter);
   }
 
-  function noBookFound()
-  {
+  function noBookFound() {
     document.getElementById('viewerCanvas').innerHTML = "<h1>Oops! Preview not found for this book!</h1>";
   }
 
-  function removeBookFooter()
-  {
+  function removeBookFooter() {
     $('#viewerCanvas > div > div:nth-child(2)').css('display', 'none');
   }
 

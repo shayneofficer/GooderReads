@@ -46,12 +46,8 @@ var orm = {
         queryString += printQuestionMarks(vals.length);
         queryString += ");";
 
-        console.log(queryString);
-        console.log(vals);
-
         connection.query(queryString, vals, function (err, result) {
             if (err) throw err;
-            console.log(result);
             cb(result);
         });
     },
@@ -70,8 +66,6 @@ var orm = {
                 queryString += " AND " + cols[i] + " = " + vals[i];
             }
             queryString += ";";
-            console.log(queryString);
-            console.log(table);
 
             connection.query(queryString, [table], function (err, result) {
                 if (err) throw err;
@@ -94,7 +88,7 @@ var orm = {
                 queryString += " AND " + cols[i] + " = " + vals[i];
             }
             queryString += ";";
-            
+
 
             connection.query(queryString, [table], function (err, result) {
                 if (err) throw err;
@@ -111,16 +105,16 @@ var orm = {
             cb(result);
         });
     },
-// method for for grabing from a table an amount of results, with an offset feature, and order it by a col
-    selectFeaturedBooks: function(table, amount, offset, orderBy, cb){
+    // method for for grabing from a table an amount of results, with an offset feature, and order it by a col
+    selectFeaturedBooks: function (table, amount, offset, orderBy, cb) {
         var queryString = "SELECT * from ?? ORDER BY ?? LIMIT ?, ?;"
-        connection.query(queryString, [table, orderBy, offset, amount], function(err, result) {
+        connection.query(queryString, [table, orderBy, offset, amount], function (err, result) {
             if (err) throw err;
             cb(result);
         });
     },
-     
-    
+
+
     // Left Join Function
     leftJoin: function (table1, table2, primaryKeyT1, primaryKeyT2, cols, cb) {
         var queryString = "SELECT " + cols.toString() + " FROM ?? LEFT JOIN ?? ON ??.?? = ??.?? WHERE ??.?? IS NOT NULL;"
@@ -137,14 +131,14 @@ var orm = {
             cb(result);
         });
     },
-   
-//selects top rated books to use to populate featured books
-    selectTop: function(table1, groupBy, orderBy, amount, title, image, cb){
-      var queryString ="SELECT ?? as title, ?? as image, ??.??, COUNT(??) as ratingsCount, AVG(??) AS avgRating FROM ?? LEFT JOIN books ON ??.?? = books.?? WHERE `Book-Rating` >= ? GROUP BY ?? ORDER BY ratingsCount DESC limit 110, 30;"
-      connection.query(queryString, [title, image, table1, groupBy, orderBy, orderBy, table1, table1, groupBy, groupBy, amount, groupBy], function(err, res){
-        if (err) throw err;
-        cb(res)
-      })
+
+    //selects top rated books to use to populate featured books
+    selectTop: function (table1, groupBy, orderBy, amount, title, image, cb) {
+        var queryString = "SELECT ?? as title, ?? as image, ??.??, COUNT(??) as ratingsCount, AVG(??) AS avgRating FROM ?? LEFT JOIN books ON ??.?? = books.?? WHERE `Book-Rating` >= ? GROUP BY ?? ORDER BY ratingsCount DESC limit 110, 30;"
+        connection.query(queryString, [title, image, table1, groupBy, orderBy, orderBy, table1, table1, groupBy, groupBy, amount, groupBy], function (err, res) {
+            if (err) throw err;
+            cb(res)
+        })
     }
 }
 
