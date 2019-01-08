@@ -32,7 +32,12 @@ $(".star-container").each(function () {
         if (data) {
           $(".star-container").each(function () {
             if ($(this).data('isbn') == Object.values(data[0])[1]) {
-              $(this).html('Your Rating: ' + Object.values(data[0])[2] / 2 + ' Stars')
+              var userRating = Object.values(data[0])[2] / 2
+              var starContainer = $(this).children()[1]
+              var stars = $(starContainer).children()
+              for (var i = 0; i < userRating; i++) {
+                $(stars[i]).addClass('saved-rating')
+              }
             }
           })
         }
