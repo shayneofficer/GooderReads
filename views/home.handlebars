@@ -21,7 +21,21 @@
           <button onclick=initialize("{{identifiers.[0].identifier}}") type="button" class="btn btn-primary"
             data-toggle="modal" data-target="#bookPreviewer">Preview</button>
           {{/if}}
-          <div class="dropdown">
+          <!-- Stars rating system -->
+
+          <div class="star-container">
+            <div class="row" style="margin-bottom: 0.5em !important;">
+              Your Rating:
+            </div>
+            <div class="row">
+              <i class="fas fa-star star" data-val="1" data-isbn={{this.isbn10}}></i>
+              <i class="fas fa-star star" data-val="2" data-isbn={{this.isbn10}}></i>
+              <i class="fas fa-star star" data-val="3" data-isbn={{this.isbn10}}></i>
+              <i class="fas fa-star star" data-val="4" data-isbn={{this.isbn10}}></i>
+              <i class="fas fa-star star" data-val="5" data-isbn={{this.isbn10}}></i>
+            </div>
+          </div>
+          {{!-- <div class="dropdown">
             <button class="btn btn-secondary btn-sm dropdown-toggle ratings-dropdown" type="button" id="ratingsDropdown"
               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-isbn={{this.isbn10}}>
               Rate the Book
@@ -38,7 +52,7 @@
               <a class="dropdown-item rate-book" data-isbn={{this.isbn10}} value=9 href="#">9</a>
               <a class="dropdown-item rate-book" data-isbn={{this.isbn10}} value=10 href="#">10</a>
             </div>
-          </div>
+          </div> --}}
         </div>
       </div>
     </div>
@@ -70,16 +84,19 @@
 <script type="text/javascript">
   google.books.load();
 
-  function initialize(id) {
+  function initialize(id)
+  {
     var viewer = new google.books.DefaultViewer(document.getElementById('viewerCanvas'));
     viewer.load(id, noBookFound, removeBookFooter);
   }
 
-  function noBookFound() {
+  function noBookFound()
+  {
     document.getElementById('viewerCanvas').innerHTML = "<h1>Oops! Preview not found for this book!</h1>";
   }
 
-  function removeBookFooter() {
+  function removeBookFooter()
+  {
     $('#viewerCanvas > div > div:nth-child(2)').css('display', 'none');
   }
 
