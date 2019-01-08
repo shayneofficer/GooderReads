@@ -103,6 +103,22 @@
   color: var(--dark);
 }
 
+.star {
+  color: var(--grey);
+}
+.star:hover {
+  cursor: pointer;
+  color: var(--primary);
+}
+
+.star-container:hover {
+  cursor: pointer;
+}
+
+.saved-rating {
+  color: var(--primary) !important;
+}
+
 ::-webkit-scrollbar {
   background: transparent;
 }
