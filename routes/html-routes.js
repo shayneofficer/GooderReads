@@ -27,8 +27,8 @@ router.get('/profile', function (req, res) {
 
 // Default landing page
 router.get('*', function (req, res) {
-  
-  featuredBooks.selectFeaturedBooks(10, 0, "rating", function(response){
+  var ran = Math.floor(Math.random()*11)
+  featuredBooks.selectFeaturedBooks(10, ran, "rating", function(response){
   res.render("home",{books: response})
   })
  
