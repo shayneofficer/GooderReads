@@ -30,7 +30,7 @@ window.onload = new function (event) {
       })
     } else {
       // User is already logged in
-      if (window.location = '/profile') {
+      if (window.location == '/profile') {
         var userID = sessionStorage.getItem('userID')
         window.location.replace('/profile/' + userID)
       }
