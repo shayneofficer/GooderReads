@@ -164,7 +164,6 @@ function validateLogin(cb) {
       // Hide Login modal
       $('#modalLoginForm').modal('hide')
       signedIn()
-      window.location.replace('/profile')
     }
     cb()
   })

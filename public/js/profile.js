@@ -36,8 +36,10 @@ window.onload = new function (event) {
       })
     } else {
       // User is already logged in
-      var userID = sessionStorage.getItem('userID')
-      window.location.replace('/profile/' + userID)
+      if (window.location = '/profile') {
+        var userID = sessionStorage.getItem('userID')
+        window.location.replace('/profile/' + userID)
+      }
     }
   }
 }
