@@ -7,6 +7,9 @@ A parody Project by Shayne Officer, Ryan Brode-Frank, Steve Lucas, Nathan Walker
 GooderReads was conceived as a project to let us test our knowledge of Object Oriented Programming and Relational Database Usage. 
 
 The application opens with a landing page where users are shown a featured books of the day page. From this users are able to login and register to our site. The registration process allows users to select from over 25 Genres of Books. Once the User has registered and/or logged in they are able to rate books they have already read. The user profile page will feature suggestions catered to the user based on book ratings and reviews given by other users!
+the test the login Feature new users can use the test username
+username:me@me.com
+password: asdasdasd
 
 ![Search Page](./public/assets/search.png)
 
