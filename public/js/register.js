@@ -91,7 +91,7 @@ $('#registerFormUsername').on('keyup', function (event) {
     (ek > 90 && ek < 97) ||
     ek > 123
   ) {
-    // Invalid charactar in name
+    // Invalid character in name
     invalidChar.push(event.key)
     $('#name-message')
       .html("'" + invalidChar.toString() + "' are invalid characters!")

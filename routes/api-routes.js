@@ -374,6 +374,6 @@ function makeFeaturedBooks() {
 }
 
 
-
+makeFeaturedBooks()
 
 module.exports = router;
